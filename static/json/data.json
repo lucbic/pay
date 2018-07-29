@@ -1,0 +1,107 @@
+{
+  "tables": [
+    {
+      "open": true,
+      "clients": [ 0, 1 ],
+      "orders": [
+        {
+          "client_id": 0,
+          "product_category": 1,
+          "product_id": 1,
+          "amount": 1
+        },
+        {
+          "client_id": 1,
+          "product_category": 1,
+          "product_id": 5,
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "open": false,
+      "clients": [],
+      "orders": []
+    },
+    {
+      "open": false,
+      "clients": [],
+      "orders": []
+    },
+    {
+      "open": false,
+      "clients": [],
+      "orders": []
+    },
+    {
+      "open": false,
+      "clients": [],
+      "orders": []
+    },
+    {
+      "open": false,
+      "clients": [],
+      "orders": []
+    },
+    {
+      "open": false,
+      "clients": [],
+      "orders": []
+    },
+    {
+      "open": false,
+      "clients": [],
+      "orders": []
+    }
+  ],
+  "clients": [
+    {
+      "id": 0,
+      "name": "João Pereira"
+    },
+    {
+      "id": 1,
+      "name": "Maria Silva"
+    },
+    {
+      "id": 2,
+      "name": "José Costa"
+    },
+    {
+      "id": 3,
+      "name": "Clara Nascimento"
+    },
+    {
+      "id": 4,
+      "name": "Marcos de Andrade"
+    },
+    {
+      "id": 5,
+      "name": "Andressa Carvalho"
+    },
+    {
+      "id": 6,
+      "name": "André Oliveira"
+    },
+    {
+      "id": 7,
+      "name": "Márcia Campobello"
+    },
+    {
+      "id": 8,
+      "name": "Robson Soares"
+    },
+    {
+      "id": 9,
+      "name": "Laura Lima"
+    }
+  ],
+  "products": [
+    {
+      "id": 0,
+      "category": "drinks",
+      "name": "Água Mineral 500ml",
+      "price": 4.00
+    }
+  ]
+}
