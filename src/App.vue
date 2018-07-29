@@ -6,11 +6,13 @@
 </template>
 
 <script>
+import FetchDataMixin from '@/mixins/FetchDataMixin'
 export default {
   name: 'app',
   components: {
     NavigationBar, Content
   }
+  mixins: [ FetchDataMixin ]
 }
 </script>
 
