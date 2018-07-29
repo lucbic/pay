@@ -1,24 +1,31 @@
 <template>
 <div class="app">
   <navigation-bar />
-  <content />
+  <app-content />
 </div>
 </template>
 
 <script>
+import NavigationBar from '@/components/NavigationBar'
+import AppContent from '@/components/AppContent'
 import FetchDataMixin from '@/mixins/FetchDataMixin'
+
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    NavigationBar, Content
-  }
+    NavigationBar,
+    AppContent
+  },
   mixins: [ FetchDataMixin ]
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+
 .app {
   display: flex;
+  flex-direction: column;
   align-items: stretch;
+  height: 100vh;
 }
 </style>
