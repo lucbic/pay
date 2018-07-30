@@ -18,7 +18,7 @@ export default {
 <style lang="scss" scoped>
 
 .content {
-  background: $color__background;
+  @include cool-background;
   flex: 1;
 }
 </style>
