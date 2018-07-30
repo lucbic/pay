@@ -29,6 +29,7 @@ export default {
   width: $size__table;
   height: $size__table;
   border-radius: ($size__table / 2);
+  // border: 2px solid $color__table-number;
 
   // display
   display: flex;
@@ -43,16 +44,17 @@ export default {
   // modifier
   &--open {
     background: $color__table--open;
-    border-radius: 0;
+    border-radius: 15px;
   }
 
   /* children */
   &__number {
     // font
     font-size: $fs__table;
-    font-family: $ff__roboto;
+    font-family: $ff__dosis;
+    font-size: 32px;
     font-weight: 700;
-    color: $color__table-number;
+    color: white;
   }
 }
 </style>
