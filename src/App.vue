@@ -1,6 +1,5 @@
 <template>
 <div class="app">
-  <navigation-bar />
   <app-content />
 </div>
 </template>
@@ -27,5 +26,8 @@ export default {
   flex-direction: column;
   align-items: stretch;
   height: 100vh;
+
+  // default text color
+  color: $color__text-default;
 }
 </style>
