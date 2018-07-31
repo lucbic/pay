@@ -39,8 +39,8 @@ export default {
 
   // transitions
   transition:
-    border-radius ease-in-out $time__table-transition,
-    background ease-in-out $time__table-transition;
+    border-radius ease-in-out $time__default-transition,
+    background ease-in-out $time__default-transition;
 
   // modifier
   &--open {
