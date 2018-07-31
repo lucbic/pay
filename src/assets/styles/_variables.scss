@@ -1,7 +1,8 @@
 // colors:
 $color__navbar: #fff;
 $color__background: #e8e8e8;
-$color__well: #fff5d3;
+// $color__well: #fff5d3;
+$color__well: #fff;
 $color__table: #adadad;
 // $color__table: #bababa;
 $color__table--open: #c1ef81;
@@ -30,4 +31,5 @@ $fs__table: 24px;
 $fs__h1: 22px;
 
 // times:
-$time__table-transition: 100ms;
+$time__default-transition: 100ms;
+$time__page-transition: .2s;
