@@ -8,13 +8,15 @@
           "client_id": 0,
           "product_category": 1,
           "product_id": 1,
-          "amount": 1
+          "amount": 1,
+          "status": false
         },
         {
           "client_id": 1,
           "product_category": 1,
           "product_id": 5,
-          "amount": 1
+          "amount": 1,
+          "status": false
         }
       ]
     },
