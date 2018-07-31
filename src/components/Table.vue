@@ -1,11 +1,11 @@
 <template>
-<div class="table" :class="{ 'table--open': data.open }" @click="toggleTable(index)">
+<div class="table" :class="{ 'table--open': data.open }" @click="selectTable(index)">
   <span class="table__number">{{ number }}</span>
 </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { eventBus } from '@/main'
 
 export default {
   name: 'Table',
@@ -17,7 +17,9 @@ export default {
     number () { return this.index + 1 }
   },
   methods: {
-    ...mapActions(['toggleTable'])
+    selectTable (index) {
+      eventBus.$emit('selectTable', index)
+    }
   }
 }
 </script>
@@ -29,7 +31,6 @@ export default {
   width: $size__table;
   height: $size__table;
   border-radius: ($size__table / 2);
-  // border: 2px solid $color__table-number;
 
   // display
   display: flex;

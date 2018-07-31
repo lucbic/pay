@@ -13,6 +13,9 @@ Vue.use(Vuebar)
 
 Vue.config.productionTip = false
 
+// Event bus
+export const eventBus = new Vue()
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

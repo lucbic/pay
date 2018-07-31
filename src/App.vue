@@ -9,6 +9,7 @@
 import Tables from '@/components/Tables.vue'
 import Clients from '@/components/Clients.vue'
 import FetchDataMixin from '@/mixins/FetchDataMixin'
+import { eventBus } from '@/main'
 
 export default {
   name: 'App',
