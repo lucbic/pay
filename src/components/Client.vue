@@ -4,15 +4,37 @@
     {{ client.name }}
   </span>
   <span>
-    {{ client.total }}
+    {{ total }}
   </span>
 </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Client',
-  props: [ 'client' ]
+  props: [ 'client' ],
+  computed: {
+    ...mapGetters(['getClientOrders', 'getCurrentTableIndex']),
+
+    total () {
+      const tableIndex = this.getCurrentTableIndex
+      const orders = this.getClientOrders(tableIndex, this.client.id)
+      let total = 0
+
+      orders.forEach(order => {
+        total += (order.price * order.amount)
+      })
+
+      let localeTotal = total.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      })
+
+      return localeTotal.replace('R$', 'R$ ')
+    }
+  }
 }
 </script>
 

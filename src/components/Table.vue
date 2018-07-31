@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { eventBus } from '@/main'
 
 export default {
@@ -17,8 +18,11 @@ export default {
     number () { return this.index + 1 }
   },
   methods: {
+    ...mapActions(['setCurrentTableIndex']),
+
     selectTable (index) {
       eventBus.$emit('selectTable', index)
+      this.setCurrentTableIndex(index)
     }
   }
 }

@@ -24,7 +24,7 @@
     </div>
 
     <div class="view">
-      <clients class="view__clients" :clients="clients"/>
+      <clients class="view__clients" :clients="clients" />
     </div>
 
     <div class="footer">
@@ -54,13 +54,14 @@ export default {
     Clients
   },
   computed: {
-    ...mapGetters(['getClients', 'getTable'])
+    ...mapGetters(['getClients', 'getTable', 'getTableOrders'])
   },
   created () {
     eventBus.$on('selectTable', index => {
       console.log('You have selected the table ' + (index + 1))
       this.table = this.getTable(index)
       this.clients = this.getClients(this.table.clients)
+      this.orders = this.getTableOrders(index)
       this.tableNumber = index + 1
     })
   },
@@ -69,6 +70,7 @@ export default {
       view: 'clients',
       table: null,
       clients: null,
+      orders: null,
       tableNumber: null
     }
   },
