@@ -22,6 +22,9 @@ export default {
     eventBus.$on('selectTable', () => {
       this.shift = true
     })
+    eventBus.$on('goToTables', () => {
+      this.shift = false
+    })
   },
   data () {
     return {
