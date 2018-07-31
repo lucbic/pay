@@ -1,3 +1,5 @@
+export const getCurrentTableIndex = state => state.currentTableIndex
+
 export const getTables = state => state.tables
 
 export const getTable = state => index => state.tables[index]

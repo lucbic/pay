@@ -52,3 +52,7 @@ export const fetchProductsData = ({ commit }) => {
       })
   })
 }
+
+export const setCurrentTableIndex = ({ commit }, tableIndex) => {
+  commit(types.SET_CURRENT_TABLE_INDEX, tableIndex)
+}

@@ -1,5 +1,6 @@
 export default {
   tables: null,
   clients: null,
-  products: null
+  products: null,
+  currentTableIndex: null
 }

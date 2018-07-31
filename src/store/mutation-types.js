@@ -1,3 +1,4 @@
+export const SET_CURRENT_TABLE_INDEX = 'SET_CURRENT_TABLE_INDEX'
 export const SET_TABLES = 'SET_TABLES'
 export const SET_CLIENTS = 'SET_CLIENTS'
 export const SET_PRODUCTS = 'SET_PRODUCTS'

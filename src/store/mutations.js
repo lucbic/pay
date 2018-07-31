@@ -1,6 +1,9 @@
 import * as types from './mutation-types'
 
 export default {
+  [types.SET_CURRENT_TABLE_INDEX] (state, tableIndex) {
+    state.currentTableIndex = tableIndex
+  },
   [types.SET_TABLES] (state, tables) {
     state.tables = tables
   },
