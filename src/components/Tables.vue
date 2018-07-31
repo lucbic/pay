@@ -65,7 +65,6 @@ export default {
   margin: $size__well-margin;
   margin-top: 10px;
   background: $color__well;
-  border: 2px solid $color__border-default;
   box-shadow: 6px 6px 10px 0px rgba(0,0,0,0.23);
   border-radius: $br__default;
   flex: 1;
