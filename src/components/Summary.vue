@@ -3,7 +3,7 @@
   <div class="well">
     <div class="header">
       <button class="header__back" @click="goToTables">
-        <simple-svg class="header__back-img" :width="'12px'" :fill="'#fff'"
+        <simple-svg class="header__back-img" :width="'12px'"
           :filepath="'static/img/long-arrow-alt-left-solid.svg'" />
         <span>Mesas</span>
       </button>
@@ -24,7 +24,7 @@
     </div>
 
     <div class="view">
-
+      <clients class="view__clients" :clients="clients"/>
     </div>
 
     <div class="footer">
@@ -43,13 +43,15 @@
 
 <script>
 import SmallLogo from '@/components/SmallLogo'
+import Clients from '@/components/Clients'
 import { mapGetters } from 'vuex'
 import { eventBus } from '@/main'
 
 export default {
   name: 'Summary',
   components: {
-    SmallLogo
+    SmallLogo,
+    Clients
   },
   computed: {
     ...mapGetters(['getClients', 'getTable'])
@@ -168,6 +170,10 @@ export default {
 
 .view {
   flex: 1;
+
+  &__clients {
+
+  }
 }
 
 .footer {
