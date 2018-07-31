@@ -28,7 +28,7 @@ export default {
     SingleTable
   },
   computed: {
-    ...mapGetters(['tables'])
+    ...mapGetters(['getTables'])
   },
   data () {
     return {

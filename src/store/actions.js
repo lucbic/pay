@@ -52,7 +52,3 @@ export const fetchProductsData = ({ commit }) => {
       })
   })
 }
-
-export const toggleTable = ({ commit }, index) => {
-  commit(types.TOGGLE_TABLE, index)
-}

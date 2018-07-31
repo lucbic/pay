@@ -1,9 +1,6 @@
 import * as types from './mutation-types'
 
 export default {
-  [types.TOGGLE_TABLE] (state, index) {
-    state.tables[index].open = !state.tables[index].open
-  },
   [types.SET_TABLES] (state, tables) {
     state.tables = tables
   },
