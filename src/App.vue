@@ -17,7 +17,17 @@ export default {
     Tables,
     Clients
   },
-  mixins: [ FetchDataMixin ]
+  mixins: [ FetchDataMixin ],
+  created () {
+    eventBus.$on('selectTable', () => {
+      this.shift = true
+    })
+  },
+  data () {
+    return {
+      shift: false
+    }
+  }
 }
 </script>
 
@@ -28,6 +38,7 @@ export default {
   color: $color__text-default;
   position: relative;
   height: 100vh;
+  overflow-x: hidden;
 }
 
 .tables {
