@@ -1,0 +1,30 @@
+<template>
+<div class="small-logo">
+  <h1 class="small-logo__title">Hamburgueria</h1>
+</div>
+</template>
+
+<script>
+export default {
+  name: 'SmallLogo'
+}
+</script>
+
+<style lang="scss" scoped>
+
+.small-logo {
+  background: white;
+  padding: 2px 6px;
+  border-radius: 8px;
+  border: 4px double $color__border-default;
+  width: fit-content;
+
+  &__title {
+    text-transform: uppercase;
+    font-family: $ff__roboto;
+    font-size: 16px;
+    color: $color__text-default;
+    margin: 0;
+  }
+}
+</style>
