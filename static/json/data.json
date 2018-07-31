@@ -121,7 +121,241 @@
       "id": 0,
       "category": "drinks",
       "name": "Água Mineral 500ml",
-      "price": 4.00
-    }
+      "price": 3.50
+    },
+    {
+      "id": 1,
+      "category": "drinks",
+      "name": "Água Mineral c/ Gás 500ml",
+      "price": 3.50
+    },
+    {
+      "id": 2,
+      "category": "drinks",
+      "name": "Refrigerante Lata 350ml",
+      "price": 5.00
+    },
+    {
+      "id": 3,
+      "category": "drinks",
+      "name": "Suco Integral Lata 350ml",
+      "price": 5.00
+    },
+    {
+      "id": 4,
+      "category": "drinks",
+      "name": "Cerveja Pilsen Long Neck 600ml",
+      "price": 8.00
+    },
+    {
+      "id": 5,
+      "category": "drinks",
+      "name": "Chopp Copo 500ml",
+      "price": 8.00
+    },
+    {
+      "id": 6,
+      "category": "drinks",
+      "name": "Capirinha Copo 500ml",
+      "price": 10.00
+    },
+    {
+      "id": 7,
+      "category": "drinks",
+      "name": "Drink Morango Copo 500ml",
+      "price": 10.00
+    },
+    {
+      "id": 8,
+      "category": "drinks",
+      "name": "Chá Mate c/ Limão 300ml",
+      "price": 6.00
+    },
+    {
+      "id": 9,
+      "category": "drinks",
+      "name": "Milkshake Chocolate 500ml",
+      "price": 6.00
+    },
+    {
+      "id": 10,
+      "category": "dishes",
+      "name": "Hambúrguer Cheddar",
+      "price": 15.00
+    },
+    {
+      "id": 11,
+      "category": "dishes",
+      "name": "Hambúrguer Frango",
+      "price": 13.50
+    },
+    {
+      "id": 12,
+      "category": "dishes",
+      "name": "Hambúrguer Picanha",
+      "price": 18.00
+    },
+    {
+      "id": 13,
+      "category": "dishes",
+      "name": "Hambúrguer Faláfel Vegan",
+      "price": 15.00
+    },
+    {
+      "id": 14,
+      "category": "dishes",
+      "name": "Hambúrguer Molho Picante",
+      "price": 17.00
+    },
+    {
+      "id": 15,
+      "category": "dishes",
+      "name": "Big Burguer Bacon",
+      "price": 20.00
+    },
+    {
+      "id": 16,
+      "category": "dishes",
+      "name": "Panqueca Três Queijos",
+      "price": 15.00
+    },
+    {
+      "id": 17,
+      "category": "dishes",
+      "name": "Panqueca Espinafre Vegan",
+      "price": 14.00
+    },
+    {
+      "id": 18,
+      "category": "dishes",
+      "name": "Panqueca Frango Cream Cheese",
+      "price": 16.00
+    },
+    {
+      "id": 19,
+      "category": "dishes",
+      "name": "Panqueca Carne",
+      "price": 16.00
+    },
+    {
+      "id": 20,
+      "category": "sides",
+      "name": "Fritas Dois Queijos Pequena",
+      "price": 12.00
+    },
+    {
+      "id": 21,
+      "category": "sides",
+      "name": "Fritas Dois Queijos Média",
+      "price": 15.00
+    },
+    {
+      "id": 22,
+      "category": "sides",
+      "name": "Fritas Dois Queijos Grande",
+      "price": 20.00
+    },
+    {
+      "id": 23,
+      "category": "sides",
+      "name": "Onion Rings Pequena",
+      "price": 15.00
+    },
+    {
+      "id": 24,
+      "category": "sides",
+      "name": "Onion Rings Grande",
+      "price": 20.00
+    },
+    {
+      "id": 25,
+      "category": "sides",
+      "name": "Nachos c/ Cheddar Grande",
+      "price": 24.00
+    },
+    {
+      "id": 26,
+      "category": "sides",
+      "name": "Frango Frito Pequena",
+      "price": 18.00
+    },
+    {
+      "id": 27,
+      "category": "sides",
+      "name": "Frango Frito Grande",
+      "price": 24.00
+    },
+    {
+      "id": 28,
+      "category": "sides",
+      "name": "Bolinho Tapioca c/ Queijo",
+      "price": 30.00
+    },
+    {
+      "id": 29,
+      "category": "sides",
+      "name": "Bolinho Shimeji Vegan",
+      "price": 30.00
+    },
+    {
+      "id": 30,
+      "category": "desserts",
+      "name": "Sorvete Chocolate Belga",
+      "price": 12.00
+    },
+    {
+      "id": 31,
+      "category": "desserts",
+      "name": "Sorvete Amora Vegan",
+      "price": 15.00
+    },
+    {
+      "id": 32,
+      "category": "desserts",
+      "name": "Mini Churros Doce de Leite",
+      "price": 10.00
+    },
+    {
+      "id": 33,
+      "category": "desserts",
+      "name": "Taça Morangos c/ Chantilly",
+      "price": 12.00
+    },
+    {
+      "id": 34,
+      "category": "desserts",
+      "name": "Crepe Francês Banana Caramelo",
+      "price": 12.00
+    },
+    {
+      "id": 35,
+      "category": "desserts",
+      "name": "Crepe Francês Creme Avelã",
+      "price": 14.00
+    },
+    {
+      "id": 36,
+      "category": "desserts",
+      "name": "Crepe Francês Frutas Vermelhas",
+      "price": 14.00
+    },
+    {
+      "id": 37,
+      "category": "desserts",
+      "name": "Pudim de Leite",
+      "price": 8.00
+    },
+    {
+      "id": 38,
+      "category": "desserts",
+      "name": "Mousse Caseira Chocolate",
+      "price": 8.50
+    },
+    {
+      "id": 39,
+      "category": "desserts",
+      "name": "Mousse Caseira Maracujá",
+      "price": 8.50
+    },
   ]
 }
