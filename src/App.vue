@@ -1,13 +1,13 @@
 <template>
 <div class="app">
   <tables :class="{shift: shift}"/>
-  <clients :class="{shift: shift}"/>
+  <orders-summary :class="{shift: shift}"/>
 </div>
 </template>
 
 <script>
 import Tables from '@/components/Tables.vue'
-import Clients from '@/components/Clients.vue'
+import OrdersSummary from '@/components/Summary.vue'
 import FetchDataMixin from '@/mixins/FetchDataMixin'
 import { eventBus } from '@/main'
 
@@ -15,7 +15,7 @@ export default {
   name: 'App',
   components: {
     Tables,
-    Clients
+    OrdersSummary
   },
   mixins: [ FetchDataMixin ],
   created () {
@@ -46,7 +46,7 @@ export default {
   transition: transform $time__page-transition;
 }
 
-.clients {
+.summary {
   position: absolute;
   left: 100vw;
   transition: transform ease $time__page-transition;
