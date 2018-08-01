@@ -1,17 +1,26 @@
 <template>
-<div class="clients" v-bar>
-  <div class="clients__content">
-    <div class="label">
-      <span class="label__client">
-        Cliente
-      </span>
-      <span class="label__value">
-        Valor
-      </span>
-    </div>
-    <client v-for="client in clients" :client="client" :key="`client-${client.id}`"/>
-    <add-client />
+<div class="clients">
+
+  <div class="label">
+    <span class="label__client">
+      Cliente
+    </span>
+    <span class="label__value">
+      Valor
+    </span>
   </div>
+
+  <div class="clients__content" v-bar>
+    <div class="clients__content-wrapper" >
+      <client v-for="client in clients" :client="client" :key="`client-${client.id}`"/>
+      <add-client />
+    </div>
+  </div>
+
+  <div class="clients__spacer">
+
+  </div>
+
 </div>
 </template>
 
@@ -31,7 +40,23 @@ export default {
 
 <style lang="scss" scoped>
 .clients {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 
+  &__content {
+    flex: 1;
+  }
+
+  &__content-wrapper {
+    > div:first-child {
+      margin-top: 0;
+    }
+  }
+
+  &__spacer {
+    height: 10px;
+  }
 }
 
 .label {
@@ -44,11 +69,11 @@ export default {
   font-weight: bold;
 
   &__client {
-    margin-left: 20px;
+    margin-left: 30px;
   }
 
   &__value {
-    margin-right: 20px;
+    margin-right: 30px;
   }
 }
 </style>

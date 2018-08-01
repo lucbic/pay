@@ -183,10 +183,8 @@ export default {
 
 .view {
   flex: 1;
-
-  &__clients {
-
-  }
+  display: flex;
+  flex-direction: column;
 }
 
 .footer {

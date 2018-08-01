@@ -50,7 +50,7 @@ export default {
   justify-content: space-between;
   position: relative;
   padding: 6px 10px;
-  margin: 5px;
+  margin: 5px 16px;
   color: $color__header-text;
   font-family: $ff__dosis;
   font-size: 20px;
