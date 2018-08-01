@@ -10,16 +10,21 @@
       </span>
     </div>
     <client v-for="client in clients" :client="client" :key="`client-${client.id}`"/>
+    <add-client />
   </div>
 </div>
 </template>
 
 <script>
 import Client from '@/components/Client'
+import AddClient from '@/components/AddClient'
 
 export default {
   name: 'Clients',
-  components: { Client },
+  components: {
+    Client,
+    AddClient
+  },
   props: [ 'clients' ]
 }
 </script>

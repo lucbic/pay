@@ -59,10 +59,13 @@ export default {
   created () {
     eventBus.$on('selectTable', index => {
       console.log('You have selected the table ' + (index + 1))
-      this.table = this.getTable(index)
-      this.clients = this.getClients(this.table.clients)
-      this.orders = this.getTableOrders(index)
-      this.tableNumber = index + 1
+      this.$nextTick(() => { this.resetData(index) })
+    })
+    eventBus.$on('addClient', () => {
+      this.$nextTick(() => {
+        this.table = this.getTable(this.tableIndex)
+        this.clients = this.getClients(this.table.clients)
+      })
     })
   },
   data () {
@@ -71,12 +74,20 @@ export default {
       table: null,
       clients: null,
       orders: null,
-      tableNumber: null
+      tableNumber: null,
+      tableIndex: null
     }
   },
   methods: {
     goToTables () {
       eventBus.$emit('goToTables')
+    },
+    resetData (index) {
+      this.table = this.getTable(index)
+      this.clients = this.getClients(this.table.clients)
+      this.orders = this.getTableOrders(index)
+      this.tableNumber = index + 1
+      this.tableIndex = index
     }
   }
 }

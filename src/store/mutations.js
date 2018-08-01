@@ -12,5 +12,14 @@ export default {
   },
   [types.SET_PRODUCTS] (state, products) {
     state.products = products
+  },
+  [types.ADD_CLIENT] (state, { name, tableIndex }) {
+    const client = {
+      id: (state.clients.length + 1),
+      name: name
+    }
+
+    state.tables[tableIndex].clients.push(client.id)
+    state.clients.push(client)
   }
 }

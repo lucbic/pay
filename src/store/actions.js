@@ -56,3 +56,8 @@ export const fetchProductsData = ({ commit }) => {
 export const setCurrentTableIndex = ({ commit }, tableIndex) => {
   commit(types.SET_CURRENT_TABLE_INDEX, tableIndex)
 }
+
+export const addClient = ({ commit, getters }, name) => {
+  const tableIndex = getters.getCurrentTableIndex
+  commit(types.ADD_CLIENT, { name, tableIndex })
+}
