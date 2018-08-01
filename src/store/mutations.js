@@ -4,6 +4,9 @@ export default {
   [types.SET_CURRENT_TABLE_INDEX] (state, tableIndex) {
     state.currentTableIndex = tableIndex
   },
+  [types.SET_ACTIVE_CLIENT] (state, id) {
+    state.activeClient = id
+  },
   [types.SET_TABLES] (state, tables) {
     state.tables = tables
   },

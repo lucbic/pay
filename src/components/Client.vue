@@ -1,5 +1,6 @@
 <template>
-<div class="client">
+<div class="client" @click="activate" v-click-outside.notouch="onClickOutside"
+  :class="{ 'client--active': active }">
   <div>
     <simple-svg class="client__icon" :width="'14px'"
       :filepath="'static/img/user-solid.svg'" />
@@ -14,13 +15,18 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Client',
   props: [ 'client' ],
+  data () {
+    return {
+      active: false
+    }
+  },
   computed: {
-    ...mapGetters(['getClientOrders', 'getCurrentTableIndex']),
+    ...mapGetters(['getClientOrders', 'getCurrentTableIndex', 'getActiveClient']),
 
     total () {
       const tableIndex = this.getCurrentTableIndex
@@ -38,6 +44,20 @@ export default {
       })
 
       return localeTotal.replace('R$', 'R$ ')
+    }
+  },
+  methods: {
+    ...mapActions(['setActiveClient']),
+
+    activate () {
+      if (this.active) { return }
+      this.active = true
+      this.setActiveClient(this.client.id)
+    },
+    onClickOutside () {
+      this.active = false
+      if (this.getActiveClient !== this.client.id) { return }
+      this.setActiveClient(-1)
     }
   }
 }
@@ -64,6 +84,11 @@ export default {
 
   &__name {
     margin-left: 5px;
+  }
+
+  &--active {
+    background: $color__button--active;
+    color: $color__dark-grey;
   }
 }
 </style>

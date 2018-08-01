@@ -1,5 +1,7 @@
 export const getCurrentTableIndex = state => state.currentTableIndex
 
+export const getActiveClient = state => state.activeClient
+
 export const getTables = state => state.tables
 
 export const getTable = state => tableIndex => state.tables[tableIndex]
