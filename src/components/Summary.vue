@@ -27,6 +27,10 @@
       <clients class="view__clients" :clients="clients" />
     </div>
 
+    <div class="total">
+
+    </div>
+
     <div class="footer">
       <div class="footer__buttons" v-show="getActiveClient !== -1">
         <button class="footer__button" @click="checkoutClient">
@@ -45,19 +49,12 @@
 import SmallLogo from '@/components/SmallLogo'
 import Clients from '@/components/Clients'
 import { mapState, mapGetters, mapActions } from 'vuex'
-import { eventBus } from '@/main'
 
 export default {
   name: 'Summary',
   components: {
     SmallLogo,
     Clients
-  },
-  watch: {
-    currentTableIndex (index) {
-      console.log('You have selected the table ' + (index + 1))
-      this.$nextTick(() => { this.resetData(index) })
-    }
   },
   computed: {
     ...mapState(['currentTableIndex']),
@@ -66,36 +63,32 @@ export default {
       'getTable',
       'getTableOrders',
       'getActiveClient'
-    ])
-  },
-  created () {
-    eventBus.$on('addClient', () => {
-      this.$nextTick(() => {
-        this.table = this.getTable(this.tableIndex)
-        this.clients = this.getClients(this.table.clients)
-      })
-    })
+    ]),
+    table () {
+      if (this.currentTableIndex === null) { return }
+      return this.getTable(this.currentTableIndex)
+    },
+    clients () {
+      if (this.currentTableIndex === null) { return }
+      return this.getClients(this.table.clients)
+    },
+    orders () {
+      if (this.currentTableIndex === null) { return }
+      return this.getTableOrders(this.currentTableIndex)
+    },
+    tableNumber () {
+      if (this.currentTableIndex === null) { return }
+      return this.currentTableIndex + 1
+    }
   },
   data () {
     return {
-      view: 'clients',
-      table: null,
-      clients: null,
-      orders: null,
-      tableNumber: null,
-      tableIndex: null
+      view: 'clients'
     }
   },
   methods: {
     ...mapActions(['setScreenSm']),
 
-    resetData (index) {
-      this.table = this.getTable(index)
-      this.clients = this.getClients(this.table.clients)
-      this.orders = this.getTableOrders(index)
-      this.tableNumber = index + 1
-      this.tableIndex = index
-    },
     checkoutClient () {
 
     },
