@@ -30,7 +30,7 @@ export default {
 <style lang="scss" scoped>
 .table {
   // shape
-  background: $color__table;
+  background: $light-grey;
   width: $size__table;
   height: $size__table;
   border-radius: ($size__table / 2);
@@ -47,14 +47,14 @@ export default {
 
   // modifier
   &--open {
-    background: $color__table--open;
+    background: $avocado;
     border-radius: 15px;
   }
 
   /* children */
   &__number {
     // font
-    font-size: $fs__table;
+    font-size: 24px;
     font-family: $ff__dosis;
     font-size: 32px;
     font-weight: 700;

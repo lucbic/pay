@@ -16,8 +16,8 @@ export default {
 .logo {
   background: white;
   padding: 4px 10px;
-  border-radius: $br__default;
-  border: 6px double $color__border-default;
+  border-radius: 15px;
+  border: 6px double $darkest-grey;
   width: fit-content;
 
   &__image {
@@ -29,8 +29,8 @@ export default {
   &__title {
     text-transform: uppercase;
     font-family: $ff__roboto;
-    font-size: $fs__logo;
-    color: $color__text-default;
+    font-size: 20px;
+    color: $darkest-grey;
     margin: 0;
   }
 }

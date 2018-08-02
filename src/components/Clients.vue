@@ -18,10 +18,6 @@
     </div>
   </div>
 
-  <div class="clients__spacer">
-
-  </div>
-
 </div>
 </template>
 
@@ -63,16 +59,13 @@ export default {
       margin-top: 0;
     }
   }
-
-  &__spacer {
-    height: 10px;
-  }
 }
 
 .label {
   display: flex;
   justify-content: space-between;
-  margin: 10px 0;
+  align-items: center;
+  height: 40px;
 
   font-family: $ff__dosis;
   font-size: 20px;

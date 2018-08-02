@@ -55,10 +55,10 @@ export default {
 
 <style lang="scss" scoped>
 .add-client {
-  background: $color__pumpkin;
+  background: $pumpkin;
   padding: 6px 10px;
   margin: 5px 16px;
-  color: $color__header-text;
+  color: $white;
   font-family: $ff__dosis;
   font-size: 20px;
   font-weight: bold;
@@ -77,14 +77,14 @@ export default {
   }
 
   &__input {
-    color: $color__header-text;
+    color: $white;
     border-style: none;
     background: none;
     width: 70%;
   }
 
   &--active {
-    background: $color__table-number;
+    background: $dark-grey;
   }
 }
 </style>

@@ -64,9 +64,9 @@ export default {
 .well {
   margin: $size__well-margin;
   margin-top: 10px;
-  background: $color__well;
+  background: $white;
   box-shadow: 6px 6px 10px 0px rgba(0,0,0,0.23);
-  border-radius: $br__default;
+  border-radius: 15px;
   flex: 1;
 
   display: flex;
@@ -76,7 +76,7 @@ export default {
     width: 60%;
     align-self: center;
     margin: 20px 0;
-    border: 0.5px solid $color__border-default;
+    border: 0.5px solid $darkest-grey;
     padding-left: $size__tables-gap;
     padding-right: $size__tables-gap;
   }
@@ -84,7 +84,7 @@ export default {
   &__title {
     text-align: center;
     font-family: $ff__dosis;
-    font-size: $fs__h1;
+    font-size: 22px;
     margin: 0;
     margin-top: $size__tables-gap;
   }

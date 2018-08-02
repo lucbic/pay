@@ -125,9 +125,9 @@ export default {
 .well {
   margin: $size__well-margin;
   margin-top: 10px;
-  background: $color__well;
+  background: $white;
   box-shadow: 6px 6px 10px 0px rgba(0,0,0,0.23);
-  border-radius: $br__default;
+  border-radius: 15px;
   flex: 1;
   overflow-y: hidden;
 
@@ -136,8 +136,8 @@ export default {
 }
 
 .header {
-  background: $color__dark-grey;
-  color: $color__header-text;
+  background: $dark-grey;
+  color: $white;
   padding: 10px;
 
   &__back {
@@ -146,7 +146,7 @@ export default {
     font-family: $ff__dosis;
     font-size: 14px;
     font-weight: bold;
-    color: $color__header-text;
+    color: $white;
     text-transform: uppercase;
     background: transparent;
     border-style: none;
@@ -164,7 +164,7 @@ export default {
 
   &__button {
     border-radius: 8px;
-    border: 1px solid $color__header-text;
+    border: 1px solid $white;
     background: transparent;
     height: 32px;
     width: 120px;
@@ -173,12 +173,12 @@ export default {
     font-size: 20px;
 
     text-transform: uppercase;
-    color: $color__header-text;
+    color: $white;
 
     &--active {
-      background: $color__button--active;
-      border-color: $color__button--active;
-      color: $color__dark-grey;
+      background: $avocado;
+      border-color: $avocado;
+      color: $dark-grey;
       font-weight: bold;
     }
   }
@@ -200,10 +200,15 @@ export default {
   flex-direction: column;
 }
 
+.total {
+  background: $avocado;
+  height: 40px;
+}
+
 .footer {
   height: 50px;
-  background: $color__dark-grey;
-  color: $color__header-text;
+  background: $dark-grey;
+  color: $white;
 
   &__buttons {
     display: flex;
@@ -213,7 +218,7 @@ export default {
 
   &__button {
     border-radius: 8px;
-    border: 1px solid $color__header-text;
+    border: 1px solid $white;
     background: transparent;
     height: 32px;
     width: 150px;
@@ -223,12 +228,12 @@ export default {
     font-weight: bold;
 
     text-transform: uppercase;
-    color: $color__header-text;
+    color: $white;
 
     &--active {
-      background: $color__button--active;
-      border-color: $color__button--active;
-      color: $color__dark-grey;
+      background: $avocado;
+      border-color: $avocado;
+      color: $dark-grey;
       font-weight: bold;
     }
   }

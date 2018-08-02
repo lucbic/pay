@@ -28,7 +28,7 @@ export default {
 
 .app {
   @include cool-background;
-  color: $color__text-default;
+  color: $darkest-grey;
   position: relative;
   height: 100vh;
   overflow-x: hidden;

@@ -16,14 +16,14 @@ export default {
   background: white;
   padding: 2px 6px;
   border-radius: 8px;
-  border: 4px double $color__border-default;
+  border: 4px double $darkest-grey;
   width: fit-content;
 
   &__title {
     text-transform: uppercase;
     font-family: $ff__roboto;
     font-size: 16px;
-    color: $color__text-default;
+    color: $darkest-grey;
     margin: 0;
   }
 }

@@ -39,13 +39,13 @@ export default {
 
 <style lang="scss" scoped>
 .client {
-  background: $color__dark-grey;
+  background: $dark-grey;
   display: flex;
   justify-content: space-between;
   position: relative;
   padding: 6px 10px;
   margin: 5px 16px;
-  color: $color__header-text;
+  color: $white;
   font-family: $ff__dosis;
   font-size: 20px;
   border-radius: 10px;
@@ -62,8 +62,8 @@ export default {
   }
 
   &--active {
-    background: $color__button--active;
-    color: $color__dark-grey;
+    background: $avocado;
+    color: $dark-grey;
   }
 }
 </style>
