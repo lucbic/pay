@@ -1,6 +1,6 @@
 <template>
-<div class="client" @click="activate" v-click-outside.notouch="onClickOutside"
-  :class="{ 'client--active': active }">
+<div class="client" @click="setActiveClient(client.id)"
+  :class="{ 'client--active': active }" id="client-component">
   <div>
     <simple-svg class="client__icon" :width="'14px'"
       :filepath="'static/img/user-solid.svg'" />
@@ -75,6 +75,7 @@ export default {
   font-family: $ff__dosis;
   font-size: 20px;
   border-radius: 10px;
+  height: 35px;
 
   &__icon,
   &__name,

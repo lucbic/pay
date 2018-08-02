@@ -1,6 +1,7 @@
 <template>
 <div class="add-client" @click="activate" v-click-outside="onClickOutside"
-  :class="{ 'add-client--active': active }" @keyup.enter="add">
+  :class="{ 'add-client--active': active }" @keyup.enter="add"
+  id="client-component">
   <simple-svg class="add-client__icon" :width="'14px'"
     :filepath="'static/img/plus-circle-solid.svg'" />
   <span v-if="!active" class="add-client__label">
@@ -72,7 +73,7 @@ export default {
   &__label,
   &__input {
     margin-left: 5px;
-    height: 22px;
+    height: 23px;
   }
 
   &__input {

@@ -1,5 +1,5 @@
 <template>
-<div class="clients">
+<div class="clients" @click="desselect($event)">
 
   <div class="label">
     <span class="label__client">
@@ -34,7 +34,12 @@ export default {
     Client,
     AddClient
   },
-  props: [ 'clients' ]
+  props: [ 'clients' ],
+    desselect (event) {
+      if (event.target.closest('#client-component')) { return }
+      this.setActiveClient(-1)
+    }
+  }
 }
 </script>
 
