@@ -24,5 +24,8 @@ export default {
 
     state.tables[tableIndex].clients.push(client.id)
     state.clients.push(client)
+  },
+  [types.SET_SCREEN_SM] (state, scr) {
+    state.screenSm = scr
   }
 }

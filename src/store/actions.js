@@ -61,7 +61,11 @@ export const setActiveClient = ({ commit }, id) => {
   commit(types.SET_ACTIVE_CLIENT, id)
 }
 
-export const addClient = ({ commit, getters }, name) => {
-  const tableIndex = getters.getCurrentTableIndex
+export const addClient = ({ commit, state }, name) => {
+  const tableIndex = state.currentTableIndex
   commit(types.ADD_CLIENT, { name, tableIndex })
+}
+
+export const setScreenSm = ({ commit }, scr) => {
+  commit(types.SET_SCREEN_SM, scr)
 }

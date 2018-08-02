@@ -2,7 +2,7 @@
 <div class="summary">
   <div class="well">
     <div class="header">
-      <button class="header__back" @click="goToTables">
+      <button class="header__back" @click="setScreenSm('tables')">
         <simple-svg class="header__back-img" :width="'12px'"
           :filepath="'static/img/long-arrow-alt-left-solid.svg'" />
         <span>Mesas</span>
@@ -28,11 +28,11 @@
     </div>
 
     <div class="footer">
-      <div class="footer__buttons">
-        <button class="footer__button">
+      <div class="footer__buttons" v-show="getActiveClient !== -1">
+        <button class="footer__button" @click="checkoutClient">
           Fechar cliente
         </button>
-        <button class="footer__button">
+        <button class="footer__button" @click="clientOrders">
           Ver pedidos
         </button>
       </div>
@@ -44,7 +44,7 @@
 <script>
 import SmallLogo from '@/components/SmallLogo'
 import Clients from '@/components/Clients'
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import { eventBus } from '@/main'
 
 export default {
@@ -53,14 +53,22 @@ export default {
     SmallLogo,
     Clients
   },
-  computed: {
-    ...mapGetters(['getClients', 'getTable', 'getTableOrders'])
-  },
-  created () {
-    eventBus.$on('selectTable', index => {
+  watch: {
+    currentTableIndex (index) {
       console.log('You have selected the table ' + (index + 1))
       this.$nextTick(() => { this.resetData(index) })
-    })
+    }
+  },
+  computed: {
+    ...mapState(['currentTableIndex']),
+    ...mapGetters([
+      'getClients',
+      'getTable',
+      'getTableOrders',
+      'getActiveClient'
+    ])
+  },
+  created () {
     eventBus.$on('addClient', () => {
       this.$nextTick(() => {
         this.table = this.getTable(this.tableIndex)
@@ -79,15 +87,20 @@ export default {
     }
   },
   methods: {
-    goToTables () {
-      eventBus.$emit('goToTables')
-    },
+    ...mapActions(['setScreenSm']),
+
     resetData (index) {
       this.table = this.getTable(index)
       this.clients = this.getClients(this.table.clients)
       this.orders = this.getTableOrders(index)
       this.tableNumber = index + 1
       this.tableIndex = index
+    },
+    checkoutClient () {
+
+    },
+    clientOrders () {
+
     }
   }
 }

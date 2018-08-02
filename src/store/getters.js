@@ -1,8 +1,4 @@
-export const getCurrentTableIndex = state => state.currentTableIndex
-
 export const getActiveClient = state => state.activeClient
-
-export const getTables = state => state.tables
 
 export const getTable = state => tableIndex => state.tables[tableIndex]
 
@@ -61,4 +57,21 @@ export const getClientOrders = state => (tableIndex, id) => {
   })
 
   return orders
+}
+
+export const getClientTotal = (state, getters) => id => {
+  const tableIndex = state.currentTableIndex
+  const orders = getters.getClientOrders(tableIndex, id)
+  let total = 0
+
+  orders.forEach(order => {
+    total += (order.price * order.amount)
+  })
+
+  let localeTotal = total.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  })
+
+  return localeTotal.replace('R$', 'R$ ')
 }

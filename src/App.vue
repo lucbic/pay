@@ -1,15 +1,15 @@
 <template>
 <div class="app">
-  <tables :class="{shift: shift}"/>
-  <orders-summary :class="{shift: shift}"/>
+  <tables :class="{shift: screenSm === 'summary'}"/>
+  <orders-summary :class="{shift: screenSm === 'summary'}"/>
 </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Tables from '@/components/Tables.vue'
 import OrdersSummary from '@/components/Summary.vue'
 import FetchDataMixin from '@/mixins/FetchDataMixin'
-import { eventBus } from '@/main'
 
 export default {
   name: 'App',
@@ -18,18 +18,8 @@ export default {
     OrdersSummary
   },
   mixins: [ FetchDataMixin ],
-  created () {
-    eventBus.$on('selectTable', () => {
-      this.shift = true
-    })
-    eventBus.$on('goToTables', () => {
-      this.shift = false
-    })
-  },
-  data () {
-    return {
-      shift: false
-    }
+  computed: {
+    ...mapState(['screenSm'])
   }
 }
 </script>

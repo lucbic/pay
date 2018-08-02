@@ -12,7 +12,8 @@
 
   <div class="clients__content" v-bar>
     <div class="clients__content-wrapper" >
-      <client v-for="client in clients" :client="client" :key="`client-${client.id}`"/>
+      <client v-for="client in clients"
+              :client="client" :key="`client-${client.id}`"/>
       <add-client />
     </div>
   </div>
@@ -25,6 +26,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Client from '@/components/Client'
 import AddClient from '@/components/AddClient'
 
@@ -35,6 +37,9 @@ export default {
     AddClient
   },
   props: [ 'clients' ],
+  methods: {
+    ...mapActions(['setActiveClient']),
+
     desselect (event) {
       if (event.target.closest('#client-component')) { return }
       this.setActiveClient(-1)

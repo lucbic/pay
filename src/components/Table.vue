@@ -6,7 +6,6 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { eventBus } from '@/main'
 
 export default {
   name: 'Table',
@@ -18,10 +17,10 @@ export default {
     number () { return this.index + 1 }
   },
   methods: {
-    ...mapActions(['setCurrentTableIndex']),
+    ...mapActions(['setCurrentTableIndex', 'setScreenSm']),
 
     selectTable (index) {
-      eventBus.$emit('selectTable', index)
+      this.setScreenSm('summary')
       this.setCurrentTableIndex(index)
     }
   }

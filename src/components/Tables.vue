@@ -7,7 +7,7 @@
     <div class="scroll" v-bar>
       <div class="scroll__content">
         <div class="tables__grid">
-          <single-table v-for="(table, index) in getTables" :key="`table-${index}`"
+          <single-table v-for="(table, index) in tables" :key="`table-${index}`"
             :index="index" :data="table"/>
         </div>
       </div>
@@ -19,7 +19,7 @@
 <script>
 import Logo from '@/components/Logo'
 import SingleTable from '@/components/Table'
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Tables',
@@ -28,7 +28,7 @@ export default {
     SingleTable
   },
   computed: {
-    ...mapGetters(['getTables'])
+    ...mapState(['tables'])
   },
   data () {
     return {

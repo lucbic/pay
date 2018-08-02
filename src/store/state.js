@@ -3,5 +3,6 @@ export default {
   clients: null,
   products: null,
   currentTableIndex: null,
-  activeClient: -1
+  activeClient: -1,
+  screenSm: 'tables'
 }

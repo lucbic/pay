@@ -9,7 +9,7 @@
     </span>
   </div>
   <span class="client__total">
-    {{ total }}
+    {{ getClientTotal(client.id) }}
   </span>
 </div>
 </template>
@@ -22,43 +22,17 @@ export default {
   props: [ 'client' ],
   data () {
     return {
-      active: false
     }
   },
   computed: {
-    ...mapGetters(['getClientOrders', 'getCurrentTableIndex', 'getActiveClient']),
+    ...mapGetters(['getClientOrders', 'getActiveClient', 'getClientTotal']),
 
-    total () {
-      const tableIndex = this.getCurrentTableIndex
-      const orders = this.getClientOrders(tableIndex, this.client.id)
-      let total = 0
-
-      console.log(orders)
-      orders.forEach(order => {
-        total += (order.price * order.amount)
-      })
-
-      let localeTotal = total.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      })
-
-      return localeTotal.replace('R$', 'R$ ')
+    active () {
+      return this.getActiveClient === this.client.id
     }
   },
   methods: {
-    ...mapActions(['setActiveClient']),
-
-    activate () {
-      if (this.active) { return }
-      this.active = true
-      this.setActiveClient(this.client.id)
-    },
-    onClickOutside () {
-      this.active = false
-      if (this.getActiveClient !== this.client.id) { return }
-      this.setActiveClient(-1)
-    }
+    ...mapActions(['setActiveClient'])
   }
 }
 </script>
