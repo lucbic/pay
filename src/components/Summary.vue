@@ -2,7 +2,7 @@
 <div class="summary">
   <div class="well">
     <div class="header">
-      <button class="header__back" @click="setScreenSm('tables')">
+      <button class="header__back" @click="backToTables">
         <simple-svg class="header__back-img" :width="'12px'"
           :filepath="'static/img/long-arrow-alt-left-solid.svg'" />
         <span>Mesas</span>
@@ -24,20 +24,27 @@
     </div>
 
     <div class="view">
-      <clients class="view__clients" :clients="clients" />
+      <clients v-show="view === 'clients'" class="view__clients" :clients="clients" />
+      <orders v-show="view === 'orders'" class="view__orders" :orders="orders" />
     </div>
 
     <div class="total">
-
+      <span>Total:</span>
+      <span>{{ localeTotal }}</span>
     </div>
 
     <div class="footer">
-      <div class="footer__buttons" v-show="getActiveClient !== -1">
+      <div class="footer__buttons" v-show="buttonsClient">
         <button class="footer__button" @click="checkoutClient">
           Fechar cliente
         </button>
         <button class="footer__button" @click="clientOrders">
           Ver pedidos
+        </button>
+      </div>
+      <div class="footer__buttons" v-show="buttonCheckout">
+        <button class="footer__button" @click="checkoutClient">
+          Fechar Conta
         </button>
       </div>
     </div>
@@ -48,13 +55,15 @@
 <script>
 import SmallLogo from '@/components/SmallLogo'
 import Clients from '@/components/Clients'
+import Orders from '@/components/Orders'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Summary',
   components: {
     SmallLogo,
-    Clients
+    Clients,
+    Orders
   },
   computed: {
     ...mapState(['currentTableIndex']),
@@ -62,7 +71,8 @@ export default {
       'getClients',
       'getTable',
       'getTableOrders',
-      'getActiveClient'
+      'getActiveClient',
+      'getTotal'
     ]),
     table () {
       if (this.currentTableIndex === null) { return }
@@ -79,6 +89,20 @@ export default {
     tableNumber () {
       if (this.currentTableIndex === null) { return }
       return this.currentTableIndex + 1
+    },
+    localeTotal () {
+      if (this.currentTableIndex === null) { return }
+      let localeTotal = this.getTotal(this.currentTableIndex)
+      return localeTotal.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      }).replace('R$', 'R$ ')
+    },
+    buttonsClient () {
+      return this.getActiveClient !== -1
+    },
+    buttonCheckout () {
+      return this.getActiveClient === -1
     }
   },
   data () {
@@ -87,8 +111,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setScreenSm']),
-
+    ...mapActions(['setScreenSm', 'setActiveClient']),
+    backToTables () {
+      this.setActiveClient(-1)
+      this.setScreenSm('tables')
+      window.setTimeout(() => {
+        this.view = 'clients'
+      }, 200)
+    },
     checkoutClient () {
 
     },
@@ -196,6 +226,13 @@ export default {
 .total {
   background: $avocado;
   height: 40px;
+  font-family: $ff__dosis;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
 }
 
 .footer {
@@ -204,15 +241,16 @@ export default {
   color: $white;
 
   &__buttons {
+    height: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    align-items: center;
   }
 
   &__button {
     border-radius: 8px;
-    border: 1px solid $white;
-    background: transparent;
+    border: 2px solid $white;
+    background: $light-grey;
     height: 32px;
     width: 150px;
     margin: 0 6px;
@@ -221,7 +259,7 @@ export default {
     font-weight: bold;
 
     text-transform: uppercase;
-    color: $white;
+    color: $darkest-grey;
 
     &--active {
       background: $avocado;

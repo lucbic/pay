@@ -20,12 +20,8 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Client',
   props: [ 'client' ],
-  data () {
-    return {
-    }
-  },
   computed: {
-    ...mapGetters(['getClientOrders', 'getActiveClient', 'getClientTotal']),
+    ...mapGetters(['getActiveClient', 'getClientTotal']),
 
     active () {
       return this.getActiveClient === this.client.id

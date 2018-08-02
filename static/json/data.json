@@ -5,12 +5,14 @@
       "clients": [ 0, 1 ],
       "orders": [
         {
+          "id": 0,
           "client_id": 0,
           "product_id": 3,
           "amount": 2,
           "status": false
         },
         {
+          "id": 1,
           "client_id": 1,
           "product_id": 5,
           "amount": 1,

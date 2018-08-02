@@ -21,6 +21,7 @@ export const getTableOrders = state => tableIndex => {
     const client = state.clients.find(x => x.id === orderData.client_id)
 
     let order = {
+      id: orderData.id,
       product: product.name,
       productId: product.id,
       client: client.name,
@@ -74,4 +75,14 @@ export const getClientTotal = (state, getters) => id => {
   })
 
   return localeTotal.replace('R$', 'R$ ')
+}
+
+export const getTotal = (state, getters) => id => {
+  const tableIndex = state.currentTableIndex
+  const orders = getters.getTableOrders(tableIndex)
+  let total = 0
+
+  orders.forEach(order => { total += order.price * order.amount })
+
+  return total
 }
