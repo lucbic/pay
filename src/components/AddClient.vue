@@ -14,7 +14,6 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { eventBus } from '@/main'
 
 export default {
   name: 'AddClient',
@@ -36,7 +35,6 @@ export default {
     add () {
       if (!this.active) { return }
 
-      eventBus.$emit('addClient')
       this.addClient(this.name)
       this.resetComponent()
     },
