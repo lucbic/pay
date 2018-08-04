@@ -49,13 +49,13 @@ export default {
   flex-direction: column;
 
   &__content {
-    @include striped-background;
+    @extend %striped-background;
     height: 100%;
   }
 }
 
 .label {
-  @include orders-grid;
+  @extend %orders-grid;
   height: 40px;
 
   font-family: $ff__dosis;

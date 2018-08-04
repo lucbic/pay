@@ -27,7 +27,7 @@ export default {
 <style lang="scss">
 
 .app {
-  @include cool-background;
+  @extend %cool-background;
   color: $darkest-grey;
   position: relative;
   height: 100vh;
