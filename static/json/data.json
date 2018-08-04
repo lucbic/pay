@@ -7,14 +7,35 @@
         {
           "id": 0,
           "client_id": 0,
-          "product_id": 3,
+          "product_id": 36,
           "amount": 2,
           "status": false
         },
         {
           "id": 1,
           "client_id": 1,
-          "product_id": 5,
+          "product_id": 4,
+          "amount": 1,
+          "status": false
+        },
+        {
+          "id": 2,
+          "client_id": 1,
+          "product_id": 13,
+          "amount": 1,
+          "status": false
+        },
+        {
+          "id": 3,
+          "client_id": 1,
+          "product_id": 4,
+          "amount": 1,
+          "status": false
+        },
+        {
+          "id": 4,
+          "client_id": 1,
+          "product_id": 26,
           "amount": 1,
           "status": false
         }
@@ -242,13 +263,13 @@
     {
       "id": 20,
       "category": "sides",
-      "name": "Fritas Dois Queijos Pequena",
+      "name": "Fritas Dois Queijos Pequeno",
       "price": 12.00
     },
     {
       "id": 21,
       "category": "sides",
-      "name": "Fritas Dois Queijos Média",
+      "name": "Fritas Dois Queijos Médio",
       "price": 15.00
     },
     {
@@ -260,7 +281,7 @@
     {
       "id": 23,
       "category": "sides",
-      "name": "Onion Rings Pequena",
+      "name": "Onion Rings Pequeno",
       "price": 15.00
     },
     {
@@ -278,7 +299,7 @@
     {
       "id": 26,
       "category": "sides",
-      "name": "Frango Frito Pequena",
+      "name": "Frango Frito Pequeno",
       "price": 18.00
     },
     {
