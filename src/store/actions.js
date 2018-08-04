@@ -10,7 +10,7 @@ export const fetchTablesData = ({ commit }) => {
       responseType: 'json'
     })
       .then((response) => {
-        commit(types.SET_TABLES, response.data)
+        commit(types.SET_TABLES_AND_ORDERS, response.data)
         resolve()
       })
       .catch((error) => {
@@ -59,6 +59,22 @@ export const setCurrentTableIndex = ({ commit }, tableIndex) => {
 
 export const setActiveClient = ({ commit }, id) => {
   commit(types.SET_ACTIVE_CLIENT, id)
+}
+
+export const deleteActiveClient = ({ commit }) => {
+  commit(types.DELETE_ACTIVE_CLIENT)
+}
+
+export const setActiveOrder = ({ commit }, id) => {
+  commit(types.SET_ACTIVE_ORDER, id)
+}
+
+export const deleteActiveOrder = ({ commit }) => {
+  commit(types.DELETE_ACTIVE_ORDER)
+}
+
+export const toggleActiveOrderStatus = ({ commit }) => {
+  commit(types.TOGGLE_ACTIVE_ORDER_STATUS)
 }
 
 export const addClient = ({ commit, state }, name) => {

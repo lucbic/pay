@@ -1,9 +1,8 @@
-export const getActiveClient = state => state.activeClient
+export const tableClients = state => {
+  if (state.currentTableIndex === null) { return }
 
-export const getTable = state => tableIndex => state.tables[tableIndex]
-
-export const getClients = state => ids => {
   let clients = []
+  const ids = state.tables[state.currentTableIndex].clients
 
   ids.forEach(clientId => {
     clients.push(state.clients.find(x => x.id === clientId))
@@ -12,9 +11,14 @@ export const getClients = state => ids => {
   return clients
 }
 
-export const getTableOrders = state => tableIndex => {
+export const tableOrders = state => {
+  if (state.currentTableIndex === null) { return }
+
   let orders = []
-  const ordersData = state.tables[tableIndex].orders
+  const clientsIds = state.tables[state.currentTableIndex].clients
+  const ordersData = state.orders.filter(order => {
+    return clientsIds.includes(order.client_id)
+  })
 
   ordersData.forEach(orderData => {
     const product = state.products.find(x => x.id === orderData.product_id)
@@ -37,9 +41,10 @@ export const getTableOrders = state => tableIndex => {
   return orders
 }
 
-export const getClientOrders = state => (tableIndex, id) => {
+export const clientOrders = state => (tableIndex, id) => {
   let orders = []
-  const ordersData = state.tables[tableIndex].orders
+
+  const ordersData = state.orders.filter(x => id === x.client_id)
 
   ordersData.forEach(orderData => {
     if (orderData.client_id !== id) { return }
@@ -60,29 +65,32 @@ export const getClientOrders = state => (tableIndex, id) => {
   return orders
 }
 
-export const getClientTotal = (state, getters) => id => {
+export const clientTotal = (state, getters) => id => {
   const tableIndex = state.currentTableIndex
-  const orders = getters.getClientOrders(tableIndex, id)
+  const orders = getters.clientOrders(tableIndex, id)
   let total = 0
 
   orders.forEach(order => {
     total += (order.price * order.amount)
   })
+  return total
+}
 
-  let localeTotal = total.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  })
-
-  return localeTotal.replace('R$', 'R$ ')
+export const activeClientTotal = (state, getters) => id => {
+  if (state.activeClient === -1) { return }
+  return getters.clientTotal(state.activeClient)
 }
 
 export const getTotal = (state, getters) => id => {
-  const tableIndex = state.currentTableIndex
-  const orders = getters.getTableOrders(tableIndex)
+  const orders = getters.tableOrders
   let total = 0
 
   orders.forEach(order => { total += order.price * order.amount })
 
   return total
+}
+
+export const currentOrderStatus = (state) => {
+  if (state.activeOrder === -1) { return }
+  return state.orders.find(x => x.id === state.activeOrder).status
 }
