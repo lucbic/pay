@@ -24,8 +24,8 @@
     </div>
 
     <div class="view">
-      <clients v-show="view === 'clients'" class="view__clients" :clients="clients" />
-      <orders v-show="view === 'orders'" class="view__orders" :orders="orders" />
+      <clients v-show="view === 'clients'" class="view__clients" />
+      <orders v-show="view === 'orders'" class="view__orders" />
     </div>
 
     <div class="total">
@@ -34,19 +34,33 @@
     </div>
 
     <div class="footer">
-      <div class="footer__buttons" v-show="buttonsClient">
-        <button class="footer__button" @click="checkoutClient">
-          Fechar cliente
+      <div class="footer__buttons">
+        <button class="footer__button client orange" @click="deleteClient"
+          v-show="buttonRemoveClient">
+          Remover Cliente
         </button>
-        <button class="footer__button" @click="clientOrders">
-          Ver pedidos
+
+        <button class="footer__button client" @click="clientOrders"
+          v-show="buttonClient">
+          Pedidos Cliente
         </button>
-      </div>
-      <div class="footer__buttons" v-show="buttonCheckout">
-        <button class="footer__button" @click="checkoutClient">
+
+        <button class="footer__button orange" @click="checkout"
+          v-show="buttonCheckout">
           Fechar Conta
         </button>
+
+        <button class="footer__button orange" @click="cancelOrder"
+          v-show="buttonOrder">
+          Cancelar
+        </button>
+
+        <button class="footer__button green" @click="orderDelivered"
+          v-show="buttonOrder">
+          Entregue
+        </button>
       </div>
+
     </div>
   </div>
 </div>
@@ -65,27 +79,23 @@ export default {
     Clients,
     Orders
   },
+  watch: {
+    view () {
+      this.setActiveClient(-1)
+      this.setActiveOrder(-1)
+    }
+  },
   computed: {
-    ...mapState(['currentTableIndex']),
-    ...mapGetters([
-      'getClients',
-      'getTable',
-      'getTableOrders',
-      'getActiveClient',
-      'getTotal'
+    ...mapState([
+      'currentTableIndex',
+      'activeOrder',
+      'activeClient'
     ]),
-    table () {
-      if (this.currentTableIndex === null) { return }
-      return this.getTable(this.currentTableIndex)
-    },
-    clients () {
-      if (this.currentTableIndex === null) { return }
-      return this.getClients(this.table.clients)
-    },
-    orders () {
-      if (this.currentTableIndex === null) { return }
-      return this.getTableOrders(this.currentTableIndex)
-    },
+    ...mapGetters([
+      'getTotal',
+      'activeClientTotal',
+      'currentOrderStatus'
+    ]),
     tableNumber () {
       if (this.currentTableIndex === null) { return }
       return this.currentTableIndex + 1
@@ -98,11 +108,17 @@ export default {
         currency: 'BRL'
       }).replace('R$', 'R$ ')
     },
-    buttonsClient () {
-      return this.getActiveClient !== -1
+    buttonClient () {
+      return this.view === 'clients' && this.activeClient !== -1
+    },
+    buttonRemoveClient () {
+      return this.activeClientTotal() === 0 && this.buttonClient
     },
     buttonCheckout () {
-      return this.getActiveClient === -1
+      return (this.activeOrder === -1) && (this.activeClient === -1)
+    },
+    buttonOrder () {
+      return !this.currentOrderStatus && this.view === 'orders' && this.activeOrder !== -1
     }
   },
   data () {
@@ -111,19 +127,35 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setScreenSm', 'setActiveClient']),
+    ...mapActions(['setScreenSm',
+      'setActiveClient',
+      'setActiveOrder',
+      'toggleActiveOrderStatus',
+      'deleteActiveOrder',
+      'deleteActiveClient'
+    ]),
     backToTables () {
+      this.setActiveOrder(-1)
       this.setActiveClient(-1)
       this.setScreenSm('tables')
       window.setTimeout(() => {
         this.view = 'clients'
       }, 200)
     },
-    checkoutClient () {
-
-    },
     clientOrders () {
 
+    },
+    checkout () {
+
+    },
+    deleteClient () {
+      this.deleteActiveClient()
+    },
+    cancelOrder () {
+      this.deleteActiveOrder()
+    },
+    orderDelivered () {
+      this.toggleActiveOrderStatus()
     }
   }
 }
@@ -249,7 +281,7 @@ export default {
 
   &__button {
     border-radius: 8px;
-    border: 2px solid $white;
+    border: 2px solid $light-grey;
     background: $light-grey;
     height: 32px;
     width: 150px;
@@ -260,6 +292,21 @@ export default {
 
     text-transform: uppercase;
     color: $darkest-grey;
+    color: $white;
+
+    &.client {
+      font-size: 16px;
+    }
+
+    &.orange {
+      background: $pumpkin;
+      border-color: $pumpkin;
+    }
+
+    &.green {
+      background: $avocado;
+      border-color: $avocado;
+    }
 
     &--active {
       background: $avocado;

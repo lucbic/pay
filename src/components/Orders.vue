@@ -10,8 +10,8 @@
 
   <div class="orders__content" v-bar>
     <div class="orders__content-wrapper" >
-      <order v-for="order in orders"
-              :order="order" :key="`order-${order.id}`"/>
+      <order v-for="order in tableOrders"
+              :order="order" :key="`order-${tableOrders.indexOf(order)}`"/>
       <!-- <add-order /> -->
     </div>
   </div>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import Order from '@/components/Order'
 // import AddOrder from '@/components/AddOrder'
 
@@ -30,13 +30,17 @@ export default {
     Order
     // AddOrder
   },
-  props: [ 'orders' ],
+  computed: {
+    ...mapState(['activeOrder']),
+    ...mapGetters(['tableOrders'])
+  },
   methods: {
-    ...mapActions(['']),
+    ...mapActions(['setActiveOrder']),
 
     desselect (event) {
-      // if (event.target.closest('#order-component')) { return }
-      // this.setActiveClient(-1)
+      if (event.target.closest('#order-component')) { return }
+      if (this.activeOrder === -1) { return }
+      this.setActiveOrder(-1)
     }
   }
 }

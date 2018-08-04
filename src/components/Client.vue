@@ -1,5 +1,5 @@
 <template>
-<div class="client" @click="setActiveClient(client.id)"
+<div class="client" @click="activate"
   :class="{ 'client--active': active }" id="client-component">
   <div>
     <simple-svg class="client__icon" :width="'14px'"
@@ -9,26 +9,41 @@
     </span>
   </div>
   <span class="client__total">
-    {{ getClientTotal(client.id) }}
+    {{ localeTotal }}
   </span>
 </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Client',
   props: [ 'client' ],
   computed: {
-    ...mapGetters(['getActiveClient', 'getClientTotal']),
+    ...mapState(['activeClient']),
+    ...mapGetters(['clientTotal']),
 
     active () {
-      return this.getActiveClient === this.client.id
+      return this.activeClient === this.client.id
+    },
+    localeTotal () {
+      let localeTotal = this.clientTotal(this.client.id)
+      localeTotal = localeTotal.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      })
+
+      return localeTotal.replace('R$', 'R$ ')
     }
   },
   methods: {
-    ...mapActions(['setActiveClient'])
+    ...mapActions(['setActiveClient']),
+
+    activate () {
+      if (this.activeClient === this.client.id) { return }
+      this.setActiveClient(this.client.id)
+    }
   }
 }
 </script>

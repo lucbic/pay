@@ -12,8 +12,8 @@
 
   <div class="clients__content" v-bar>
     <div class="clients__content-wrapper" >
-      <client v-for="client in clients"
-              :client="client" :key="`client-${client.id}`"/>
+      <client v-for="client in tableClients"
+              :client="client" :key="`client-${tableClients.indexOf(client)}`"/>
       <add-client />
     </div>
   </div>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import Client from '@/components/Client'
 import AddClient from '@/components/AddClient'
 
@@ -32,12 +32,16 @@ export default {
     Client,
     AddClient
   },
-  props: [ 'clients' ],
+  computed: {
+    ...mapState(['activeClient']),
+    ...mapGetters(['tableClients'])
+  },
   methods: {
     ...mapActions(['setActiveClient']),
 
     desselect (event) {
       if (event.target.closest('#client-component')) { return }
+      if (this.activeClient === -1) { return }
       this.setActiveClient(-1)
     }
   }
