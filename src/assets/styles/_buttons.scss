@@ -1,0 +1,49 @@
+.btn {
+  border-radius: 8px;
+  border: 2px solid $light-grey;
+  background: $light-grey;
+  height: 32px;
+  width: 150px;
+  margin: 0 6px;
+  font-family: $ff__dosis;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: $darkest-grey;
+  color: $white;
+
+  &.font-sm {
+    font-size: 16px;
+  }
+
+  &.orange {
+    background: $pumpkin;
+    border-color: $pumpkin;
+  }
+
+  &.green {
+    background: $avocado;
+    border-color: $avocado;
+  }
+
+  &.header {
+    border-radius: 8px;
+    border: 1px solid $white;
+    background: transparent;
+    height: 32px;
+    margin: 0 10px;
+    padding: 0;
+    font-family: $ff__dosis;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: $white;
+
+    &.active {
+      background: $avocado;
+      border-color: $avocado;
+      color: $dark-grey;
+      font-weight: bold;
+    }
+  }
+}

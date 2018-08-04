@@ -12,12 +12,12 @@
         Mesa {{ tableNumber }}
       </h1>
       <div class="header__buttons">
-        <button class="header__button" @click="view = 'clients'"
-          :class="{ 'header__button--active': view === 'clients' }">
+        <button class="btn header" @click="view = 'clients'"
+          :class="{ 'active': view === 'clients' }">
           Clientes
         </button>
-        <button class="header__button" @click="view = 'orders'"
-          :class="{ 'header__button--active': view === 'orders' }">
+        <button class="btn header" @click="view = 'orders'"
+          :class="{ 'active': view === 'orders' }">
           Pedidos
         </button>
       </div>
@@ -35,27 +35,27 @@
 
     <div class="footer">
       <div class="footer__buttons">
-        <button class="footer__button client orange" @click="deleteClient"
+        <button class="btn font-sm orange" @click="deleteClient"
           v-show="buttonRemoveClient">
           Remover Cliente
         </button>
 
-        <button class="footer__button client" @click="clientOrders"
+        <button class="btn font-sm" @click="clientOrders"
           v-show="buttonClient">
           Pedidos Cliente
         </button>
 
-        <button class="footer__button orange" @click="checkout"
+        <button class="btn orange" @click="checkout"
           v-show="buttonCheckout">
           Fechar Conta
         </button>
 
-        <button class="footer__button orange" @click="cancelOrder"
+        <button class="btn orange" @click="cancelOrder"
           v-show="buttonOrder">
           Cancelar
         </button>
 
-        <button class="footer__button green" @click="orderDelivered"
+        <button class="btn green" @click="orderDelivered"
           v-show="buttonOrder">
           Entregue
         </button>
@@ -217,27 +217,6 @@ export default {
     margin-top: 10px;
   }
 
-  &__button {
-    border-radius: 8px;
-    border: 1px solid $white;
-    background: transparent;
-    height: 32px;
-    width: 120px;
-    margin: 0 10px;
-    font-family: $ff__dosis;
-    font-size: 20px;
-
-    text-transform: uppercase;
-    color: $white;
-
-    &--active {
-      background: $avocado;
-      border-color: $avocado;
-      color: $dark-grey;
-      font-weight: bold;
-    }
-  }
-
   &__table-number {
     margin: 0;
     margin-top: 12px;
@@ -277,43 +256,6 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  &__button {
-    border-radius: 8px;
-    border: 2px solid $light-grey;
-    background: $light-grey;
-    height: 32px;
-    width: 150px;
-    margin: 0 6px;
-    font-family: $ff__dosis;
-    font-size: 18px;
-    font-weight: bold;
-
-    text-transform: uppercase;
-    color: $darkest-grey;
-    color: $white;
-
-    &.client {
-      font-size: 16px;
-    }
-
-    &.orange {
-      background: $pumpkin;
-      border-color: $pumpkin;
-    }
-
-    &.green {
-      background: $avocado;
-      border-color: $avocado;
-    }
-
-    &--active {
-      background: $avocado;
-      border-color: $avocado;
-      color: $dark-grey;
-      font-weight: bold;
-    }
   }
 }
 </style>
