@@ -1,13 +1,11 @@
 <template>
 <div class="client" @click="activate"
   :class="{ 'client--active': active }" id="client-component">
-  <div>
     <simple-svg class="client__icon" :width="'14px'"
       :filepath="'static/img/user-solid.svg'" />
     <span class="client__name">
       {{ client.name }}
     </span>
-  </div>
   <span class="client__total">
     {{ localeTotal }}
   </span>
@@ -65,11 +63,12 @@ export default {
   &__icon,
   &__name,
   &__total {
-    display: inline-block;
+    display: block;
   }
 
   &__name {
-    margin-left: 5px;
+    flex: 1;
+    margin-left: 8px;
   }
 
   &--active {
