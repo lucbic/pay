@@ -81,6 +81,11 @@ export const activeClientTotal = (state, getters) => id => {
   return getters.clientTotal(state.activeClient)
 }
 
+export const activeClientName = (state) => {
+  if (state.activeClient === -1) { return }
+  return state.clients.find(x => x.id === state.activeClient).name
+}
+
 export const getTotal = (state, getters) => id => {
   const orders = getters.tableOrders
   let total = 0
@@ -90,7 +95,17 @@ export const getTotal = (state, getters) => id => {
   return total
 }
 
-export const currentOrderStatus = (state) => {
+export const activeOrderStatus = (state) => {
   if (state.activeOrder === -1) { return }
   return state.orders.find(x => x.id === state.activeOrder).status
+}
+
+export const activeOrderProduct = state => {
+  if (state.activeOrder === -1) { return }
+  const order = state.orders.find(x => x.id === state.activeOrder)
+  const product = state.products.find(x => x.id === order.product_id)
+  return {
+    name: product.name,
+    amount: order.amount
+  }
 }

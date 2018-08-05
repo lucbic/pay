@@ -1,5 +1,6 @@
 <template>
 <div class="summary">
+  <modal :mode="'yes-no'" ref="modal" />
   <div class="well">
     <div class="header">
       <button class="header__back" @click="backToTables">
@@ -70,6 +71,7 @@
 import SmallLogo from '@/components/SmallLogo'
 import Clients from '@/components/Clients'
 import Orders from '@/components/Orders'
+import Modal from '@/components/Modal'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -77,7 +79,8 @@ export default {
   components: {
     SmallLogo,
     Clients,
-    Orders
+    Orders,
+    Modal
   },
   watch: {
     view () {
@@ -89,12 +92,15 @@ export default {
     ...mapState([
       'currentTableIndex',
       'activeOrder',
-      'activeClient'
+      'activeClient',
+      'clients'
     ]),
     ...mapGetters([
       'getTotal',
       'activeClientTotal',
-      'currentOrderStatus'
+      'activeOrderStatus',
+      'activeClientName',
+      'activeOrderProduct'
     ]),
     tableNumber () {
       if (this.currentTableIndex === null) { return }
@@ -118,7 +124,7 @@ export default {
       return (this.activeOrder === -1) && (this.activeClient === -1)
     },
     buttonOrder () {
-      return !this.currentOrderStatus && this.view === 'orders' && this.activeOrder !== -1
+      return !this.activeOrderStatus && this.view === 'orders' && this.activeOrder !== -1
     }
   },
   data () {
@@ -149,13 +155,22 @@ export default {
 
     },
     deleteClient () {
-      this.deleteActiveClient()
+      const content = `Deseja excluir o cliente \n ${this.activeClientName}?`
+      this.$refs.modal.show(content).then(() => {
+        this.deleteActiveClient()
+      }, () => {})
     },
     cancelOrder () {
-      this.deleteActiveOrder()
+      const content = `Deseja cancelar o pedido \n ${this.activeOrderProduct.name} - ${this.activeOrderProduct.amount} unid.?`
+      this.$refs.modal.show(content).then(() => {
+        this.deleteActiveOrder()
+      }, () => {})
     },
     orderDelivered () {
-      this.toggleActiveOrderStatus()
+      const content = `Deseja marcar o pedido \n ${this.activeOrderProduct.name} - ${this.activeOrderProduct.amount} unid. \n como entregue?`
+      this.$refs.modal.show(content).then(() => {
+        this.toggleActiveOrderStatus()
+      }, () => {})
     }
   }
 }
