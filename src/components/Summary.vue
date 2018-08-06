@@ -234,7 +234,7 @@ export default {
 
   &__table-number {
     margin: 0;
-    margin-top: 12px;
+    margin-top: 15px;
     text-align: center;
     font-family: $ff__dosis;
     font-size: 20px;

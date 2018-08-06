@@ -14,5 +14,13 @@
   grid-template-columns: 6fr 3fr 1fr 2fr 1fr;
   grid-column-gap: 8px;
   align-content: center;
-  margin: 0 14px 0 8px;
+  padding: 0 14px 0 8px;
+}
+
+%orders-new-grid {
+  display: grid;
+  grid-template-columns: 5fr 3fr 1fr 2fr;
+  grid-column-gap: 8px;
+  align-content: center;
+  padding: 0 14px 0 8px;
 }

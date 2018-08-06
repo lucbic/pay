@@ -12,7 +12,7 @@
     <div class="orders__content-wrapper" >
       <order v-for="order in tableOrders"
               :order="order" :key="`order-${tableOrders.indexOf(order)}`"/>
-      <!-- <add-order /> -->
+      <add-order />
     </div>
   </div>
 
@@ -22,13 +22,13 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import Order from '@/components/Order'
-// import AddOrder from '@/components/AddOrder'
+import AddOrder from '@/components/AddOrder'
 
 export default {
   name: 'Orders',
   components: {
-    Order
-    // AddOrder
+    Order,
+    AddOrder
   },
   computed: {
     ...mapState(['activeOrder']),

@@ -109,3 +109,8 @@ export const activeOrderProduct = state => {
     amount: order.amount
   }
 }
+
+export const productsList = state => category => {
+  if (state.products === null) { return }
+  return state.products.filter(x => x.category === category)
+}

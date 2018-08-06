@@ -13,6 +13,10 @@
   color: $darkest-grey;
   color: $white;
 
+  &.large {
+    width: 200px;
+  }
+
   &.font-sm {
     font-size: 16px;
   }
@@ -44,6 +48,31 @@
       border-color: $avocado;
       color: $dark-grey;
       font-weight: bold;
+    }
+  }
+
+  &-carousel {
+    $size: 54px;
+    border-radius: ($size / 2);
+    border: 1px solid $white;
+    background: transparent;
+    height: $size;
+    width: $size;
+    margin: 0 8px;
+    padding: 0;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    >div {
+      margin-top: 2px;
+      margin-left: 0.5px;
+    }
+
+    &.active {
+      background: $avocado;
+      border-color: $avocado;
     }
   }
 }

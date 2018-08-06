@@ -1,5 +1,5 @@
 <template>
-<div class="add-client" @click="activate" v-click-outside="onClickOutside"
+<div class="add-client" @click="activate"
   :class="{ 'add-client--active': active }" @keyup.enter="add"
   id="client-component">
   <simple-svg class="add-client__icon" :width="'14px'"
@@ -41,11 +41,6 @@ export default {
     resetComponent () {
       this.name = ''
       this.active = false
-    },
-    onClickOutside () {
-      if (!this.active) { return }
-
-      this.resetComponent()
     }
   }
 }
