@@ -1,12 +1,12 @@
 <template>
 <div class="client" @click="activate"
-  :class="{ 'client--active': active }" id="client-component">
+  :class="{ 'client--active': active, 'client--modal': modal }" id="client-component">
     <simple-svg class="client__icon" :width="'14px'"
       :filepath="'static/img/user-solid.svg'" />
     <span class="client__name">
       {{ client.name }}
     </span>
-  <span class="client__total">
+  <span v-show="!modal" class="client__total">
     {{ localeTotal }}
   </span>
 </div>
@@ -17,13 +17,14 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Client',
-  props: [ 'client' ],
+  props: [ 'client', 'modal', 'modal-active-client' ],
   computed: {
     ...mapState(['activeClient']),
     ...mapGetters(['clientTotal']),
 
     active () {
-      return this.activeClient === this.client.id
+      const active = this.modal ? this.modalActiveClient : this.activeClient
+      return active === this.client.id
     },
     localeTotal () {
       let localeTotal = this.clientTotal(this.client.id)
@@ -39,6 +40,7 @@ export default {
     ...mapActions(['setActiveClient']),
 
     activate () {
+      if (this.modal) { return this.$emit('setModalActiveClient', this.client.id) }
       if (this.activeClient === this.client.id) { return }
       this.setActiveClient(this.client.id)
     }
@@ -51,6 +53,7 @@ export default {
   background: $dark-grey;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   position: relative;
   padding: 6px 10px;
   margin: 5px 16px;
@@ -74,6 +77,12 @@ export default {
   &--active {
     background: $avocado;
     color: $dark-grey;
+  }
+
+  &--modal {
+    margin: 5px 20px;
+    height: 30px;
+    padding: 0 10px;
   }
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
 <div class="make-order">
+  <make-order-modal ref="modal"></make-order-modal>
   <div class="well">
     <div class="header">
       <button class="header__back" @click="backToSummary">
@@ -46,8 +47,8 @@
       </div>
       <div class="orders-list__content" v-bar>
         <div class="orders-list__content-wrapper">
-          <order v-for="order in orders" :order="order"
-            :key="`order-${orders.indexOf(order)}`"
+          <order v-for="order in newOrders" :order="order"
+            :key="`order-${newOrders.indexOf(order)}`"
             :new-order="true" :active-new-order="activeNewOrder"
             @setActiveNewOrder="setActiveNewOrder" />
         </div>
@@ -71,6 +72,7 @@ import SmallLogo from '@/components/SmallLogo'
 import Modal from '@/components/Modal'
 import Product from '@/components/Product'
 import Order from '@/components/Order'
+import MakeOrderModal from '@/components/MakeOrderModal'
 import Split from 'split.js'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
@@ -80,7 +82,8 @@ export default {
     SmallLogo,
     Modal,
     Product,
-    Order
+    Order,
+    MakeOrderModal
   },
   watch: {
     view () {
@@ -111,7 +114,7 @@ export default {
     return {
       view: 'drinks',
       categories: ['drinks', 'dishes', 'sides', 'desserts'],
-      orders: [],
+      newOrders: [],
       activeNewOrder: -1
     }
   },
@@ -144,14 +147,10 @@ export default {
       }
     },
     addNewOrder (product) {
-      const order = {
-        id: this.orders.length,
-        client: 'Zé do Barril',
-        product: product.name,
-        amount: 2,
-        price: product.price
-      }
-      this.orders.push(order)
+      this.$refs.modal.show(product)
+      this.$refs.modal.show(product).then(order => {
+        this.newOrders.push(order)
+      }, () => {})
     },
     setActiveNewOrder (id) {
       this.activeNewOrder = id

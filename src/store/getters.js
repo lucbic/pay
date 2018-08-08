@@ -86,6 +86,10 @@ export const activeClientName = (state) => {
   return state.clients.find(x => x.id === state.activeClient).name
 }
 
+export const clientName = state => id => {
+  return state.clients.find(x => x.id === id).name
+}
+
 export const getTotal = (state, getters) => id => {
   const orders = getters.tableOrders
   let total = 0
