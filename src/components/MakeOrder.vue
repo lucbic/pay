@@ -19,15 +19,15 @@
       </div>
     </div>
 
-    <div class="view">
+    <div class="products">
       <h1 class="make-order__division"> {{ translateCategory(view) }} </h1>
-      <div class="view__labels">
+      <div class="products__labels">
         <span>Item</span>
         <span>Preço</span>
       </div>
       <template v-for="category in categories">
-        <div v-show="category === view" class="view__slide" v-bar>
-          <div class="view__slide-wrapper">
+        <div v-show="category === view" class="products__slide" v-bar>
+          <div class="products__slide-wrapper">
             <product v-for="product in productsList(category)" :product="product"
               :key="`product-${productsList(category).indexOf(product)}`"
               @add="addNewOrder" />
@@ -71,6 +71,7 @@ import SmallLogo from '@/components/SmallLogo'
 import Modal from '@/components/Modal'
 import Product from '@/components/Product'
 import Order from '@/components/Order'
+import Split from 'split.js'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -96,6 +97,15 @@ export default {
     buttonConfirm () {
 
     }
+  },
+  mounted () {
+    Split(['.products', '.orders-list'], {
+      sizes: [55, 45],
+      direction: 'vertical',
+      gutterSize: 15,
+      minSize: [50, 50],
+      snapOffset: 0
+    })
   },
   data () {
     return {
@@ -229,8 +239,7 @@ export default {
   }
 }
 
-.view {
-  flex: 1;
+.products {
   display: flex;
   flex-direction: column;
 
@@ -254,16 +263,18 @@ export default {
     font-size: 16px;
     font-weight: bold;
     padding: 0 44px 0 35px;
-    height: 28px;
+    min-height: 28px;
   }
 }
 
 .orders-list {
+  display: flex;
+  flex-direction: column;
 
   &__labels {
     @extend %orders-new-grid;
     align-items: center;
-    height: 28px;
+    min-height: 28px;
     background: $white;
     font-family: $ff__dosis;
     font-size: 14px;
@@ -272,7 +283,7 @@ export default {
 
   &__content {
     @extend %striped-background;
-    height: ($size__bg-stripes * 4);
+    flex: 1;
   }
 
   &__center {
