@@ -85,3 +85,7 @@ export const addClient = ({ commit, state }, name) => {
 export const setScreenSm = ({ commit }, scr) => {
   commit(types.SET_SCREEN_SM, scr)
 }
+
+export const addOrders = ({ commit }, orders) => {
+  commit(types.ADD_ORDERS, orders)
+}

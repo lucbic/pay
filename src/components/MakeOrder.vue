@@ -29,8 +29,8 @@
       <template v-for="category in categories">
         <div v-show="category === view" class="products__slide" v-bar>
           <div class="products__slide-wrapper">
-            <product v-for="product in productsList(category)" :product="product"
-              :key="`product-${productsList(category).indexOf(product)}`"
+            <product v-for="(product, pIndex) in productsList(category)" :product="product"
+              :key="`product-${pIndex}`"
               @add="addNewOrder" />
           </div>
         </div>
@@ -45,19 +45,19 @@
         <span class="orders-list__center">Qtd.</span>
         <span class="orders-list__center">Preço</span>
       </div>
-      <div class="orders-list__content" v-bar>
+      <div class="orders-list__content" v-bar ref="list">
         <div class="orders-list__content-wrapper">
-          <order v-for="order in newOrders" :order="order"
-            :key="`order-${newOrders.indexOf(order)}`"
-            :new-order="true" :active-new-order="activeNewOrder"
-            @setActiveNewOrder="setActiveNewOrder" />
+          <order v-for="(order, index) in newOrders" :order="order"
+            :key="`order-${index}`"
+            :new-order="true"
+            @deleteNewOrder="deleteNewOrder"/>
         </div>
       </div>
     </div>
 
     <div class="footer">
       <div class="footer__buttons">
-        <button class="btn orange large" @click=""
+        <button class="btn orange large" @click="confirmOrders"
           v-show="true">
           Confirmar Pedido
         </button>
@@ -85,11 +85,6 @@ export default {
     Order,
     MakeOrderModal
   },
-  watch: {
-    view () {
-
-    }
-  },
   computed: {
     ...mapState(['currentTableIndex']),
     ...mapGetters(['productsList']),
@@ -102,7 +97,7 @@ export default {
     }
   },
   mounted () {
-    Split(['.products', '.orders-list'], {
+    this.split = Split(['.products', '.orders-list'], {
       sizes: [55, 45],
       direction: 'vertical',
       gutterSize: 15,
@@ -115,11 +110,11 @@ export default {
       view: 'drinks',
       categories: ['drinks', 'dishes', 'sides', 'desserts'],
       newOrders: [],
-      activeNewOrder: -1
+      split: null
     }
   },
   methods: {
-    ...mapActions(['setScreenSm']),
+    ...mapActions(['setScreenSm', 'addOrders']),
     imgPath (view) {
       const path = 'static/img/' + view
       if (this.view === view) {
@@ -130,20 +125,13 @@ export default {
     },
     backToSummary () {
       this.setScreenSm('summary')
-      window.setTimeout(() => {
-        this.view = 'drinks'
-      }, 200)
     },
     translateCategory (category) {
       switch (category) {
-        case 'drinks':
-          return 'Bebidas'
-        case 'dishes':
-          return 'Pratos'
-        case 'sides':
-          return 'Porções'
-        case 'desserts':
-          return 'Sobremesas'
+        case 'drinks': return 'Bebidas'
+        case 'dishes': return 'Pratos'
+        case 'sides': return 'Porções'
+        case 'desserts': return 'Sobremesas'
       }
     },
     addNewOrder (product) {
@@ -152,8 +140,13 @@ export default {
         this.newOrders.push(order)
       }, () => {})
     },
-    setActiveNewOrder (id) {
-      this.activeNewOrder = id
+    deleteNewOrder (order) {
+      const index = this.newOrders.indexOf(order)
+      this.newOrders.splice(index, 1)
+    },
+    confirmOrders () {
+      this.addOrders(this.newOrders)
+      this.backToSummary()
     }
   }
 }
@@ -271,7 +264,7 @@ export default {
   flex-direction: column;
 
   &__labels {
-    @extend %orders-new-grid;
+    @extend %orders-grid;
     align-items: center;
     min-height: 28px;
     background: $white;

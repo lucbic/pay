@@ -67,5 +67,23 @@ export default {
   },
   [types.SET_SCREEN_SM] (state, scr) {
     state.screenSm = scr
+  },
+  [types.ADD_ORDERS] (state, orders) {
+    let largestId = -1
+
+    state.orders.forEach(order => {
+      if (order.id > largestId) { largestId = order.id }
+    })
+
+    largestId += 1
+
+    orders.forEach(order => {
+      delete order.client
+      delete order.product
+      delete order.price
+      order.id = largestId
+      state.orders.push(order)
+      largestId += 1
+    })
   }
 }

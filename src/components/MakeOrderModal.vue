@@ -84,9 +84,12 @@ export default {
         self.$on('reply', val => {
           const order = {
             client: this.clientName(this.modalActiveClient),
+            client_id: this.modalActiveClient,
             product: this.product.name,
+            product_id: this.product.id,
             price: this.product.price,
-            amount: this.amount
+            amount: this.amount,
+            status: false
           }
           this.reset()
           val ? resolve(order) : reject(val)
@@ -139,7 +142,6 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  // height: 200px;
   width: calc(100vw - 20px);
   background: $white;
   display: flex;

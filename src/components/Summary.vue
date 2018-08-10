@@ -141,12 +141,12 @@ export default {
       'deleteActiveClient'
     ]),
     backToTables () {
-      this.setActiveOrder(-1)
-      this.setActiveClient(-1)
       this.setScreenSm('tables')
       window.setTimeout(() => {
+        this.setActiveOrder(-1)
+        this.setActiveClient(-1)
         this.view = 'clients'
-      }, 200)
+      }, 400)
     },
     clientOrders () {
 

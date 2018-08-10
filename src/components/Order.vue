@@ -1,6 +1,6 @@
 <template>
 <div class="order" @click="activate" id="order-component">
-  <div class="order__grid" :class="{ 'order__grid--new': newOrder }">
+  <div class="order__grid">
     <span>
       {{ order.product }}
     </span>
@@ -18,6 +18,9 @@
       <simple-svg class="order__box--check" v-show="order.status"
         :width="'14px'" :filepath="'static/img/check-solid.svg'" />
     </div>
+    <button v-else class="order__box" @click="$emit('deleteNewOrder', order)">
+      <simple-svg :width="'12px'" :filepath="'static/img/trash-solid.svg'" />
+    </button>
   </div>
   <hr class="order__underline" v-show="active" >
 </div>
@@ -28,13 +31,13 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Order',
-  props: ['order', 'new-order', 'active-new-order'],
+  props: ['order', 'new-order'],
   computed: {
     ...mapState(['activeOrder']),
 
     active () {
-      const active = this.newOrder ? this.activeNewOrder : this.activeOrder
-      return active === this.order.id
+      if (this.newOrder) { return }
+      return this.activeOrder === this.order.id
     },
     localePrice () {
       let localePrice = this.order.price
@@ -48,12 +51,9 @@ export default {
     ...mapActions(['setActiveOrder']),
 
     activate () {
-      if (this.newOrder) {
-        this.$emit('setActiveNewOrder', this.order.id)
-      } else {
-        if (this.activeOrder === this.order.id) { return }
-        this.setActiveOrder(this.order.id)
-      }
+      if (this.newOrder) { return }
+      if (this.activeOrder === this.order.id) { return }
+      this.setActiveOrder(this.order.id)
     }
   }
 }
@@ -70,10 +70,6 @@ export default {
     font-size: 13px;
     line-height: 13px;
     >span, { align-self: center; }
-
-    &--new {
-      @extend %orders-new-grid;
-    }
   }
 
   &__center {
@@ -86,6 +82,9 @@ export default {
     align-items: center;
     margin-top: 2px;
     position: relative;
+    padding: 0;
+    border: none;
+    background: none;
 
     &--check {
       position: absolute;
