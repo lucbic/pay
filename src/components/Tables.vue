@@ -8,7 +8,7 @@
       <div class="scroll__content">
         <div class="tables__grid">
           <single-table v-for="(table, index) in tables" :key="`table-${index}`"
-            :index="index" :data="table"/>
+            :index="index" :table="table"/>
         </div>
       </div>
     </div>

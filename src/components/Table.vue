@@ -1,5 +1,5 @@
 <template>
-<div class="table" :class="{ 'table--open': data.open }" @click="selectTable(index)">
+<div class="table" :class="{ 'table--open': table.open }" @click="selectTable(index)">
   <span class="table__number">{{ number }}</span>
 </div>
 </template>
@@ -11,7 +11,7 @@ export default {
   name: 'Table',
   props: [
     'index',
-    'data'
+    'table'
   ],
   computed: {
     number () { return this.index + 1 }

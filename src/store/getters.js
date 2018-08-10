@@ -42,8 +42,9 @@ export const tableOrders = state => {
 }
 
 export const clientOrders = state => (tableIndex, id) => {
-  let orders = []
+  if (state.orders === null) { return }
 
+  let orders = []
   const ordersData = state.orders.filter(x => id === x.client_id)
 
   ordersData.forEach(orderData => {
@@ -52,6 +53,7 @@ export const clientOrders = state => (tableIndex, id) => {
     const product = state.products.find(x => x.id === orderData.product_id)
 
     let order = {
+      id: orderData.id,
       product: product.name,
       productId: product.id,
       amount: orderData.amount,
@@ -76,7 +78,7 @@ export const clientTotal = (state, getters) => id => {
   return total
 }
 
-export const activeClientTotal = (state, getters) => id => {
+export const activeClientTotal = (state, getters) => {
   if (state.activeClient === -1) { return }
   return getters.clientTotal(state.activeClient)
 }

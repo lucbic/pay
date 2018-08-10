@@ -1,32 +1,25 @@
 <template>
-<div class="summary">
+<div class="client-orders">
   <modal :mode="'yes-no'" ref="modal" />
   <div class="well">
     <div class="header">
-      <button class="header__back" @click="backToTables">
+      <button class="header__back" @click="backToSummary">
         <simple-svg class="header__back-img" :width="'12px'"
           :filepath="'static/img/long-arrow-alt-left-solid.svg'" />
-        <span>Mesas</span>
+        <span>Voltar</span>
       </button>
-      <small-logo class="summary__logo" />
+      <small-logo class="client-orders__logo" />
       <h1 class="header__table-number">
         Mesa {{ tableNumber }}
       </h1>
-      <div class="header__buttons">
-        <button class="btn header" @click="view = 'clients'"
-          :class="{ 'active': view === 'clients' }">
-          Clientes
-        </button>
-        <button class="btn header" @click="view = 'orders'"
-          :class="{ 'active': view === 'orders' }">
-          Pedidos
-        </button>
-      </div>
+    </div>
+
+    <div class="division">
+      Cliente: {{ activeClientName }}
     </div>
 
     <div class="view">
-      <clients v-show="view === 'clients'" class="view__clients" />
-      <orders v-show="view === 'orders'" class="view__orders" />
+      <orders class="view__orders" :client="true" />
     </div>
 
     <div class="total">
@@ -36,19 +29,9 @@
 
     <div class="footer">
       <div class="footer__buttons">
-        <button class="btn font-sm orange" @click="deleteClient"
-          v-show="buttonRemoveClient">
-          Remover Cliente
-        </button>
-
-        <button class="btn font-sm" @click="clientOrders"
-          v-show="buttonClient">
-          Pedidos Cliente
-        </button>
-
         <button class="btn orange" @click="checkout"
           v-show="buttonCheckout">
-          Fechar Conta
+          Fechar Cliente
         </button>
 
         <button class="btn orange" @click="cancelOrder"
@@ -69,34 +52,23 @@
 
 <script>
 import SmallLogo from '@/components/SmallLogo'
-import Clients from '@/components/Clients'
 import Orders from '@/components/Orders'
 import Modal from '@/components/Modal'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: 'Summary',
+  name: 'ClientOrders',
   components: {
     SmallLogo,
-    Clients,
     Orders,
     Modal
-  },
-  watch: {
-    view () {
-      this.setActiveClient(-1)
-      this.setActiveOrder(-1)
-    }
   },
   computed: {
     ...mapState([
       'currentTableIndex',
-      'activeOrder',
-      'activeClient',
-      'clients'
+      'activeOrder'
     ]),
     ...mapGetters([
-      'getTotal',
       'activeClientTotal',
       'activeOrderStatus',
       'activeClientName',
@@ -107,59 +79,33 @@ export default {
       return this.currentTableIndex + 1
     },
     localeTotal () {
-      if (this.currentTableIndex === null) { return }
-      let localeTotal = this.getTotal(this.currentTableIndex)
+      if (!this.activeClientTotal) { return 'R$ 0,00' }
+      let localeTotal = this.activeClientTotal
       return localeTotal.toLocaleString('pt-BR', {
         style: 'currency',
         currency: 'BRL'
       }).replace('R$', 'R$ ')
     },
-    buttonClient () {
-      return this.view === 'clients' && this.activeClient !== -1
-    },
-    buttonRemoveClient () {
-      return this.activeClientTotal === 0 && this.buttonClient
-    },
     buttonCheckout () {
-      return (this.activeOrder === -1) && (this.activeClient === -1)
+      return (this.activeOrder === -1)
     },
     buttonOrder () {
-      return !this.activeOrderStatus && this.view === 'orders' && this.activeOrder !== -1
-    }
-  },
-  data () {
-    return {
-      view: 'clients'
+      return !this.activeOrderStatus && this.activeOrder !== -1
     }
   },
   methods: {
-    ...mapActions(['setScreenSm',
-      'setActiveClient',
+    ...mapActions([
+      'setScreenSm',
       'setActiveOrder',
       'toggleActiveOrderStatus',
-      'deleteActiveOrder',
-      'deleteActiveClient'
+      'deleteActiveOrder'
     ]),
-    backToTables () {
-      this.setScreenSm('tables')
-      window.setTimeout(() => {
-        this.setActiveOrder(-1)
-        this.setActiveClient(-1)
-        this.view = 'clients'
-      }, 400)
-    },
-    clientOrders () {
-      this.setActiveOrder(-1)
-      this.setScreenSm('client-orders')
+    backToSummary () {
+      this.setScreenSm('summary')
+      window.setTimeout(() => { this.setActiveOrder(-1) }, 400)
     },
     checkout () {
 
-    },
-    deleteClient () {
-      const content = `Deseja excluir o cliente \n ${this.activeClientName}?`
-      this.$refs.modal.show(content).then(() => {
-        this.deleteActiveClient()
-      }, () => {})
     },
     cancelOrder () {
       const content = `Deseja cancelar o pedido \n ${this.activeOrderProduct.name} - ${this.activeOrderProduct.amount} unid.?`
@@ -178,7 +124,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.summary {
+.client-orders {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -242,6 +188,18 @@ export default {
     font-weight: normal;
     text-transform: uppercase;
   }
+}
+
+.division {
+  margin: 0;
+  padding: 12px 0;
+  text-align: center;
+  font-family: $ff__dosis;
+  font-size: 16px;
+  font-weight: bold;
+  background: $darkest-grey;
+  color: $white;
+  text-transform: uppercase;
 }
 
 .view {

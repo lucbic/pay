@@ -62,6 +62,9 @@ export default {
       name: name
     }
 
+    if (state.tables[tableIndex].clients.length === 0) {
+      state.tables[tableIndex].open = true
+    }
     state.tables[tableIndex].clients.push(client.id)
     state.clients.push(client)
   },

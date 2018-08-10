@@ -10,9 +10,9 @@
 
   <div class="orders__content" v-bar>
     <div class="orders__content-wrapper" >
-      <order v-for="order in tableOrders"
-              :order="order" :key="`order-${tableOrders.indexOf(order)}`"/>
-      <add-order />
+      <order v-for="(order, index) in orders"
+              :order="order" :key="`order-${index}`"/>
+      <add-order v-show="!client"/>
     </div>
   </div>
 
@@ -30,9 +30,17 @@ export default {
     Order,
     AddOrder
   },
+  props: ['client'],
   computed: {
-    ...mapState(['activeOrder']),
-    ...mapGetters(['tableOrders'])
+    ...mapState(['activeOrder', 'currentTableIndex', 'activeClient']),
+    ...mapGetters(['tableOrders', 'clientOrders']),
+    orders () {
+      if (this.client) {
+        return this.clientOrders(this.currentTableIndex, this.activeClient)
+      } else {
+        return this.tableOrders
+      }
+    }
   },
   methods: {
     ...mapActions(['setActiveOrder']),
