@@ -17,6 +17,10 @@ export default {
     state.clients.splice(index, 1)
     tableClients.splice(indexTable, 1)
     state.activeClient = -1
+
+    if (state.tables[state.currentTableIndex].clients.length === 0) {
+      state.tables[state.currentTableIndex].open = false
+    }
   },
   [types.SET_ACTIVE_ORDER] (state, id) {
     state.activeOrder = id
@@ -45,6 +49,7 @@ export default {
     state.orders = orders
   },
   [types.SET_CLIENTS] (state, clients) {
+    clients.map(client => { client.paid = false })
     state.clients = clients
   },
   [types.SET_PRODUCTS] (state, products) {
@@ -88,5 +93,20 @@ export default {
       state.orders.push(order)
       largestId += 1
     })
+  },
+  [types.CHECKOUT_ACTIVE_CLIENT] (state) {
+    const tableClientsIds = state.tables[state.currentTableIndex].clients
+    const tableClients = state.clients.filter(x => {
+      tableClientsIds.forEach(y => x.id === y)
+    })
+    let count = 0
+    tableClients.forEach(z => {
+      if (z.paid) { count += 1 }
+    })
+    // change for clear table mutation
+    if (tableClients.length === count) {
+      state.tables[state.currentTableIndex].open = false
+    }
+    state.clients.find(x => x.id === state.activeClient).paid = true
   }
 }

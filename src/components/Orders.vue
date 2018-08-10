@@ -1,18 +1,19 @@
 <template>
 <div class="orders" @click="desselect($event)">
 
-  <div class="label">
+  <div class="label" :class="{ 'label--client': client }">
     <span>Pedido</span>
-    <span>Cliente</span>
+    <span v-show="!client">Cliente</span>
     <span class="label__center">Qtd.</span>
     <span class="label__center">R$</span>
+    <span class="label__center">Ok</span>
   </div>
 
   <div class="orders__content" v-bar>
     <div class="orders__content-wrapper" >
-      <order v-for="(order, index) in orders"
+      <order v-for="(order, index) in orders" :client="client"
               :order="order" :key="`order-${index}`"/>
-      <add-order v-show="!client"/>
+      <add-order />
     </div>
   </div>
 
@@ -76,6 +77,10 @@ export default {
 
   &__center {
     justify-self: center;
+  }
+
+  &--client {
+    grid-template-columns: 9fr 1fr 2fr 1fr;
   }
 }
 </style>

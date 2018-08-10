@@ -1,10 +1,10 @@
 <template>
 <div class="order" @click="activate" id="order-component">
-  <div class="order__grid">
+  <div class="order__grid" :class="{ 'order__grid--client': client }">
     <span>
       {{ order.product }}
     </span>
-    <span>
+    <span v-if="!client">
       {{ order.client }}
     </span>
     <span class="order__center">
@@ -31,7 +31,7 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Order',
-  props: ['order', 'new-order'],
+  props: ['order', 'new-order', 'client'],
   computed: {
     ...mapState(['activeOrder']),
 
@@ -70,6 +70,10 @@ export default {
     font-size: 13px;
     line-height: 13px;
     >span, { align-self: center; }
+
+    &--client {
+      grid-template-columns: 9fr 1fr 2fr 1fr;
+    }
   }
 
   &__center {

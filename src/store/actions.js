@@ -89,3 +89,7 @@ export const setScreenSm = ({ commit }, scr) => {
 export const addOrders = ({ commit }, orders) => {
   commit(types.ADD_ORDERS, orders)
 }
+
+export const checkoutActiveClient = ({ commit }) => {
+  commit(types.CHECKOUT_ACTIVE_CLIENT)
+}

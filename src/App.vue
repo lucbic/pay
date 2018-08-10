@@ -3,7 +3,7 @@
   <transition-group :name="transition">
     <tables v-show="screenSmOrigin[1] === 'tables'" key="1" />
     <orders-summary v-show="screenSmOrigin[1] === 'summary'" key="2" />
-    <make-order v-if="screenSmOrigin[1] === 'make-order'" key="3"/>
+    <make-order v-if="screenSmOrigin[1] === 'make-order'" :client="clientMakeOrder" key="3"/>
     <client-orders v-show="screenSmOrigin[1] === 'client-orders'" key="4"/>
   </transition-group>
 </div>
@@ -42,6 +42,10 @@ export default {
         return 'shift-left'
       } else if (scr[0] === 'client-orders' && scr[1] === 'summary') {
         return 'shift-right'
+      } else if (scr[0] === 'client-orders' && scr[1] === 'make-order') {
+        return 'shift-left'
+      } else if (scr[0] === 'make-order' && scr[1] === 'client-orders') {
+        return 'shift-right'
       }
     }
   },
@@ -49,6 +53,13 @@ export default {
     screenSm (val) {
       if (this.screenSmOrigin.length === 2) { this.screenSmOrigin.shift() }
       this.screenSmOrigin.push(val)
+    },
+    screenSmOrigin (self) {
+      if (self[0] === 'client-orders' && self[1] === 'make-order') {
+        this.clientMakeOrder = true
+      } else {
+        this.clientMakeOrder = false
+      }
     }
   },
   mounted () {
@@ -57,7 +68,8 @@ export default {
   },
   data () {
     return {
-      screenSmOrigin: []
+      screenSmOrigin: [],
+      clientMakeOrder: false
     }
   }
 }

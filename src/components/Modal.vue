@@ -75,7 +75,7 @@ export default {
 
 .overlay {
   background: $black;
-  opacity: 0.7;
+  opacity: 0.5;
   height: 100%;
   width: 100%;
 }

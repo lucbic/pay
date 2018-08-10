@@ -1,6 +1,7 @@
 <template>
 <div class="client-orders">
   <modal :mode="'yes-no'" ref="modal" />
+  <checkout :client="true" ref="checkout" />
   <div class="well">
     <div class="header">
       <button class="header__back" @click="backToSummary">
@@ -54,6 +55,7 @@
 import SmallLogo from '@/components/SmallLogo'
 import Orders from '@/components/Orders'
 import Modal from '@/components/Modal'
+import Checkout from '@/components/Checkout'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -61,7 +63,8 @@ export default {
   components: {
     SmallLogo,
     Orders,
-    Modal
+    Modal,
+    Checkout
   },
   computed: {
     ...mapState([
@@ -105,7 +108,9 @@ export default {
       window.setTimeout(() => { this.setActiveOrder(-1) }, 400)
     },
     checkout () {
+      this.$refs.checkout.show(() => {
 
+      })
     },
     cancelOrder () {
       const content = `Deseja cancelar o pedido \n ${this.activeOrderProduct.name} - ${this.activeOrderProduct.amount} unid.?`

@@ -1,9 +1,9 @@
 <template>
 <div class="make-order">
-  <make-order-modal ref="modal"></make-order-modal>
+  <make-order-modal :client="client" ref="modal"></make-order-modal>
   <div class="well">
     <div class="header">
-      <button class="header__back" @click="backToSummary">
+      <button class="header__back" @click="back">
         <simple-svg class="header__back-img" :width="'12px'"
           :filepath="'static/img/long-arrow-alt-left-solid.svg'" />
         <span>Voltar</span>
@@ -85,6 +85,7 @@ export default {
     Order,
     MakeOrderModal
   },
+  props: ['client'],
   computed: {
     ...mapState(['currentTableIndex']),
     ...mapGetters(['productsList']),
@@ -123,8 +124,12 @@ export default {
         return path + '.svg'
       }
     },
-    backToSummary () {
-      this.setScreenSm('summary')
+    back () {
+      if (this.client) {
+        this.setScreenSm('client-orders')
+      } else {
+        this.setScreenSm('summary')
+      }
     },
     translateCategory (category) {
       switch (category) {
@@ -146,7 +151,7 @@ export default {
     },
     confirmOrders () {
       this.addOrders(this.newOrders)
-      this.backToSummary()
+      this.back()
     }
   }
 }

@@ -12,10 +12,10 @@
       <span class="client-name">Cliente</span>
       <div class="clients">
         <client v-for="client in tableClients"
-        :key="`client-${tableClients.indexOf(client)}`"
-        @setModalActiveClient="setModalActiveClient"
-        :client="client" :modal="true"
-        :modal-active-client="modalActiveClient"/>
+          :key="`client-${tableClients.indexOf(client)}`"
+          @setModalActiveClient="setModalActiveClient"
+          :client="client" :modal="true"
+          :modal-active-client="modalActiveClient"/>
       </div>
       <div class="amount division">
         <span class="amount__label">Quantidade</span>
@@ -45,21 +45,12 @@
 
 <script>
 import Client from '@/components/Client'
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'MakeOrderModal',
   components: { Client },
-  props: {
-    info: {
-      type: Boolean,
-      default: false
-    },
-    mode: {
-      type: String,
-      default: 'ok-cancel'
-    }
-  },
+  props: ['client'],
   data () {
     return {
       active: false,
@@ -69,6 +60,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['activeClient']),
     ...mapGetters(['tableClients', 'clientName'])
   },
   methods: {
@@ -76,7 +68,11 @@ export default {
       this.$emit('reply', val)
     },
     show (product) {
-      this.modalActiveClient = this.tableClients[0].id
+      if (this.client) {
+        this.modalActiveClient = this.activeClient
+      } else {
+        this.modalActiveClient = this.tableClients[0].id
+      }
       this.product = product
       this.active = true
       const self = this
