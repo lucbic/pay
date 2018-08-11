@@ -11,7 +11,7 @@
       </h1>
 
       <span class="label">Consumo individual</span>
-      <div class="orders" v-bar :style="{ height: (orders.length * 30 + 2) + 'px' }">
+      <div class="orders" v-bar :style="{ height: ordersHeight }">
         <div class="orders__wrapper">
           <div class="item"
             v-for="(order, index) in orders" :key="`order${index}`">
@@ -84,7 +84,7 @@ export default {
       return this.toLocale(total)
     },
     total () {
-      if (this.orders === undefined) { return }
+      if (this.orders === undefined || this.orders === null) { return 0 }
       let total = 0
       this.orders.forEach(order => {
         total += this.orderTotal(order)
@@ -96,6 +96,10 @@ export default {
     },
     localeTax () {
       return this.toLocale(this.tax)
+    },
+    ordersHeight () {
+      if (this.orders === undefined) { return }
+      return (this.orders.length * 30 + 2) + 'px'
     }
   },
   methods: {
