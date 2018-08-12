@@ -95,18 +95,15 @@ export default {
     })
   },
   [types.CHECKOUT_ACTIVE_CLIENT] (state) {
-    const tableClientsIds = state.tables[state.currentTableIndex].clients
-    const tableClients = state.clients.filter(x => {
-      tableClientsIds.forEach(y => x.id === y)
-    })
-    let count = 0
-    tableClients.forEach(z => {
-      if (z.paid) { count += 1 }
-    })
-    // change for clear table mutation
-    if (tableClients.length === count) {
-      state.tables[state.currentTableIndex].open = false
-    }
     state.clients.find(x => x.id === state.activeClient).paid = true
+  },
+  [types.CLOSE_CURRENT_TABLE] (state, tableClientsIds) {
+    const resetTable = {
+      open: false,
+      clients: [],
+      orders: []
+    }
+    state.tables[state.currentTableIndex] = resetTable
+    delete state.clients.filter(x => tableClientsIds.includes(x))
   }
 }
