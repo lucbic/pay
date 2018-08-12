@@ -90,13 +90,18 @@ export default {
       delete order.client
       delete order.product
       delete order.price
+      order.paid = false
       order.id = largestId
       state.orders.push(order)
       largestId += 1
     })
   },
   [types.CHECKOUT_ACTIVE_CLIENT] (state) {
-    state.clients.find(x => x.id === state.activeClient).paid = true
+    let client = state.clients.find(x => x.id === state.activeClient)
+    client.paid = true
+
+    state.orders.forEach(x => { if (x.client_id === client.id) { x.paid = true } })
+
     state.activeClient = -1
   },
   [types.CLOSE_CURRENT_TABLE] (state) {

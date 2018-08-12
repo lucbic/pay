@@ -9,14 +9,16 @@
           "client_id": 0,
           "product_id": 36,
           "amount": 2,
-          "status": false
+          "status": false,
+          "paid": false
         },
         {
           "id": 1,
           "client_id": 1,
           "product_id": 4,
           "amount": 1,
-          "status": false
+          "status": false,
+          "paid": false
         }
       ]
     },

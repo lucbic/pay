@@ -32,7 +32,8 @@ export const tableOrders = state => {
       clientId: client.id,
       amount: orderData.amount,
       price: product.price,
-      status: orderData.status
+      status: orderData.status,
+      paid: orderData.paid
     }
 
     orders.push(order)

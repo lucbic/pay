@@ -139,7 +139,6 @@ export default {
       this.categories.forEach(x => { x.icon = `${path}${x.name}.svg` })
       this.categories.forEach(x => { console.log(x.icon) })
       this.categories.find(x => x.name === val).icon = `${path}${val}-color.svg`
-      console.log(this.categories.find(x => x.name === val).icon)
     }
   },
   methods: {
