@@ -84,7 +84,7 @@ export default {
   }
 
   &--client {
-    grid-template-columns: 9fr 1fr 2fr 1fr;
+    grid-template-columns: 8fr 1fr 2fr 1fr;
   }
 }
 </style>
