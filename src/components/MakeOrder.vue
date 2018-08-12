@@ -13,9 +13,10 @@
         Novo Pedido - Mesa {{ tableNumber }}
       </h1>
       <div class="header__buttons">
-        <button v-for="category in categories" class="btn-carousel" @click="view = category"
-          :class="{ 'active': view === category }">
-          <simple-svg :width="'36px'" :filepath="imgPath(category)" />
+        <button v-for="category in categories" class="btn-carousel" @click="view = category.name"
+          :class="{ 'active': view === category.name }">
+          <!-- <simple-svg :width="'36px'" :filepath="category.icon" /> -->
+          <img :src="category.icon" style="width: 36px;">
         </button>
       </div>
     </div>
@@ -27,9 +28,9 @@
         <span>Preço</span>
       </div>
       <template v-for="category in categories">
-        <div v-show="category === view" class="products__slide" v-bar>
+        <div v-show="view === category.name" class="products__slide" v-bar>
           <div class="products__slide-wrapper">
-            <product v-for="(product, pIndex) in productsList(category)" :product="product"
+            <product v-for="(product, pIndex) in productsList(category.name)" :product="product"
               :key="`product-${pIndex}`"
               @add="addNewOrder" />
           </div>
@@ -92,9 +93,6 @@ export default {
     tableNumber () {
       if (this.currentTableIndex === null) { return }
       return this.currentTableIndex + 1
-    },
-    buttonConfirm () {
-
     }
   },
   mounted () {
@@ -105,24 +103,46 @@ export default {
       minSize: [50, 50],
       snapOffset: 0
     })
+    this.view = 'drinks'
   },
   data () {
     return {
-      view: 'drinks',
-      categories: ['drinks', 'dishes', 'sides', 'desserts'],
+      view: '',
+      categories: [
+        {
+          name: 'drinks',
+          icon: 'static/img/drinks.svg'
+        },
+        {
+          name: 'dishes',
+          icon: 'static/img/dishes.svg'
+        },
+        {
+          name: 'sides',
+          icon: 'static/img/sides.svg'
+        },
+        {
+          name: 'desserts',
+          icon: 'static/img/desserts.svg'
+        }
+      ],
       newOrders: [],
       split: null
+    }
+  },
+  watch: {
+    view (val) {
+      const path = 'static/img/'
+      this.categories.forEach(x => { x.icon = `${path}${x.name}.svg` })
+      this.categories.forEach(x => { console.log(x.icon) })
+      this.categories.find(x => x.name === val).icon = `${path}${val}-color.svg`
+      console.log(this.categories.find(x => x.name === val).icon)
     }
   },
   methods: {
     ...mapActions(['setScreenSm', 'addOrders']),
     imgPath (view) {
-      const path = 'static/img/' + view
-      if (this.view === view) {
-        return path + '-color.svg'
-      } else {
-        return path + '.svg'
-      }
+
     },
     back () {
       if (this.client) {
