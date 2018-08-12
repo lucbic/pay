@@ -1,5 +1,5 @@
 <template>
-<div class="summary">
+<div class="summary" ref="summary">
   <modal :mode="'yes-no'" ref="modal" />
   <div class="well">
     <div class="header">
@@ -86,6 +86,14 @@ export default {
     view () {
       this.setActiveClient(-1)
       this.setActiveOrder(-1)
+    },
+    fixedScreen (val) {
+      if (val !== -1) {
+        console.log('eita ' + val)
+        this.$refs.summary.style.height = val + 'px'
+      } else {
+        this.$refs.summary.style.height = '100vh'
+      }
     }
   },
   computed: {
@@ -93,7 +101,7 @@ export default {
       'currentTableIndex',
       'activeOrder',
       'activeClient',
-      'clients'
+      'fixedScreen'
     ]),
     ...mapGetters([
       'getTotal',

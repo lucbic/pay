@@ -24,17 +24,22 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['addClient']),
+    ...mapActions(['addClient', 'setFixedScreen']),
 
     activate () {
       if (this.active) { return }
 
+      const height = window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight
+      this.setFixedScreen(height)
       this.active = true
       this.$nextTick(() => { this.$refs.teste.focus() })
     },
     add () {
       if (!this.active) { return }
 
+      this.setFixedScreen(-1)
       this.addClient(this.name)
       this.resetComponent()
     },

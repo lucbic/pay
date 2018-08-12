@@ -105,5 +105,8 @@ export default {
     }
     state.tables[state.currentTableIndex] = resetTable
     delete state.clients.filter(x => tableClientsIds.includes(x))
+  },
+  [types.SET_FIXED_SCREEN] (state, val) {
+    state.fixedScreen = val
   }
 }

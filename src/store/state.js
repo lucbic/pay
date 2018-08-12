@@ -6,6 +6,7 @@ export default {
   currentTableIndex: null,
   activeClient: -1,
   activeOrder: -1,
-  screenSm: 'tables'
+  screenSm: 'tables',
   // screenSm: 'make-order'
+  fixedScreen: -1
 }

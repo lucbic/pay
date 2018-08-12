@@ -103,3 +103,7 @@ export const checkoutActiveClient = ({ commit, state }) => {
     commit(types.CLOSE_CURRENT_TABLE, tableClientsIds)
   }
 }
+
+export const setFixedScreen = ({ commit }, val) => {
+  commit(types.SET_FIXED_SCREEN, val)
+}
