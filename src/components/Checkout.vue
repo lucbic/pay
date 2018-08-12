@@ -59,7 +59,7 @@ export default {
   data () {
     return {
       active: false,
-      includeTax: false
+      includeTax: true
     }
   },
   computed: {
@@ -211,7 +211,7 @@ export default {
 
 .item {
   height: 28px;
-  padding: 5px 15px;
+  padding: 5px 10px;
   margin: 2px 10px;
   background: $light-beige;
   border-radius: 10px;
@@ -245,7 +245,7 @@ export default {
 }
 
 .price {
-  width: 55px;
+  width: 70px;
 }
 
 .total {
