@@ -1,5 +1,6 @@
 <template>
-<div class="order" @click="activate" id="order-component">
+<div class="order" @click="activate" :class="{ 'order--paid': order.paid }"
+  id="order-component">
   <div class="order__grid" :class="{ 'order__grid--client': client }">
     <span>
       {{ order.product }}
@@ -23,6 +24,7 @@
     </button>
   </div>
   <hr class="order__underline" v-show="active" >
+  <hr class="order__line-through" v-show="order.paid" >
 </div>
 </template>
 
@@ -51,7 +53,7 @@ export default {
     ...mapActions(['setActiveOrder']),
 
     activate () {
-      if (this.newOrder) { return }
+      if (this.newOrder || this.order.paid || this.order.status) { return }
       if (this.activeOrder === this.order.id) { return }
       this.setActiveOrder(this.order.id)
     }
@@ -60,6 +62,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+%line {
+  position: absolute;
+  margin: 0 14px 0 8px;
+  width: calc(100% - 22px);
+  bottom: 0;
+}
+
 .order {
   position: relative;
 
@@ -95,20 +104,26 @@ export default {
       top: 50%;
       left: 50%;
       transform: translate(-30%, -60%);
-      color: blue;
     }
   }
 
   &__underline {
-    position: absolute;
-    margin: 0 14px 0 8px;
-    width: calc(100% - 22px);
-    bottom: 0;
-    border: 1px solid $pumpkin;
+    @extend %line;
+    border: 1px solid blue;
+  }
+
+  &__line-through {
+    @extend %line;
+    bottom: 50%;
+    border: 0.5px solid $light-red;
   }
 
   &--active {
     border-bottom: 2px dashed $pumpkin;
+  }
+
+  &--paid {
+    color: $light-red;
   }
 }
 </style>
