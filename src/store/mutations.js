@@ -108,5 +108,8 @@ export default {
   },
   [types.SET_FIXED_SCREEN] (state, val) {
     state.fixedScreen = val
+  },
+  [types.TOGGLE_FULL_SCREEN] (state) {
+    state.fullscreen = !state.fullscreen
   }
 }

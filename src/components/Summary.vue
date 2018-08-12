@@ -1,5 +1,6 @@
 <template>
 <div class="summary" ref="summary">
+  <full-screen />
   <modal :mode="'yes-no'" ref="modal" />
   <div class="well">
     <div class="header">
@@ -72,6 +73,7 @@ import SmallLogo from '@/components/SmallLogo'
 import Clients from '@/components/Clients'
 import Orders from '@/components/Orders'
 import Modal from '@/components/Modal'
+import FullScreen from '@/components/FullScreen'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -80,7 +82,8 @@ export default {
     SmallLogo,
     Clients,
     Orders,
-    Modal
+    Modal,
+    FullScreen
   },
   watch: {
     view () {

@@ -1,5 +1,6 @@
 <template>
 <div class="make-order">
+  <full-screen />
   <make-order-modal :client="client" ref="modal"></make-order-modal>
   <div class="well">
     <div class="header">
@@ -74,6 +75,7 @@ import Modal from '@/components/Modal'
 import Product from '@/components/Product'
 import Order from '@/components/Order'
 import MakeOrderModal from '@/components/MakeOrderModal'
+import FullScreen from '@/components/FullScreen'
 import Split from 'split.js'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
@@ -84,7 +86,8 @@ export default {
     Modal,
     Product,
     Order,
-    MakeOrderModal
+    MakeOrderModal,
+    FullScreen
   },
   props: ['client'],
   computed: {

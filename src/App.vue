@@ -1,5 +1,5 @@
 <template>
-<div class="app">
+<div class="app" ref="app">
   <transition-group :name="transition">
     <tables v-show="screenSmOrigin[1] === 'tables'" key="1" />
     <orders-summary v-show="screenSmOrigin[1] === 'summary'" key="2" />

@@ -107,3 +107,7 @@ export const checkoutActiveClient = ({ commit, state }) => {
 export const setFixedScreen = ({ commit }, val) => {
   commit(types.SET_FIXED_SCREEN, val)
 }
+
+export const toggleFullScreen = ({ commit }) => {
+  commit(types.TOGGLE_FULL_SCREEN)
+}

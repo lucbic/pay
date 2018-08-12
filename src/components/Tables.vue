@@ -1,5 +1,6 @@
 <template>
 <div class="tables">
+  <full-screen />
   <logo class="tables__logo"/>
   <div class="well">
     <h1 class="well__title">Selecione a mesa</h1>
@@ -20,19 +21,17 @@
 import Logo from '@/components/Logo'
 import SingleTable from '@/components/Table'
 import { mapState } from 'vuex'
+import FullScreen from '@/components/FullScreen'
 
 export default {
   name: 'Tables',
   components: {
     Logo,
-    SingleTable
+    SingleTable,
+    FullScreen
   },
   computed: {
     ...mapState(['tables'])
-  },
-  data () {
-    return {
-    }
   }
 }
 </script>
