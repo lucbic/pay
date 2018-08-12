@@ -74,6 +74,7 @@ import Clients from '@/components/Clients'
 import Orders from '@/components/Orders'
 import Modal from '@/components/Modal'
 import FullScreen from '@/components/FullScreen'
+import OrdersMixin from '@/mixins/OrdersMixin'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -85,6 +86,7 @@ export default {
     Modal,
     FullScreen
   },
+  mixins: [OrdersMixin],
   watch: {
     view () {
       this.setActiveClient(-1)
@@ -170,18 +172,6 @@ export default {
       const content = `Deseja excluir o cliente \n ${this.activeClientName}?`
       this.$refs.modal.show(content).then(() => {
         this.deleteActiveClient()
-      }, () => {})
-    },
-    cancelOrder () {
-      const content = `Deseja cancelar o pedido \n ${this.activeOrderProduct.name} - ${this.activeOrderProduct.amount} unid.?`
-      this.$refs.modal.show(content).then(() => {
-        this.deleteActiveOrder()
-      }, () => {})
-    },
-    orderDelivered () {
-      const content = `Deseja marcar o pedido \n ${this.activeOrderProduct.name} - ${this.activeOrderProduct.amount} unid. \n como entregue?`
-      this.$refs.modal.show(content).then(() => {
-        this.toggleActiveOrderStatus()
       }, () => {})
     }
   }

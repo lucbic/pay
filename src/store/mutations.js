@@ -28,6 +28,7 @@ export default {
   [types.TOGGLE_ACTIVE_ORDER_STATUS] (state) {
     let order = state.orders.find(x => x.id === state.activeOrder)
     order.status = !order.status
+    state.activeOrder = -1
   },
   [types.DELETE_ACTIVE_ORDER] (state) {
     const order = state.orders.find(x => x.id === state.activeOrder)
@@ -96,15 +97,22 @@ export default {
   },
   [types.CHECKOUT_ACTIVE_CLIENT] (state) {
     state.clients.find(x => x.id === state.activeClient).paid = true
+    state.activeClient = -1
   },
-  [types.CLOSE_CURRENT_TABLE] (state, tableClientsIds) {
-    const resetTable = {
-      open: false,
-      clients: [],
-      orders: []
-    }
-    state.tables[state.currentTableIndex] = resetTable
-    delete state.clients.filter(x => tableClientsIds.includes(x))
+  [types.CLOSE_CURRENT_TABLE] (state) {
+    // reset table
+    let table = state.tables[state.currentTableIndex]
+    table.open = false
+    table.clients = []
+    table.orders = []
+    // remove clients from database
+    const ids = state.tables[state.currentTableIndex].clients
+    ids.forEach(id => {
+      const index = state.clients.findIndex(x => x.id === id)
+      state.clients.splice(index, 1)
+    })
+    // set current table to null
+    state.currentTableIndex = null
   },
   [types.SET_FIXED_SCREEN] (state, val) {
     state.fixedScreen = val

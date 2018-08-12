@@ -120,3 +120,8 @@ export const productsList = state => category => {
   if (state.products === null) { return }
   return state.products.filter(x => x.category === category)
 }
+
+export const clientCkeckoutReady = (state, getters) => {
+  const orders = getters.clientOrders(state.currentTableIndex, state.activeClient)
+  return orders.every(x => x.status === true)
+}

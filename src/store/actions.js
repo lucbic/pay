@@ -90,17 +90,16 @@ export const addOrders = ({ commit }, orders) => {
   commit(types.ADD_ORDERS, orders)
 }
 
-export const checkoutActiveClient = ({ commit, state }) => {
-  const tableClientsIds = state.tables[state.currentTableIndex].clients
-  const tableClients = state.clients.filter(x => {
-    tableClientsIds.forEach(y => x.id === y)
-  })
-  let count = 0
-  tableClients.forEach(z => { if (z.paid) { count += 1 } })
-  console.log(tableClients)
+export const checkoutActiveClient = ({ commit, getters }) => {
   commit(types.CHECKOUT_ACTIVE_CLIENT)
-  if (tableClients.length === count) {
-    commit(types.CLOSE_CURRENT_TABLE, tableClientsIds)
+  const tableClients = getters.tableClients
+  let paid = 0
+  tableClients.forEach(z => { if (z.paid) { paid += 1 } })
+  if (tableClients.length === paid) {
+    commit(types.CLOSE_CURRENT_TABLE)
+    commit(types.SET_SCREEN_SM, 'tables')
+  } else {
+    commit(types.SET_SCREEN_SM, 'summary')
   }
 }
 

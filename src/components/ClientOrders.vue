@@ -1,6 +1,6 @@
 <template>
 <div class="client-orders">
-  <modal :mode="'yes-no'" ref="modal" />
+  <modal :mode="modalMode" ref="modal" />
   <checkout :client="true" ref="checkout" />
   <div class="well">
     <div class="header">
@@ -56,6 +56,7 @@ import SmallLogo from '@/components/SmallLogo'
 import Orders from '@/components/Orders'
 import Modal from '@/components/Modal'
 import Checkout from '@/components/Checkout'
+import OrdersMixin from '@/mixins/OrdersMixin'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -66,17 +67,17 @@ export default {
     Modal,
     Checkout
   },
+  mixins: [OrdersMixin],
   computed: {
-    ...mapState([
-      'currentTableIndex',
-      'activeOrder'
-    ]),
+    ...mapState(['currentTableIndex', 'activeOrder']),
     ...mapGetters([
       'activeClientTotal',
       'activeOrderStatus',
       'activeClientName',
-      'activeOrderProduct'
+      'activeOrderProduct',
+      'clientCkeckoutReady'
     ]),
+
     tableNumber () {
       if (this.currentTableIndex === null) { return }
       return this.currentTableIndex + 1
@@ -96,33 +97,26 @@ export default {
       return !this.activeOrderStatus && this.activeOrder !== -1
     }
   },
+  data () {
+    return {
+      modalMode: 'yes-no'
+    }
+  },
   methods: {
-    ...mapActions([
-      'setScreenSm',
-      'setActiveOrder',
-      'toggleActiveOrderStatus',
-      'deleteActiveOrder'
-    ]),
+    ...mapActions(['setScreenSm', 'setActiveOrder']),
+
     backToSummary () {
       this.setScreenSm('summary')
       window.setTimeout(() => { this.setActiveOrder(-1) }, 400)
     },
     checkout () {
-      this.$refs.checkout.show(() => {
-
-      })
-    },
-    cancelOrder () {
-      const content = `Deseja cancelar o pedido \n ${this.activeOrderProduct.name} - ${this.activeOrderProduct.amount} unid.?`
-      this.$refs.modal.show(content).then(() => {
-        this.deleteActiveOrder()
-      }, () => {})
-    },
-    orderDelivered () {
-      const content = `Deseja marcar o pedido \n ${this.activeOrderProduct.name} - ${this.activeOrderProduct.amount} unid. \n como entregue?`
-      this.$refs.modal.show(content).then(() => {
-        this.toggleActiveOrderStatus()
-      }, () => {})
+      if (this.clientCkeckoutReady) {
+        this.$refs.checkout.show()
+      } else {
+        const content = 'A conta do cliente só pode ser fechada quando todos os pedidos constarem como entregues.'
+        this.modalMode = 'info'
+        this.$refs.modal.show(content)
+      }
     }
   }
 }

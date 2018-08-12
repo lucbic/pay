@@ -1,8 +1,10 @@
 <template>
 <div class="client" @click="activate"
-  :class="{ 'client--active': active, 'client--modal': modal }" id="client-component">
+  :class="{ 'client--active': active,
+            'client--modal': modal,
+            'client--paid': client.paid}" id="client-component">
     <simple-svg class="client__icon" :width="'14px'"
-      :filepath="'static/img/user-solid.svg'" />
+      :filepath="icon" />
     <span class="client__name">
       {{ client.name }}
     </span>
@@ -34,6 +36,13 @@ export default {
       })
 
       return localeTotal.replace('R$', 'R$ ')
+    },
+    icon () {
+      if (this.client.paid) {
+        return 'static/img/check-solid.svg'
+      } else {
+        return 'static/img/user-solid.svg'
+      }
     }
   },
   methods: {
@@ -41,7 +50,7 @@ export default {
 
     activate () {
       if (this.modal) { return this.$emit('setModalActiveClient', this.client.id) }
-      if (this.activeClient === this.client.id) { return }
+      if (this.activeClient === this.client.id || this.client.paid) { return }
       this.setActiveClient(this.client.id)
     }
   }
@@ -83,6 +92,10 @@ export default {
     margin: 5px 20px;
     height: 30px;
     padding: 0 10px;
+  }
+
+  &--paid {
+    background: $turquoise;
   }
 }
 </style>

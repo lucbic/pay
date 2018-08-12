@@ -34,8 +34,8 @@
       </div>
 
       <div class="total item">
-        <span class="total__label">Total</span>
-        <span class="total__price">{{ localeTotal }}</span>
+        <span>Total</span>
+        <span class="price">{{ localeTotal }}</span>
       </div>
 
       <div class="checkout__buttons">
@@ -105,18 +105,11 @@ export default {
   methods: {
     ...mapActions(['checkoutActiveClient']),
     reply (val) {
-      this.$emit('reply', val)
+      if (val) { this.checkoutActiveClient() }
+      this.active = false
     },
     show () {
       this.active = true
-      const self = this
-      return new Promise((resolve, reject) => {
-        self.$on('reply', val => {
-          this.active = false
-          if (val) { this.checkoutActiveClient() }
-          val ? resolve() : reject(val)
-        })
-      })
     },
     orderTotal (order) {
       return order.amount * order.price
@@ -245,7 +238,7 @@ export default {
 }
 
 .price {
-  width: 70px;
+  min-width: 70px;
 }
 
 .total {

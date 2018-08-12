@@ -46,6 +46,8 @@ export default {
         return 'shift-left'
       } else if (scr[0] === 'make-order' && scr[1] === 'client-orders') {
         return 'shift-right'
+      } else if (scr[0] === 'client-orders' && scr[1] === 'tables') {
+        return 'shift-right'
       }
     }
   },

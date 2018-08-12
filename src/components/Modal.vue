@@ -9,13 +9,13 @@
         {{ content }}
       </p>
       <div class="modal__buttons">
-        <button v-if="!info" class="btn orange" @click="reply(false)">
+        <button v-if="mode !== 'info'" class="btn orange" @click="reply(false)">
           <span v-if="mode === 'yes-no' ">Não</span>
           <span v-if="mode === 'ok-cancel' ">Cancelar</span>
         </button>
         <button class="btn green" @click="reply(true)">
           <span v-if="mode === 'yes-no' ">Sim</span>
-          <span v-if="mode === 'ok-cancel' ">Ok</span>
+          <span v-if="mode === 'ok-cancel' || mode === 'info'">Ok</span>
         </button>
       </div>
     </div>
@@ -28,10 +28,6 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Modal',
   props: {
-    info: {
-      type: Boolean,
-      default: false
-    },
     mode: {
       type: String,
       default: 'ok-cancel'
