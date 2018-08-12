@@ -13,7 +13,7 @@
     <div class="orders__content-wrapper" >
       <order v-for="(order, index) in orders" :client="client"
               :order="order" :key="`order-${index}`"/>
-      <add-order />
+      <add-order v-if="showAddOrder" />
     </div>
   </div>
 
@@ -34,13 +34,17 @@ export default {
   props: ['client'],
   computed: {
     ...mapState(['activeOrder', 'currentTableIndex', 'activeClient']),
-    ...mapGetters(['tableOrders', 'clientOrders']),
+    ...mapGetters(['tableOrders', 'clientOrders', 'tableClients']),
     orders () {
       if (this.client) {
         return this.clientOrders(this.currentTableIndex, this.activeClient)
       } else {
         return this.tableOrders
       }
+    },
+    showAddOrder () {
+      if (this.tableClients === undefined) { return }
+      return this.tableClients.length > 0
     }
   },
   methods: {
