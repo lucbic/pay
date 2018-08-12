@@ -12,6 +12,7 @@
       <span class="client-name">Cliente</span>
       <div class="clients">
         <client v-for="client in tableClients"
+          v-if="!client.paid"
           :key="`client-${tableClients.indexOf(client)}`"
           @setModalActiveClient="setModalActiveClient"
           :client="client" :modal="true"
@@ -72,6 +73,7 @@ export default {
         this.modalActiveClient = this.activeClient
       } else {
         this.modalActiveClient = this.tableClients[0].id
+        this.modalActiveClient = this.tableClients.find(x => !x.paid).id
       }
       this.product = product
       this.active = true
