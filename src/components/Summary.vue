@@ -101,6 +101,15 @@ export default {
       } else {
         this.$refs.summary.style.height = '100vh'
       }
+    },
+    screenSm (val) {
+      if (val === 'tables') {
+        window.setTimeout(() => {
+          this.setActiveOrder(-1)
+          this.setActiveClient(-1)
+          this.view = 'clients'
+        }, 400)
+      }
     }
   },
   computed: {
@@ -108,7 +117,8 @@ export default {
       'currentTableIndex',
       'activeOrder',
       'activeClient',
-      'fixedScreen'
+      'fixedScreen',
+      'screenSm'
     ]),
     ...mapGetters([
       'getTotal',
@@ -157,11 +167,6 @@ export default {
     ]),
     backToTables () {
       this.setScreenSm('tables')
-      window.setTimeout(() => {
-        this.setActiveOrder(-1)
-        this.setActiveClient(-1)
-        this.view = 'clients'
-      }, 400)
     },
     clientOrders () {
       this.setActiveOrder(-1)
