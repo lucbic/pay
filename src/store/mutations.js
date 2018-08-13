@@ -85,16 +85,14 @@ export default {
       if (order.id > largestId) { largestId = order.id }
     })
 
-    largestId += 1
-
     orders.forEach(order => {
+      largestId += 1
       delete order.client
       delete order.product
       delete order.price
       order.paid = false
       order.id = largestId
       state.orders.push(order)
-      largestId += 1
     })
   },
   [types.CHECKOUT_ACTIVE_CLIENT] (state) {

@@ -3,10 +3,10 @@
   id="order-component">
   <div class="order__grid" :class="{ 'order__grid--client': client }">
     <span>
-      {{ order.product }}
+      {{ productName }}
     </span>
     <span v-if="!client">
-      {{ order.client }}
+      {{ clientName }}
     </span>
     <span class="order__center">
       {{ order.amount }}
@@ -29,20 +29,27 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Order',
   props: ['order', 'new-order', 'client'],
   computed: {
     ...mapState(['activeOrder']),
+    ...mapGetters(['getProduct', 'getClient']),
 
     active () {
       if (this.newOrder) { return }
       return this.activeOrder === this.order.id
     },
+    productName () {
+      return this.getProduct(this.order.product_id).name
+    },
+    clientName () {
+      return this.getClient(this.order.client_id).name
+    },
     localePrice () {
-      let localePrice = this.order.price
+      let localePrice = this.getProduct(this.order.product_id).price
       return localePrice.toLocaleString('pt-BR', {
         style: 'currency',
         currency: 'BRL'

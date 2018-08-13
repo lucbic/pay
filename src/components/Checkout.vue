@@ -19,7 +19,7 @@
         <div class="orders__wrapper">
           <div class="item" v-for="(order, index) in orders"
             :key="`order${index}`">
-            <span>{{ order.amount }} x {{ order.product }}</span>
+            <span>{{ order.amount }} x {{ getProduct(order.product_id).name }}</span>
             <span class="price">{{ localeOrderTotal(order) }}</span>
           </div>
         </div>
@@ -74,7 +74,8 @@ export default {
     ...mapGetters([
       'activeClientName',
       'clientOrders',
-      'tableOrders'
+      'tableOrders',
+      'getProduct'
     ]),
     orders () {
       if (this.client) {
@@ -118,7 +119,7 @@ export default {
       this.active = true
     },
     orderTotal (order) {
-      return order.amount * order.price
+      return order.amount * this.getProduct(order.product_id).price
     },
     localeOrderTotal (order) {
       return this.toLocale(this.orderTotal(order))

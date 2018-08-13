@@ -13,56 +13,13 @@ export const tableClients = state => {
 
 export const tableOrders = state => {
   if (state.currentTableIndex === null) { return [] }
-
-  let orders = []
   const clientsIds = state.tables[state.currentTableIndex].clients
-  const ordersData = state.orders.filter(order => {
-    return clientsIds.includes(order.client_id)
-  })
-
-  ordersData.forEach(orderData => {
-    const product = state.products.find(x => x.id === orderData.product_id)
-    const client = state.clients.find(x => x.id === orderData.client_id)
-
-    let order = {
-      id: orderData.id,
-      product: product.name,
-      client: client.name,
-      amount: orderData.amount,
-      price: product.price,
-      status: orderData.status,
-      paid: orderData.paid
-    }
-
-    orders.push(order)
-  })
-
-  return orders
+  return state.orders.filter(order => clientsIds.includes(order.client_id))
 }
 
 export const clientOrders = state => (tableIndex, id) => {
-  if (state.orders === null) { return }
-
-  let orders = []
-  const ordersData = state.orders.filter(x => id === x.client_id)
-
-  ordersData.forEach(orderData => {
-    if (orderData.client_id !== id) { return }
-
-    const product = state.products.find(x => x.id === orderData.product_id)
-
-    let order = {
-      id: orderData.id,
-      product: product.name,
-      amount: orderData.amount,
-      price: product.price,
-      status: orderData.status
-    }
-
-    orders.push(order)
-  })
-
-  return orders
+  if (state.orders === null) { return [] }
+  return state.orders.filter(order => order.client_id === id)
 }
 
 export const clientTotal = (state, getters) => id => {
@@ -71,7 +28,7 @@ export const clientTotal = (state, getters) => id => {
   let total = 0
 
   orders.forEach(order => {
-    total += (order.price * order.amount)
+    total += (getters.getProduct(order.product_id).price * order.amount)
   })
   return total
 }
@@ -127,4 +84,12 @@ export const clientCheckoutReady = (state, getters) => {
 
 export const tableCheckoutReady = (state, getters) => {
   return getters.tableOrders.every(x => x.status === true)
+}
+
+export const getProduct = (state) => id => {
+  return state.products.find(x => x.id === id)
+}
+
+export const getClient = (state) => id => {
+  return state.clients.find(x => x.id === id)
 }
