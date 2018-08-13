@@ -1,5 +1,5 @@
 <template>
-<div class="clients" @click="desselect($event)">
+<div class="clients" @click="deselect($event)">
 
   <div class="label">
     <span class="label__client">
@@ -39,7 +39,7 @@ export default {
   methods: {
     ...mapActions(['setActiveClient']),
 
-    desselect (event) {
+    deselect (event) {
       if (event.target.closest('#client-component')) { return }
       if (this.activeClient === -1) { return }
       this.setActiveClient(-1)

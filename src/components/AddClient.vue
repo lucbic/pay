@@ -1,7 +1,6 @@
 <template>
-<div class="add-client" @click="activate"
-  :class="{ 'add-client--active': active }" @keyup.enter="add"
-  id="client-component">
+<div class="add-client" @click="activate" v-click-outside="onClickOutside"
+  :class="{ 'add-client--active': active }" @keyup.enter="add">
   <simple-svg class="add-client__icon" :width="'14px'"
     :filepath="'static/img/plus-circle-solid.svg'" />
   <span v-if="!active" class="add-client__label">
@@ -9,6 +8,9 @@
   </span>
   <input v-if="active" type="text" class="add-client__input"
   v-model="name" ref="teste">
+  <button v-if="active" class="add-client__send" @click="add">
+    <img src="static/img/send.svg" style="width: 14px;">
+  </button>
 </div>
 </template>
 
@@ -41,11 +43,14 @@ export default {
 
       this.setFixedScreen(-1)
       this.addClient(this.name)
-      this.resetComponent()
+      this.reset()
     },
-    resetComponent () {
+    reset () {
       this.name = ''
       this.active = false
+    },
+    onClickOutside () {
+      if (this.active) { this.reset() }
     }
   }
 }
@@ -54,31 +59,32 @@ export default {
 <style lang="scss" scoped>
 .add-client {
   background: $pumpkin;
-  padding: 6px 10px;
+  padding: 0 20px 0 10px;
   margin: 5px 16px;
+  height: 35px;
   color: $white;
   font-family: $ff__dosis;
   font-size: 20px;
   font-weight: bold;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
 
-  &__label,
-  &__icon,
-  &__input {
-    display: inline-block;
-  }
-
-  &__label,
-  &__input {
-    margin-left: 5px;
-    height: 23px;
-  }
+  &__label { margin-left: 5px; }
 
   &__input {
+    margin-left: 8px;
     color: $white;
     border-style: none;
     background: none;
-    width: 70%;
+    flex: 1;
+  }
+
+  &__send {
+    border: none;
+    background: none;
+    padding: 0;
+    width: 30px;
   }
 
   &--active {

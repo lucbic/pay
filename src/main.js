@@ -6,6 +6,7 @@ import store from './store'
 import Vuebar from 'vuebar'
 import VueSimpleSVG from 'vue-simple-svg'
 import Fullscreen from 'vue-fullscreen'
+import vClickOutside from 'v-click-outside'
 
 // Reset css import
 import 'normalize.css'
@@ -13,6 +14,7 @@ import 'normalize.css'
 // Vue plugins
 Vue.use(Vuebar)
 Vue.use(VueSimpleSVG)
+Vue.use(vClickOutside)
 Vue.use(Fullscreen)
 
 Vue.config.productionTip = false
