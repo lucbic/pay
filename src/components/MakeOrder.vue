@@ -158,7 +158,6 @@ export default {
       }
     },
     addNewOrder (product) {
-      this.$refs.modal.show(product)
       this.$refs.modal.show(product).then(order => {
         this.newOrders.push(order)
       }, () => {})
