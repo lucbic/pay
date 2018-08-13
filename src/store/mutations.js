@@ -87,10 +87,6 @@ export default {
 
     orders.forEach(order => {
       largestId += 1
-      delete order.client
-      delete order.product
-      delete order.price
-      order.paid = false
       order.id = largestId
       state.orders.push(order)
     })

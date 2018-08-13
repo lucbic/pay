@@ -79,12 +79,11 @@ export default {
       return new Promise((resolve, reject) => {
         self.$on('reply', val => {
           const order = {
-            client: this.clientName(this.modalActiveClient),
-            client_id: this.modalActiveClient,
-            product: this.product.name,
-            product_id: this.product.id,
-            price: this.product.price,
+            id: null,
             amount: this.amount,
+            client_id: this.modalActiveClient,
+            product_id: this.product.id,
+            paid: false,
             status: false
           }
           this.reset()
