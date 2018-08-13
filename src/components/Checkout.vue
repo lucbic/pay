@@ -6,15 +6,19 @@
         <simple-svg :filepath="'static/img/times-solid.svg'" :width="'14px'" />
       </button>
 
-      <h1 class="checkout__header">
+      <h1 v-if="client" class="checkout__header">
         Fechar conta de<br />{{ activeClientName }}?
       </h1>
+      <h1 v-else class="checkout__header">
+        Fechar mesa {{ currentTableIndex + 1 }}?
+      </h1>
 
-      <span class="label">Consumo individual</span>
+      <span v-if="client" class="label">Consumo individual</span>
+      <span v-else class="label">Consumo da mesa</span>
       <div class="orders" v-bar :style="{ height: ordersHeight }">
         <div class="orders__wrapper">
-          <div class="item"
-            v-for="(order, index) in orders" :key="`order${index}`">
+          <div class="item" v-for="(order, index) in orders"
+            :key="`order${index}`">
             <span>{{ order.amount }} x {{ order.product }}</span>
             <span class="price">{{ localeOrderTotal(order) }}</span>
           </div>
@@ -69,13 +73,14 @@ export default {
     ]),
     ...mapGetters([
       'activeClientName',
-      'clientOrders'
+      'clientOrders',
+      'tableOrders'
     ]),
     orders () {
       if (this.client) {
         return this.clientOrders(this.currentTableIndex, this.activeClient)
       } else {
-        return this.tableOrders
+        return this.tableOrders.filter(x => !x.paid)
       }
     },
     localeTotal () {
@@ -103,9 +108,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['checkoutActiveClient']),
+    ...mapActions(['checkoutActiveClient', 'closeCurrentTable']),
     reply (val) {
-      if (val) { this.checkoutActiveClient() }
+      if (val) { this.client ? this.checkoutActiveClient() : this.closeCurrentTable() }
+      this.includeTax = true
       this.active = false
     },
     show () {

@@ -27,16 +27,11 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'Modal',
-  props: {
-    mode: {
-      type: String,
-      default: 'ok-cancel'
-    }
-  },
   data () {
     return {
       active: false,
-      content: ''
+      content: '',
+      mode: 'ok-cancel'
     }
   },
   computed: {
@@ -46,8 +41,9 @@ export default {
     reply (val) {
       this.$emit('reply', val)
     },
-    show (content) {
+    show (content, mode) {
       this.content = content
+      this.mode = mode
       this.active = true
       const self = this
       return new Promise((resolve, reject) => {

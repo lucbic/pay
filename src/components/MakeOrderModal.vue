@@ -21,13 +21,15 @@
       <div class="amount division">
         <span class="amount__label">Quantidade</span>
         <button class="amount__btn" @click="changeAmount('minus')">
-          <simple-svg filepath="static/img/minus-circle-solid.svg"
-            width="17px"/>
+          <!-- <simple-svg filepath="static/img/minus-circle-solid.svg"
+            width="17px"/> -->
+          <img src="static/img/minus-circle-solid.svg" style="width: 17px;">
         </button>
         <span class="amount__number">{{ amount }}</span>
         <button class="amount__btn" @click="changeAmount('plus')">
-          <simple-svg filepath="static/img/plus-circle-solid.svg"
-          width="17px"/>
+          <!-- <simple-svg filepath="static/img/plus-circle-solid.svg"
+          width="17px"/> -->
+          <img src="static/img/plus-circle-solid.svg" style="width: 17px;">
         </button>
       </div>
       <div class="footer">

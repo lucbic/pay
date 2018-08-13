@@ -65,7 +65,8 @@ export default {
 
     const client = {
       id: largestId + 1,
-      name: name
+      name: name,
+      paid: false
     }
 
     if (state.tables[tableIndex].clients.length === 0) {

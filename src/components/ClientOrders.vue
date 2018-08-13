@@ -1,6 +1,6 @@
 <template>
 <div class="client-orders">
-  <modal :mode="modalMode" ref="modal" />
+  <modal ref="modal" />
   <checkout :client="true" ref="checkout" />
   <div class="well">
     <div class="header">
@@ -75,7 +75,7 @@ export default {
       'activeOrderStatus',
       'activeClientName',
       'activeOrderProduct',
-      'clientCkeckoutReady'
+      'clientCheckoutReady'
     ]),
 
     tableNumber () {
@@ -97,11 +97,6 @@ export default {
       return !this.activeOrderStatus && this.activeOrder !== -1
     }
   },
-  data () {
-    return {
-      modalMode: 'yes-no'
-    }
-  },
   methods: {
     ...mapActions(['setScreenSm', 'setActiveOrder']),
 
@@ -110,12 +105,11 @@ export default {
       window.setTimeout(() => { this.setActiveOrder(-1) }, 400)
     },
     checkout () {
-      if (this.clientCkeckoutReady) {
+      if (this.clientCheckoutReady) {
         this.$refs.checkout.show()
       } else {
-        const content = 'A conta do cliente só pode ser fechada quando todos os pedidos constarem como entregues.'
-        this.modalMode = 'info'
-        this.$refs.modal.show(content)
+        const content = 'A conta do cliente só pode ser fechada quando todos os pedidos forem entregues.'
+        this.$refs.modal.show(content, 'info')
       }
     }
   }

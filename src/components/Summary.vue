@@ -1,7 +1,8 @@
 <template>
 <div class="summary" ref="summary">
   <full-screen />
-  <modal :mode="'yes-no'" ref="modal" />
+  <modal ref="modal" />
+  <checkout ref="checkout" />
   <div class="well">
     <div class="header">
       <button class="header__back" @click="backToTables">
@@ -74,6 +75,7 @@ import Clients from '@/components/Clients'
 import Orders from '@/components/Orders'
 import Modal from '@/components/Modal'
 import FullScreen from '@/components/FullScreen'
+import Checkout from '@/components/Checkout'
 import OrdersMixin from '@/mixins/OrdersMixin'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
@@ -84,7 +86,8 @@ export default {
     Clients,
     Orders,
     Modal,
-    FullScreen
+    FullScreen,
+    Checkout
   },
   mixins: [OrdersMixin],
   watch: {
@@ -94,7 +97,6 @@ export default {
     },
     fixedScreen (val) {
       if (val !== -1) {
-        console.log('eita ' + val)
         this.$refs.summary.style.height = val + 'px'
       } else {
         this.$refs.summary.style.height = '100vh'
@@ -113,7 +115,8 @@ export default {
       'activeClientTotal',
       'activeOrderStatus',
       'activeClientName',
-      'activeOrderProduct'
+      'activeOrderProduct',
+      'tableCheckoutReady'
     ]),
     tableNumber () {
       if (this.currentTableIndex === null) { return }
@@ -166,11 +169,16 @@ export default {
       this.setScreenSm('client-orders')
     },
     checkout () {
-
+      if (this.tableCheckoutReady) {
+        this.$refs.checkout.show()
+      } else {
+        const content = 'A conta só pode ser fechada quando todos os pedidos forem entregues.'
+        this.$refs.modal.show(content, 'info')
+      }
     },
     deleteClient () {
       const content = `Deseja excluir o cliente \n ${this.activeClientName}?`
-      this.$refs.modal.show(content).then(() => {
+      this.$refs.modal.show(content, 'yes-no').then(() => {
         this.deleteActiveClient()
       }, () => {})
     }

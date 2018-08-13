@@ -12,7 +12,7 @@ export const tableClients = state => {
 }
 
 export const tableOrders = state => {
-  if (state.currentTableIndex === null) { return }
+  if (state.currentTableIndex === null) { return [] }
 
   let orders = []
   const clientsIds = state.tables[state.currentTableIndex].clients
@@ -27,9 +27,7 @@ export const tableOrders = state => {
     let order = {
       id: orderData.id,
       product: product.name,
-      productId: product.id,
       client: client.name,
-      clientId: client.id,
       amount: orderData.amount,
       price: product.price,
       status: orderData.status,
@@ -56,7 +54,6 @@ export const clientOrders = state => (tableIndex, id) => {
     let order = {
       id: orderData.id,
       product: product.name,
-      productId: product.id,
       amount: orderData.amount,
       price: product.price,
       status: orderData.status
@@ -94,11 +91,12 @@ export const clientName = state => id => {
 }
 
 export const getTotal = (state, getters) => id => {
-  const orders = getters.tableOrders
   let total = 0
-
-  orders.forEach(order => { total += order.price * order.amount })
-
+  const clientsIds = state.tables[state.currentTableIndex].clients
+  clientsIds.forEach(x => {
+    if (state.clients.find(y => y.id === x).paid) { return }
+    total += getters.clientTotal(x)
+  })
   return total
 }
 
@@ -122,7 +120,11 @@ export const productsList = state => category => {
   return state.products.filter(x => x.category === category)
 }
 
-export const clientCkeckoutReady = (state, getters) => {
+export const clientCheckoutReady = (state, getters) => {
   const orders = getters.clientOrders(state.currentTableIndex, state.activeClient)
   return orders.every(x => x.status === true)
+}
+
+export const tableCheckoutReady = (state, getters) => {
+  return getters.tableOrders.every(x => x.status === true)
 }

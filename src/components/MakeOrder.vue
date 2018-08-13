@@ -16,7 +16,6 @@
       <div class="header__buttons">
         <button v-for="category in categories" class="btn-carousel" @click="view = category.name"
           :class="{ 'active': view === category.name }">
-          <!-- <simple-svg :width="'36px'" :filepath="category.icon" /> -->
           <img :src="category.icon" style="width: 36px;">
         </button>
       </div>
@@ -71,7 +70,6 @@
 
 <script>
 import SmallLogo from '@/components/SmallLogo'
-import Modal from '@/components/Modal'
 import Product from '@/components/Product'
 import Order from '@/components/Order'
 import MakeOrderModal from '@/components/MakeOrderModal'
@@ -83,7 +81,6 @@ export default {
   name: 'MakeOrder',
   components: {
     SmallLogo,
-    Modal,
     Product,
     Order,
     MakeOrderModal,
@@ -137,7 +134,6 @@ export default {
     view (val) {
       const path = 'static/img/'
       this.categories.forEach(x => { x.icon = `${path}${x.name}.svg` })
-      this.categories.forEach(x => { console.log(x.icon) })
       this.categories.find(x => x.name === val).icon = `${path}${val}-color.svg`
     }
   },

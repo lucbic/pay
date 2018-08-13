@@ -110,3 +110,8 @@ export const setFixedScreen = ({ commit }, val) => {
 export const toggleFullScreen = ({ commit }) => {
   commit(types.TOGGLE_FULL_SCREEN)
 }
+
+export const closeCurrentTable = ({ commit }) => {
+  commit(types.CLOSE_CURRENT_TABLE)
+  commit(types.SET_SCREEN_SM, 'tables')
+}
