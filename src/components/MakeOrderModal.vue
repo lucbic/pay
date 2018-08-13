@@ -30,10 +30,10 @@
       </div>
       <div class="footer">
         <div class="footer__buttons">
-          <button class="btn orange" @click="reply(false)">
+          <button class="btn" @click="reply(false)">
             Cancelar
           </button>
-          <button class="btn green" @click="reply(true)">
+          <button class="btn orange" @click="reply(true)">
             Confirmar
           </button>
         </div>

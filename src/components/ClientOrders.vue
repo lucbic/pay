@@ -35,12 +35,12 @@
           Fechar Cliente
         </button>
 
-        <button class="btn orange" @click="cancelOrder"
+        <button class="btn" @click="cancelOrder"
           v-show="buttonOrder">
           Cancelar
         </button>
 
-        <button class="btn green" @click="orderDelivered"
+        <button class="btn orange" @click="orderDelivered"
           v-show="buttonOrder">
           Entregue
         </button>

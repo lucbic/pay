@@ -43,22 +43,22 @@
           Remover Cliente
         </button>
 
-        <button class="btn font-sm" @click="clientOrders"
-          v-show="buttonClient">
-          Pedidos Cliente
-        </button>
-
         <button class="btn orange" @click="checkout"
           v-show="buttonCheckout">
           Fechar Conta
         </button>
 
-        <button class="btn orange" @click="cancelOrder"
+        <button class="btn font-sm" @click="clientOrders"
+          v-show="buttonClient">
+          Pedidos Cliente
+        </button>
+
+        <button class="btn" @click="cancelOrder"
           v-show="buttonOrder">
           Cancelar
         </button>
 
-        <button class="btn green" @click="orderDelivered"
+        <button class="btn orange" @click="orderDelivered"
           v-show="buttonOrder">
           Entregue
         </button>
@@ -146,7 +146,7 @@ export default {
       return this.activeClientTotal === 0 && this.buttonClient
     },
     buttonCheckout () {
-      return (this.activeOrder === -1) && (this.activeClient === -1) && (this.getTotal > 0)
+      return (this.activeOrder === -1) && (this.getTotal > 0)
     },
     buttonOrder () {
       return !this.activeOrderStatus && this.view === 'orders' && this.activeOrder !== -1
