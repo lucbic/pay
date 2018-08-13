@@ -65,10 +65,9 @@ export default {
   display: flex;
   flex-direction: column;
 
-  &__content {
-    @extend %striped-background;
-    height: 100%;
-  }
+  &__content { height: 100%; }
+
+  &__content-wrapper { @extend %striped-background; }
 }
 
 .label {

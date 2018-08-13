@@ -296,10 +296,9 @@ export default {
     font-weight: bold;
   }
 
-  &__content {
-    @extend %striped-background;
-    flex: 1;
-  }
+  &__content { flex: 1; }
+
+  &__content-wrapper { @extend %striped-background; }
 
   &__center {
     justify-self: center;
