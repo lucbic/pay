@@ -47,7 +47,8 @@ export const clientName = state => id => {
   return state.clients.find(x => x.id === id).name
 }
 
-export const getTotal = (state, getters) => id => {
+export const getTotal = (state, getters) => {
+  if (state.currentTableIndex === null) { return 0 }
   let total = 0
   const clientsIds = state.tables[state.currentTableIndex].clients
   clientsIds.forEach(x => {

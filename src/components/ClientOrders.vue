@@ -91,7 +91,7 @@ export default {
       }).replace('R$', 'R$ ')
     },
     buttonCheckout () {
-      return (this.activeOrder === -1)
+      return (this.activeOrder === -1) && (this.activeClientTotal > 0)
     },
     buttonOrder () {
       return !this.activeOrderStatus && this.activeOrder !== -1

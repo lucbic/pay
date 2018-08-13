@@ -123,8 +123,7 @@ export default {
       return this.currentTableIndex + 1
     },
     localeTotal () {
-      if (this.currentTableIndex === null) { return }
-      let localeTotal = this.getTotal(this.currentTableIndex)
+      let localeTotal = this.getTotal
       return localeTotal.toLocaleString('pt-BR', {
         style: 'currency',
         currency: 'BRL'
@@ -137,7 +136,7 @@ export default {
       return this.activeClientTotal === 0 && this.buttonClient
     },
     buttonCheckout () {
-      return (this.activeOrder === -1) && (this.activeClient === -1)
+      return (this.activeOrder === -1) && (this.activeClient === -1) && (this.getTotal > 0)
     },
     buttonOrder () {
       return !this.activeOrderStatus && this.view === 'orders' && this.activeOrder !== -1
