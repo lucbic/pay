@@ -137,7 +137,7 @@ export default {
 
 /* ------ MEDIA-QUERIES  ------ */
 @media all and (min-width: $breakpoint__sm) {
-  .app { height: 100%; }
+  .app { min-height: 100%; }
 
   .tables,
   .summary,
