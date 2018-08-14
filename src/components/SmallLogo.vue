@@ -27,4 +27,11 @@ export default {
     margin: 0;
   }
 }
+
+@media all and (max-width: 350px) {
+  .small-logo__title {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+}
 </style>

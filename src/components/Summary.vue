@@ -219,7 +219,7 @@ export default {
   width: 100vw;
 
   &__logo {
-    margin: 10px auto 0;
+    margin: 0 auto;
     position: absolute;
     top: 5px;
     left: 50%;
