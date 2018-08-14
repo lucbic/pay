@@ -69,16 +69,6 @@ export default {
       open: false,
       clients: [],
       orders: []
-    },
-    {
-      open: false,
-      clients: [],
-      orders: []
-    },
-    {
-      open: false,
-      clients: [],
-      orders: []
     }
   ],
   clients: [

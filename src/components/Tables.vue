@@ -94,4 +94,20 @@ export default {
   margin: 0 ($size__tables-gap / 2);
   margin-bottom: $size__tables-gap;
 }
+
+/* ------ MEDIA-QUERIES  ------ */
+@media all and (min-width: $breakpoint__sm) {
+  .tables {
+    height: 100%;
+    width: 100%;
+
+    &__logo {
+      display: none;
+    }
+
+    &__grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+}
 </style>

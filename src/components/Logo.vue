@@ -34,4 +34,17 @@ export default {
     margin: 0;
   }
 }
+
+/* ------ MEDIA-QUERIES  ------ */
+@media all and (min-width: $breakpoint__sm) {
+  .logo {
+    &__image {
+      width: 50px;
+    }
+
+    &__title {
+      font-size: 16px;
+    }
+  }
+}
 </style>

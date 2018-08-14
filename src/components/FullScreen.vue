@@ -41,4 +41,8 @@ export default {
   fill: currentColor;
   >div { height: 14px; }
 }
+
+@media all and (min-width: $breakpoint__sm) {
+  .fullscreen { display: none; }
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-<div class="summary" ref="summary">
+<div :class="className" ref="summary">
   <full-screen />
   <modal ref="modal" />
   <checkout ref="checkout" />
@@ -24,14 +24,18 @@
           Pedidos
         </button>
       </div>
+      <div class="header__section">
+        <span>{{ headerSection }}</span>
+      </div>
+
     </div>
 
     <div class="view">
-      <clients v-show="view === 'clients'" class="view__clients" />
-      <orders v-show="view === 'orders'" class="view__orders" />
+      <clients v-show="clientsConditions" class="view__clients" />
+      <orders v-show="ordersConditions" class="view__orders" />
     </div>
 
-    <div class="total">
+    <div :class="totalClass" >
       <span>Total:</span>
       <span>{{ localeTotal }}</span>
     </div>
@@ -89,6 +93,7 @@ export default {
     FullScreen,
     Checkout
   },
+  props: ['secondPane'],
   mixins: [OrdersMixin],
   watch: {
     view () {
@@ -150,6 +155,21 @@ export default {
     },
     buttonOrder () {
       return !this.activeOrderStatus && this.view === 'orders' && this.activeOrder !== -1
+    },
+    className () {
+      return this.secondPane ? 'summary2' : 'summary'
+    },
+    headerSection () {
+      return this.secondPane ? 'Pedidos' : 'Clientes'
+    },
+    totalClass () {
+      return this.secondPane ? 'total2' : 'total'
+    },
+    clientsConditions () {
+      return this.$mq === 'sm' ? this.view === 'clients' : !this.secondPane
+    },
+    ordersConditions () {
+      return this.$mq === 'sm' ? this.view === 'orders' : this.secondPane
     }
   },
   data () {
@@ -191,7 +211,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.summary {
+.summary,
+.summary2 {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -223,6 +244,7 @@ export default {
   background: $dark-grey;
   color: $white;
   padding: 10px;
+  position: relative;
 
   &__back {
     display: flex;
@@ -255,6 +277,19 @@ export default {
     font-weight: normal;
     text-transform: uppercase;
   }
+
+  &__section {
+    margin-top: 10px;
+    height: 32px;
+    font-family: $ff__dosis;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $white;
+    justify-content: center;
+    align-items: center;
+    display: none;
+  }
 }
 
 .view {
@@ -263,7 +298,8 @@ export default {
   flex-direction: column;
 }
 
-.total {
+.total,
+.total2 {
   background: $avocado;
   height: 40px;
   font-family: $ff__dosis;
@@ -286,5 +322,26 @@ export default {
     justify-content: center;
     align-items: center;
   }
+}
+
+/* ------ MEDIA-QUERIES  ------ */
+@media all and (min-width: $breakpoint__sm) {
+  .header__back,
+  .header__buttons,
+  .summary__logo,
+  .total { display: none; }
+
+  .header__section { display: flex; }
+
+  .summary,
+  .summary2 {
+    height: 100%;
+    width: 100%;
+  }
+
+  .header__table-number {
+    margin-top: 0;
+  }
+
 }
 </style>

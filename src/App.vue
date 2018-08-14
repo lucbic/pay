@@ -1,10 +1,11 @@
 <template>
 <div class="app" ref="app">
-  <transition-group :name="transition">
-    <tables v-show="screenSmOrigin[1] === 'tables'" key="1" />
-    <orders-summary v-show="screenSmOrigin[1] === 'summary'" key="2" />
-    <make-order v-if="screenSmOrigin[1] === 'make-order'" :client="clientMakeOrder" key="3"/>
-    <client-orders v-show="screenSmOrigin[1] === 'client-orders'" key="4"/>
+  <transition-group :name="transition" tag="div" class="app__content">
+    <tables v-show="tablesConditions" key="1" />
+    <orders-summary v-show="summaryConditions" key="2" />
+    <orders-summary v-if="summary2Conditions" :secondPane="true" key="3" />
+    <make-order v-if="makeOrderConditions" :client="clientMakeOrder" key="4"/>
+    <client-orders v-show="clientOrdersConditions" key="5"/>
   </transition-group>
 </div>
 </template>
@@ -47,6 +48,21 @@ export default {
       } else if (scr[0] === 'client-orders' && scr[1] === 'tables') {
         return 'shift-right'
       }
+    },
+    tablesConditions () {
+      return this.$mq === 'sm' ? this.screenSm === 'tables' : true
+    },
+    summaryConditions () {
+      return this.$mq === 'sm' ? this.screenSm === 'summary' : true
+    },
+    summary2Conditions () {
+      return !(this.$mq === 'sm')
+    },
+    makeOrderConditions () {
+      return this.screenSm === 'make-order'
+    },
+    clientOrdersConditions () {
+      return this.screenSm === 'client-orders'
     }
   },
   watch: {
@@ -92,6 +108,7 @@ export default {
   position: absolute;
 }
 
+/* ------ TRANSITIONS ------ */
 .shift-left-enter-active, .shift-left-leave-active {
   transform: translateX(0);
   transition: transform .4s;
@@ -118,5 +135,34 @@ export default {
   transform: translateX(100vw);
 }
 
+/* ------ MEDIA-QUERIES  ------ */
+@media all and (min-width: $breakpoint__sm) {
+  .app { height: 100%; }
 
+  .tables,
+  .summary,
+  .make-order {
+    position: static;
+  }
+
+  .tables { grid-area: tables; }
+  .summary { grid-area: summary; }
+  .summary2 { grid-area: summary2; }
+  .make-order { grid-area: make-order; }
+  .client-orders { grid-area: client-orders; }
+
+  .app__content {
+    margin: 0 auto;
+    max-width: $breakpoint__lg;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 310px 560px;
+    grid-template-areas:
+      "tables    tables"
+      "summary summary2"
+      "make-order make-order"
+      ". client-orders";
+
+  }
+}
 </style>
