@@ -1,56 +1,10 @@
-// import tables from 'static/tables.json'
-import axios from 'axios'
 import * as types from './mutation-types'
+import Data from './data'
 
-export const fetchTablesData = ({ commit }) => {
-  return new Promise((resolve, reject) => {
-    axios({
-      method: 'get',
-      url: 'http://localhost:3000/tables',
-      responseType: 'json'
-    })
-      .then((response) => {
-        commit(types.SET_TABLES_AND_ORDERS, response.data)
-        resolve()
-      })
-      .catch((error) => {
-        reject(error)
-      })
-  })
-}
-
-export const fetchClientsData = ({ commit }) => {
-  return new Promise((resolve, reject) => {
-    axios({
-      method: 'get',
-      url: 'http://localhost:3000/clients',
-      responseType: 'json'
-    })
-      .then((response) => {
-        commit(types.SET_CLIENTS, response.data)
-        resolve()
-      })
-      .catch((error) => {
-        reject(error)
-      })
-  })
-}
-
-export const fetchProductsData = ({ commit }) => {
-  return new Promise((resolve, reject) => {
-    axios({
-      method: 'get',
-      url: 'http://localhost:3000/products',
-      responseType: 'json'
-    })
-      .then((response) => {
-        commit(types.SET_PRODUCTS, response.data)
-        resolve()
-      })
-      .catch((error) => {
-        reject(error)
-      })
-  })
+export const fetchData = ({ commit }) => {
+  commit(types.SET_TABLES_AND_ORDERS, Data.tables)
+  commit(types.SET_CLIENTS, Data.clients)
+  commit(types.SET_PRODUCTS, Data.products)
 }
 
 export const setCurrentTableIndex = ({ commit }, tableIndex) => {

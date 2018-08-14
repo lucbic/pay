@@ -10,12 +10,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import Tables from '@/components/Tables.vue'
 import OrdersSummary from '@/components/Summary'
 import MakeOrder from '@/components/MakeOrder'
 import ClientOrders from '@/components/ClientOrders'
-import FetchDataMixin from '@/mixins/FetchDataMixin'
 
 export default {
   name: 'App',
@@ -25,7 +24,6 @@ export default {
     MakeOrder,
     ClientOrders
   },
-  mixins: [ FetchDataMixin ],
   computed: {
     ...mapState(['screenSm']),
     transition () {
@@ -68,6 +66,8 @@ export default {
     this.screenSmOrigin.push(this.screenSm)
     this.screenSmOrigin.push(this.screenSm)
   },
+  created () { this.fetchData() },
+  methods: { ...mapActions(['fetchData']) },
   data () {
     return {
       screenSmOrigin: [],
