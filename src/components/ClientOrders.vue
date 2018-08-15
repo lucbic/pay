@@ -160,6 +160,7 @@ export default {
     text-transform: uppercase;
     background: transparent;
     border-style: none;
+    cursor: pointer;
 
     > span { margin-left: 5px; }
 

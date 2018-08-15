@@ -69,6 +69,7 @@ export default {
   border-radius: 10px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   &__label { margin-left: 5px; }
 
@@ -85,10 +86,12 @@ export default {
     background: none;
     padding: 0;
     width: 30px;
+    cursor: pointer;
   }
 
   &--active {
     background: $dark-grey;
+    cursor: auto;
   }
 }
 </style>

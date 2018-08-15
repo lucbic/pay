@@ -17,7 +17,7 @@
       <span v-else class="label">Consumo da mesa</span>
       <div class="orders" v-bar :style="{ height: ordersHeight }">
         <div class="orders__wrapper">
-          <div class="item" v-for="(order, index) in orders"
+          <div class="item " v-for="(order, index) in orders"
             :key="`order${index}`">
             <span>{{ order.amount }} x {{ getProduct(order.product_id).name }}</span>
             <span class="price">{{ localeOrderTotal(order) }}</span>
@@ -227,6 +227,7 @@ export default {
     border: none;
     background: none;
     position: relative;
+    cursor: pointer;
 
     &--check {
       position: absolute;
@@ -252,5 +253,9 @@ export default {
   font-size: 18px;
   font-weight: bold;
   text-transform: uppercase;
+}
+
+@media all and (max-width: 350px) {
+  .item { font-size: 14px; }
 }
 </style>

@@ -199,6 +199,7 @@ export default {
     background: $darkest-grey;
     color: $white;
     text-transform: uppercase;
+    min-height: 28.5px
   }
 }
 
@@ -219,6 +220,7 @@ export default {
   background: $dark-grey;
   color: $white;
   padding: 10px;
+  min-height: 140px;
 
   &__back {
     display: flex;
@@ -230,6 +232,7 @@ export default {
     text-transform: uppercase;
     background: transparent;
     border-style: none;
+    cursor: pointer;
 
     > span { margin-left: 5px; }
 
@@ -240,6 +243,7 @@ export default {
     display: flex;
     justify-content: center;
     margin-top: 10px;
+    >button { cursor: pointer; }
   }
 
   &__table-number {
@@ -305,7 +309,7 @@ export default {
 }
 
 .footer {
-  height: 50px;
+  min-height: 50px;
   background: $dark-grey;
   color: $white;
 

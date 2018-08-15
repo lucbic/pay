@@ -5,9 +5,9 @@
       <button class="modal__exit" @click="reply(false)">
         <simple-svg :filepath="'static/img/times-solid.svg'" :width="'14px'" />
       </button>
-      <p class="modal__content">
-        {{ content }}
-      </p>
+      <div class="modal__content">
+        <span>{{ content }}</span>
+      </div>
       <div class="modal__buttons">
         <button v-if="mode !== 'info'" class="btn orange" @click="reply(false)">
           <span v-if="mode === 'yes-no' ">Não</span>
@@ -83,11 +83,11 @@ export default {
   background: $white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   color: $darkest-grey;
   border-radius: 15px;
-  padding: 40px 20px 40px;
+  padding: 20px;
 
   &__exit {
     position: absolute;
@@ -100,28 +100,22 @@ export default {
     border: none;
     background: none;
     color: $darkest-grey;
+    cursor: pointer;
   }
 
   &__content {
     font-family: $ff__dosis;
     font-size: 22px;
     text-align: center;
-    margin-top: 0;
-    margin-bottom: 80px;
     line-height: 1.2;
-    white-space: pre-line;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
-  &__buttons {
-    position: absolute;
-    bottom: 30px;
-    >button {
-      width: 120px;
-    }
-  }
+  &__buttons>button { width: 120px; }
 
-  .par {
-    margin-top: 0;
-  }
+  .par { margin-top: 0; }
 }
 </style>

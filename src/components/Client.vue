@@ -71,6 +71,7 @@ export default {
   font-size: 20px;
   border-radius: 10px;
   height: 35px;
+  cursor: pointer;
 
   &__icon,
   &__name,

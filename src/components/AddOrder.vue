@@ -34,6 +34,8 @@ export default {
   justify-content: center;
   align-items: center;
   padding: 0 10px;
+  cursor: pointer;
+  
   >span {
     margin-left: 8px;
   }

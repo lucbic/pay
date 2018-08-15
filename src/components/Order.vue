@@ -78,6 +78,7 @@ export default {
 
 .order {
   position: relative;
+  cursor: pointer;
 
   &__grid {
     @extend %orders-grid;
@@ -105,6 +106,8 @@ export default {
     padding: 0;
     border: none;
     background: none;
+    cursor: pointer;
+    color: inherit;
 
     &--check {
       position: absolute;

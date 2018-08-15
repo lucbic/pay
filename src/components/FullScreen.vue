@@ -39,6 +39,8 @@ export default {
   background: $dark-grey;
   border-radius: 5px;
   fill: currentColor;
+  cursor: pointer;
+  
   >div { height: 14px; }
 }
 

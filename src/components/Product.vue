@@ -39,6 +39,7 @@ export default {
   font-size: 16px;
   border-radius: 10px;
   height: 30;
+  cursor: pointer;
 
   &__name {
     display: block;
@@ -50,5 +51,9 @@ export default {
     display: block;
     width: 60px;
   }
+}
+
+@media all and (max-width: 350px) {
+  .product { font-size: 14px; }
 }
 </style>

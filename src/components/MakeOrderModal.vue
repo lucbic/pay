@@ -156,6 +156,7 @@ export default {
     border: none;
     background: none;
     color:  $white;
+    cursor: pointer;
   }
 }
 
@@ -223,6 +224,7 @@ export default {
     font-size: 22px;
     color: inherit;
     padding-top: 1px;
+    cursor: pointer;
   }
 }
 
