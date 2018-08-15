@@ -53,10 +53,10 @@ export default {
       return this.$mq === 'sm' ? this.screenSm === 'tables' : true
     },
     summaryConditions () {
-      return this.$mq === 'sm' ? this.screenSm === 'summary' : true
+      return this.$mq === 'sm' ? this.screenSm === 'summary' : this.screenSm !== 'make-order'
     },
     summary2Conditions () {
-      return !(this.$mq === 'sm')
+      return !(this.$mq === 'sm') && this.summaryConditions
     },
     makeOrderConditions () {
       return this.screenSm === 'make-order'
@@ -148,7 +148,10 @@ export default {
   .tables { grid-area: tables; }
   .summary { grid-area: summary; }
   .summary2 { grid-area: summary2; }
-  .make-order { grid-area: make-order; }
+  .make-order {
+    grid-row: 2 / 3;
+    grid-column: 1 / -1;
+  }
   .client-orders { grid-area: client-orders; }
 
   .app__content {

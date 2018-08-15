@@ -11,7 +11,10 @@
         <span>Mesas</span>
       </button>
       <small-logo class="summary__logo" />
-      <h1 class="header__table-number">
+      <h1 v-if="currentTableIndex === null" class="header__table-number">
+        -
+      </h1>
+      <h1 v-else class="header__table-number">
         Mesa {{ tableNumber }}
       </h1>
       <div class="header__buttons">
@@ -151,7 +154,12 @@ export default {
       return this.activeClientTotal === 0 && this.buttonClient
     },
     buttonCheckout () {
-      return (this.activeOrder === -1) && (this.getTotal > 0)
+      const condition = (this.activeOrder === -1) && (this.getTotal > 0)
+      if (this.$mq === 'sm') {
+        return condition
+      } else {
+        return this.secondPane ? condition : false
+      }
     },
     buttonOrder () {
       return !this.activeOrderStatus && this.view === 'orders' && this.activeOrder !== -1

@@ -7,10 +7,10 @@
     Adicionar Cliente
   </span>
   <input v-if="active" type="text" class="add-client__input"
-  v-model="name" ref="teste">
-  <button v-if="active" class="add-client__send" @click="add">
+    v-model="name" ref="teste">
+  <div v-if="active" class="add-client__send" @click="add">
     <img src="static/img/send.svg" style="width: 14px;">
-  </button>
+  </div>
 </div>
 </template>
 
@@ -31,17 +31,20 @@ export default {
     activate () {
       if (this.active) { return }
 
-      const height = window.innerHeight ||
-        document.documentElement.clientHeight ||
-        document.body.clientHeight
-      this.setFixedScreen(height)
+      if (this.$mq === 'sm') {
+        const height = window.innerHeight ||
+          document.documentElement.clientHeight ||
+          document.body.clientHeight
+        this.setFixedScreen(height)
+      }
+
       this.active = true
       this.$nextTick(() => { this.$refs.teste.focus() })
     },
     add () {
       if (!this.active) { return }
 
-      this.setFixedScreen(-1)
+      if (this.$mq === 'sm') { this.setFixedScreen(-1) }
       this.addClient(this.name)
       this.reset()
     },
@@ -85,7 +88,6 @@ export default {
     border: none;
     background: none;
     padding: 0;
-    width: 30px;
     cursor: pointer;
   }
 

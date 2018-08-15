@@ -1,11 +1,12 @@
 <template>
-<div class="table" :class="{ 'table--open': table.open }" @click="selectTable(index)">
+<div class="table" :class="{ 'table--open': table.open, 'table--active': active }"
+  @click="selectTable(index)" id="table-component">
   <span class="table__number">{{ number }}</span>
 </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Table',
@@ -14,7 +15,10 @@ export default {
     'table'
   ],
   computed: {
-    number () { return this.index + 1 }
+    ...mapState(['currentTableIndex']),
+
+    number () { return this.index + 1 },
+    active () { return this.currentTableIndex === this.index }
   },
   methods: {
     ...mapActions(['setCurrentTableIndex', 'setScreenSm']),
@@ -49,6 +53,10 @@ export default {
   &--open {
     background: $avocado;
     border-radius: 15px;
+  }
+
+  &--active {
+    border: 4px solid $turquoise;
   }
 
   /* children */

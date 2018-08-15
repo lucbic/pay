@@ -14,7 +14,7 @@
     <div class="clients__content-wrapper" >
       <client v-for="client in tableClients"
               :client="client" :key="`client-${tableClients.indexOf(client)}`"/>
-      <add-client />
+      <add-client v-if="currentTableIndex !== null" />
     </div>
   </div>
 
@@ -33,7 +33,7 @@ export default {
     AddClient
   },
   computed: {
-    ...mapState(['activeClient']),
+    ...mapState(['activeClient', 'currentTableIndex']),
     ...mapGetters(['tableClients'])
   },
   methods: {

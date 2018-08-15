@@ -119,6 +119,8 @@ export default {
 <style lang="scss" scoped>
 .wrapper {
   position: fixed;
+  top: 0;
+  left: 0;
   height: 100vh;
   width: 100vw;
   z-index: 1;
@@ -239,5 +241,10 @@ export default {
     justify-content: center;
     align-items: center;
   }
+}
+
+/* ------ MEDIA-QUERIES  ------ */
+@media all and (min-width: $breakpoint__sm) {
+  .modal { max-width: 400px; }
 }
 </style>

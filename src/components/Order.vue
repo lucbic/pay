@@ -119,7 +119,7 @@ export default {
 
   &__underline {
     @extend %line;
-    border: 1px solid blue;
+    border: 1px solid $turquoise;
   }
 
   &__line-through {

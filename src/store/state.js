@@ -7,7 +7,6 @@ export default {
   activeClient: -1,
   activeOrder: -1,
   screenSm: 'tables',
-  // screenSm: 'make-order'
   fixedScreen: -1,
   fullscreen: false
 }

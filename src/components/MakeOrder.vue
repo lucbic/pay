@@ -21,48 +21,50 @@
       </div>
     </div>
 
-    <div class="products">
-      <h1 class="make-order__division"> {{ translateCategory(view) }} </h1>
-      <div class="products__labels">
-        <span>Item</span>
-        <span>Preço</span>
-      </div>
-      <template v-for="category in categories">
-        <div v-show="view === category.name" class="products__slide" v-bar>
-          <div class="products__slide-wrapper">
-            <product v-for="(product, pIndex) in productsList(category.name)" :product="product"
-              :key="`product-${pIndex}`"
-              @add="addNewOrder" />
-          </div>
+    <div class="content">
+      <div class="products">
+        <h1 class="make-order__division"> {{ translateCategory(view) }} </h1>
+        <div class="products__labels">
+          <span>Item</span>
+          <span>Preço</span>
         </div>
-      </template>
-    </div>
-
-    <div class="orders-list">
-      <h1 class="make-order__division">Itens Selecionados</h1>
-      <div class="orders-list__labels">
-        <span>Item</span>
-        <span>Cliente</span>
-        <span class="orders-list__center">Qtd.</span>
-        <span class="orders-list__center">Preço</span>
+        <template v-for="category in categories">
+          <div v-show="view === category.name" class="products__slide" v-bar>
+            <div class="products__slide-wrapper">
+              <product v-for="(product, pIndex) in productsList(category.name)" :product="product"
+                :key="`product-${pIndex}`"
+                @add="addNewOrder" />
+            </div>
+          </div>
+        </template>
       </div>
-      <div class="orders-list__content" v-bar ref="list">
-        <div class="orders-list__content-wrapper">
-          <order v-for="(order, index) in newOrders" :order="order"
-            :key="`order-${index}`"
-            :new-order="true"
-            @deleteNewOrder="deleteNewOrder"/>
+
+      <div class="content__gutter" />
+
+      <div class="orders-list">
+        <h1 class="make-order__division">Itens Selecionados</h1>
+        <div class="orders-list__labels">
+          <span>Item</span>
+          <span>Cliente</span>
+          <span class="orders-list__center">Qtd.</span>
+          <span class="orders-list__center">Preço</span>
+        </div>
+        <div class="orders-list__content" v-bar ref="list">
+          <div class="orders-list__content-wrapper">
+            <order v-for="(order, index) in newOrders" :order="order"
+              :key="`order-${index}`"
+              :new-order="true"
+              @deleteNewOrder="deleteNewOrder"/>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="footer">
-      <div class="footer__buttons">
-        <button class="btn orange large" @click="confirmOrders"
-          v-show="true">
-          Confirmar Pedido
-        </button>
-      </div>
+      <button class="btn orange large" @click="confirmOrders"
+        v-show="true">
+        Confirmar Pedido
+      </button>
     </div>
   </div>
 </div>
@@ -96,13 +98,22 @@ export default {
     }
   },
   mounted () {
-    this.split = Split(['.products', '.orders-list'], {
-      sizes: [55, 45],
-      direction: 'vertical',
-      gutterSize: 15,
-      minSize: [50, 50],
-      snapOffset: 0
-    })
+    if (this.$mq === 'sm') {
+      this.split = Split(['.products', '.orders-list'], {
+        sizes: [55, 45],
+        direction: 'vertical',
+        gutterSize: 18,
+        minSize: [50, 50],
+        snapOffset: 0,
+        elementStyle: (dimension, size, gutterSize) => {
+          return { 'flex-basis': 'calc(' + size + '% - ' + gutterSize + 'px)' }
+        },
+        gutterStyle: (dimension, gutterSize) => {
+          return { 'flex-basis': gutterSize + 'px' }
+        }
+      })
+    }
+
     this.view = 'drinks'
   },
   data () {
@@ -180,6 +191,7 @@ export default {
   flex-direction: column;
   height: 100vh;
   width: 100vw;
+  position: relative;
 
   &__logo {
     margin: 10px auto 0;
@@ -199,7 +211,8 @@ export default {
     background: $darkest-grey;
     color: $white;
     text-transform: uppercase;
-    min-height: 28.5px
+    max-height: 28px;
+    min-height: 28px;
   }
 }
 
@@ -257,9 +270,22 @@ export default {
   }
 }
 
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  &__gutter {
+    min-width: 20px;
+    background: $white;
+    display: none;
+  }
+}
+
 .products {
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid $white;
 
   &__slide {
     flex: 1;
@@ -312,12 +338,33 @@ export default {
   min-height: 50px;
   background: $dark-grey;
   color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  &__buttons {
+/* ------ MEDIA-QUERIES  ------ */
+@media all and (min-width: $breakpoint__sm) {
+  .make-order {
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+  }
+
+  .content {
+    flex-direction: row;
+
+    &__gutter {
+      display: block;
+      border-top: 28px solid $darkest-grey;
+    }
+  }
+
+  .products {
+    flex: 1;
+  }
+
+  .orders-list {
+    flex: 1;
   }
 }
 </style>

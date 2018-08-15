@@ -2,7 +2,7 @@
 <div class="tables">
   <full-screen />
   <logo class="tables__logo"/>
-  <div class="well">
+  <div class="well" @click="deselect($event)">
     <h1 class="well__title">Selecione a mesa</h1>
     <hr>
     <div class="scroll" v-bar>
@@ -20,7 +20,7 @@
 <script>
 import Logo from '@/components/Logo'
 import SingleTable from '@/components/Table'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import FullScreen from '@/components/FullScreen'
 
 export default {
@@ -31,7 +31,16 @@ export default {
     FullScreen
   },
   computed: {
-    ...mapState(['tables'])
+    ...mapState(['tables', 'currentTableIndex'])
+  },
+  methods: {
+    ...mapActions(['setCurrentTableIndex']),
+
+    deselect () {
+      if (event.target.closest('#table-component')) { return }
+      if (this.currentTableIndex === null) { return }
+      this.setCurrentTableIndex(null)
+    }
   }
 }
 </script>
