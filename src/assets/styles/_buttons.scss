@@ -30,9 +30,10 @@
   &.green {
     background: $avocado;
     border-color: $avocado;
+    color: $dark-grey;
   }
 
-  &.header {
+  &.header-select {
     border-radius: 8px;
     border: 1px solid $white;
     background: transparent;
@@ -75,5 +76,12 @@
       background: $avocado;
       border-color: $avocado;
     }
+  }
+}
+
+@media all and (min-width: $breakpoint__sm) {
+  .btn {
+    width: 100%;
+    max-width: 160px;
   }
 }

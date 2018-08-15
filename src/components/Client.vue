@@ -46,12 +46,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setActiveClient']),
+    ...mapActions(['setActiveClient', 'setActiveOrder']),
 
     activate () {
       if (this.modal) { return this.$emit('setModalActiveClient', this.client.id) }
       if (this.activeClient === this.client.id || this.client.paid) { return }
       this.setActiveClient(this.client.id)
+      this.setActiveOrder(-1)
     }
   }
 }

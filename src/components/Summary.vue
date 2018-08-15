@@ -1,5 +1,5 @@
 <template>
-<div :class="className" ref="summary">
+<div class="summary" ref="summary">
   <full-screen />
   <modal ref="modal" />
   <checkout ref="checkout" />
@@ -11,61 +11,53 @@
         <span>Mesas</span>
       </button>
       <small-logo class="summary__logo" />
-      <h1 v-if="currentTableIndex === null" class="header__table-number">
-        -
-      </h1>
-      <h1 v-else class="header__table-number">
+      <h1 v-if="currentTableIndex !== null" class="header__table-number">
         Mesa {{ tableNumber }}
       </h1>
       <div class="header__buttons">
-        <button class="btn header" @click="view = 'clients'"
+        <button class="btn header-select" @click="view = 'clients'"
           :class="{ 'active': view === 'clients' }">
           Clientes
         </button>
-        <button class="btn header" @click="view = 'orders'"
+        <button class="btn header-select" @click="view = 'orders'"
           :class="{ 'active': view === 'orders' }">
           Pedidos
         </button>
-      </div>
-      <div class="header__section">
-        <span>{{ headerSection }}</span>
       </div>
 
     </div>
 
     <div class="view">
+      <div class="view__gutter" />
       <clients v-show="clientsConditions" class="view__clients" />
-      <orders v-show="ordersConditions" class="view__orders" />
-    </div>
-
-    <div :class="totalClass" >
-      <span>Total:</span>
-      <span>{{ localeTotal }}</span>
+      <div class="view__gutter" />
+      <orders v-show="ordersConditions" :client="activeClient !== -1" class="view__orders" />
+      <div class="view__gutter" />
     </div>
 
     <div class="footer">
       <div class="footer__buttons">
-        <button class="btn font-sm orange" @click="deleteClient"
-          v-show="buttonRemoveClient">
-          Remover Cliente
-        </button>
-
-        <button class="btn orange" @click="checkout"
+        <button class="btn green btn-checkout" @click="checkout"
           v-show="buttonCheckout">
           Fechar Conta
         </button>
 
-        <button class="btn font-sm" @click="clientOrders"
+        <button class="btn font-sm btn-remove-client" @click="deleteClient"
+          v-show="buttonRemoveClient">
+          Remov. Cliente
+        </button>
+
+        <button class="btn font-sm orange btn-orders" @click="clientOrders"
           v-show="buttonClient">
           Pedidos Cliente
         </button>
 
-        <button class="btn" @click="cancelOrder"
+        <button class="btn btn-cancel-order" @click="cancelOrder"
           v-show="buttonOrder">
           Cancelar
         </button>
 
-        <button class="btn orange" @click="orderDelivered"
+        <button class="btn orange btn-order-delivered" @click="orderDelivered"
           v-show="buttonOrder">
           Entregue
         </button>
@@ -96,7 +88,6 @@ export default {
     FullScreen,
     Checkout
   },
-  props: ['secondPane'],
   mixins: [OrdersMixin],
   watch: {
     view () {
@@ -140,44 +131,39 @@ export default {
       if (this.currentTableIndex === null) { return }
       return this.currentTableIndex + 1
     },
-    localeTotal () {
-      let localeTotal = this.getTotal
-      return localeTotal.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      }).replace('R$', 'R$ ')
-    },
     buttonClient () {
-      return this.view === 'clients' && this.activeClient !== -1
+      if (this.$mq === 'sm') {
+        return this.view === 'clients' && this.activeClient !== -1
+      } else {
+        return false
+      }
     },
     buttonRemoveClient () {
-      return this.activeClientTotal === 0 && this.buttonClient
+      if (this.$mq === 'sm') {
+        return this.activeClientTotal === 0 && this.view === 'clients' && this.activeClient !== -1
+      } else {
+        return this.activeClientTotal === 0
+      }
     },
     buttonCheckout () {
-      const condition = (this.activeOrder === -1) && (this.getTotal > 0)
       if (this.$mq === 'sm') {
-        return condition
+        return this.activeOrder === -1 && this.activeClient === -1 && this.getTotal > 0
       } else {
-        return this.secondPane ? condition : false
+        return this.getTotal > 0
       }
     },
     buttonOrder () {
-      return !this.activeOrderStatus && this.view === 'orders' && this.activeOrder !== -1
-    },
-    className () {
-      return this.secondPane ? 'summary2' : 'summary'
-    },
-    headerSection () {
-      return this.secondPane ? 'Pedidos' : 'Clientes'
-    },
-    totalClass () {
-      return this.secondPane ? 'total2' : 'total'
+      if (this.$mq === 'sm') {
+        return !this.activeOrderStatus && this.view === 'orders' && this.activeOrder !== -1
+      } else {
+        return !this.activeOrderStatus && this.activeOrder !== -1
+      }
     },
     clientsConditions () {
-      return this.$mq === 'sm' ? this.view === 'clients' : !this.secondPane
+      return this.$mq === 'sm' ? this.view === 'clients' : true
     },
     ordersConditions () {
-      return this.$mq === 'sm' ? this.view === 'orders' : this.secondPane
+      return this.$mq === 'sm' ? this.view === 'orders' : true
     }
   },
   data () {
@@ -186,7 +172,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setScreenSm',
+    ...mapActions([
+      'setScreenSm',
       'setActiveClient',
       'setActiveOrder',
       'toggleActiveOrderStatus',
@@ -219,8 +206,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.summary,
-.summary2 {
+.summary {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -253,6 +239,7 @@ export default {
   color: $white;
   padding: 10px;
   position: relative;
+  min-height: 45px;
 
   &__back {
     display: flex;
@@ -305,19 +292,12 @@ export default {
   flex: 1;
   display: flex;
   flex-direction: column;
-}
 
-.total,
-.total2 {
-  background: $avocado;
-  height: 40px;
-  font-family: $ff__dosis;
-  font-size: 24px;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 30px;
+  &__gutter {
+    display: none;
+    min-width: 10px;
+    background: $dark-grey;
+  }
 }
 
 .footer {
@@ -337,13 +317,11 @@ export default {
 @media all and (min-width: $breakpoint__sm) {
   .header__back,
   .header__buttons,
-  .summary__logo,
-  .total { display: none; }
+  .summary__logo { display: none; }
 
   .header__section { display: flex; }
 
-  .summary,
-  .summary2 {
+  .summary {
     height: 100%;
     width: 100%;
   }
@@ -352,5 +330,27 @@ export default {
     margin-top: 0;
   }
 
+  .view {
+    flex-direction: row;
+
+    &__gutter {
+      display: block;
+    }
+  }
+
+  .footer__buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 10px;
+    justify-items: center;
+    margin: 0 10px;
+  }
+
+  .btn {
+    &-checkout { grid-column: 1 / 2; font-size: 16px; }
+    &-remove-client { grid-column: 2 / 3; }
+    &-cancel-order { grid-column: 3 / 4; }
+    &-order-delivered { grid-column: 4 / 5; }
+  }
 }
 </style>

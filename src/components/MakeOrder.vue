@@ -22,6 +22,8 @@
     </div>
 
     <div class="content">
+      <div class="content__gutter" />
+
       <div class="products">
         <h1 class="make-order__division"> {{ translateCategory(view) }} </h1>
         <div class="products__labels">
@@ -58,10 +60,12 @@
           </div>
         </div>
       </div>
+
+      <div class="content__gutter" />
     </div>
 
     <div class="footer">
-      <button class="btn orange large" @click="confirmOrders"
+      <button class="btn orange font-sm large" @click="confirmOrders"
         v-show="true">
         Confirmar Pedido
       </button>
@@ -276,8 +280,8 @@ export default {
   flex-direction: column;
 
   &__gutter {
-    min-width: 20px;
-    background: $white;
+    min-width: 10px;
+    background: $dark-grey;
     display: none;
   }
 }
@@ -355,7 +359,6 @@ export default {
 
     &__gutter {
       display: block;
-      border-top: 28px solid $darkest-grey;
     }
   }
 

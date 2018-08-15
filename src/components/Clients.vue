@@ -1,5 +1,6 @@
 <template>
 <div class="clients" @click="deselect($event)">
+  <div class="clients__division">Clientes</div>
 
   <div class="label">
     <span class="label__client">
@@ -18,6 +19,11 @@
     </div>
   </div>
 
+  <div class="total" >
+    <span>Total:</span>
+    <span>{{ localeTotal }}</span>
+  </div>
+
 </div>
 </template>
 
@@ -34,7 +40,15 @@ export default {
   },
   computed: {
     ...mapState(['activeClient', 'currentTableIndex']),
-    ...mapGetters(['tableClients'])
+    ...mapGetters(['getTotal', 'tableClients']),
+
+    localeTotal () {
+      let localeTotal = this.getTotal
+      return localeTotal.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      }).replace('R$', 'R$ ')
+    }
   },
   methods: {
     ...mapActions(['setActiveClient']),
@@ -53,6 +67,21 @@ export default {
   flex: 1;
   display: flex;
   flex-direction: column;
+
+  &__division {
+    margin: 0;
+    padding: 5px 0;
+    text-align: center;
+    font-family: $ff__dosis;
+    font-size: 16px;
+    font-weight: bold;
+    background: $darkest-grey;
+    color: $white;
+    text-transform: uppercase;
+    max-height: 28px;
+    min-height: 28px;
+    display: none;
+  }
 
   &__content {
     flex: 1;
@@ -82,5 +111,22 @@ export default {
   &__value {
     margin-right: 30px;
   }
+}
+
+.total {
+  background: $avocado;
+  height: 40px;
+  font-family: $ff__dosis;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+}
+
+/* ------ MEDIA-QUERIES  ------ */
+@media all and (min-width: $breakpoint__sm) {
+  .clients__division { display: block; }
 }
 </style>

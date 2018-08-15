@@ -9,11 +9,11 @@
         <span>{{ content }}</span>
       </div>
       <div class="modal__buttons">
-        <button v-if="mode !== 'info'" class="btn orange" @click="reply(false)">
+        <button v-if="mode !== 'info'" class="btn" @click="reply(false)">
           <span v-if="mode === 'yes-no' ">Não</span>
           <span v-if="mode === 'ok-cancel' ">Cancelar</span>
         </button>
-        <button class="btn green" @click="reply(true)">
+        <button class="btn orange" @click="reply(true)">
           <span v-if="mode === 'yes-no' ">Sim</span>
           <span v-if="mode === 'ok-cancel' || mode === 'info'">Ok</span>
         </button>

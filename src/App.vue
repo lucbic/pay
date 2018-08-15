@@ -3,9 +3,8 @@
   <transition-group :name="transition" tag="div" class="app__content">
     <tables v-show="tablesConditions" key="1" />
     <orders-summary v-show="summaryConditions" key="2" />
-    <orders-summary v-if="summary2Conditions" :secondPane="true" key="3" />
-    <make-order v-if="makeOrderConditions" :client="clientMakeOrder" key="4"/>
-    <client-orders v-show="clientOrdersConditions" key="5"/>
+    <make-order v-if="makeOrderConditions" :client="clientMakeOrder" key="3"/>
+    <client-orders v-show="clientOrdersConditions" key="4"/>
   </transition-group>
 </div>
 </template>
@@ -28,6 +27,8 @@ export default {
   computed: {
     ...mapState(['screenSm']),
     transition () {
+      if (this.$mq !== 'sm') { return }
+
       const scr = this.screenSmOrigin
       if (scr[0] === 'tables' && scr[1] === 'summary') {
         return 'shift-left'
@@ -54,9 +55,6 @@ export default {
     },
     summaryConditions () {
       return this.$mq === 'sm' ? this.screenSm === 'summary' : this.screenSm !== 'make-order'
-    },
-    summary2Conditions () {
-      return !(this.$mq === 'sm') && this.summaryConditions
     },
     makeOrderConditions () {
       return this.screenSm === 'make-order'
@@ -145,27 +143,35 @@ export default {
     position: static;
   }
 
-  .tables { grid-area: tables; }
-  .summary { grid-area: summary; }
-  .summary2 { grid-area: summary2; }
-  .make-order {
-    grid-row: 2 / 3;
-    grid-column: 1 / -1;
+  .tables {
+    min-height: 310px !important;
+    max-height: 310px;
   }
-  .client-orders { grid-area: client-orders; }
+
+  .summary,
+  .make-order {
+    min-height: 450px !important;
+    max-height: 450px;
+  }
 
   .app__content {
     margin: 0 auto;
     max-width: $breakpoint__lg;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 310px 560px;
-    grid-template-areas:
-      "tables    tables"
-      "summary summary2"
-      "make-order make-order"
-      ". client-orders";
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
 
+  @media (min-height: 770px) {
+    .app { min-height: fit-content; }
+
+    .app__content { max-height: 100vh; }
+
+    .summary,
+    .make-order {
+      flex: 1;
+      max-height: 770px;
+    }
   }
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
 <div class="orders" @click="desselect($event)">
+  <div class="orders__division">Pedidos{{ clientName }}</div>
 
   <div class="label" :class="{ 'label--client': client }">
     <span>Pedido</span>
@@ -15,6 +16,11 @@
               :order="order" :key="`order-${index}`"/>
       <add-order v-if="showAddOrder" />
     </div>
+  </div>
+
+  <div v-show="client && $mq !== 'sm'" class="total" >
+    <span>Total cliente:</span>
+    <span>{{ localeTotal }}</span>
   </div>
 
 </div>
@@ -34,7 +40,14 @@ export default {
   props: ['client'],
   computed: {
     ...mapState(['activeOrder', 'currentTableIndex', 'activeClient']),
-    ...mapGetters(['tableOrders', 'clientOrders', 'tableClients']),
+    ...mapGetters([
+      'activeClientTotal',
+      'tableOrders',
+      'clientOrders',
+      'tableClients',
+      'activeClientName'
+    ]),
+
     orders () {
       if (this.client) {
         return this.clientOrders(this.currentTableIndex, this.activeClient)
@@ -45,6 +58,17 @@ export default {
     showAddOrder () {
       if (this.tableClients === undefined) { return }
       return this.tableClients.length > 0
+    },
+    clientName () {
+      return this.activeClientName ? `: ${this.activeClientName}` : ''
+    },
+    localeTotal () {
+      if (!this.activeClientTotal) { return 'R$ 0,00' }
+      let localeTotal = this.activeClientTotal
+      return localeTotal.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      }).replace('R$', 'R$ ')
     }
   },
   methods: {
@@ -64,6 +88,21 @@ export default {
   flex: 1;
   display: flex;
   flex-direction: column;
+
+  &__division {
+    margin: 0;
+    padding: 5px 0;
+    text-align: center;
+    font-family: $ff__dosis;
+    font-size: 16px;
+    font-weight: bold;
+    background: $darkest-grey;
+    color: $white;
+    text-transform: uppercase;
+    max-height: 28px;
+    min-height: 28px;
+    display: none;
+  }
 
   &__content { height: 100%; }
 
@@ -85,5 +124,22 @@ export default {
   &--client {
     grid-template-columns: 8fr 1fr 2fr 1fr;
   }
+}
+
+.total {
+  background: $avocado;
+  min-height: 40px;
+  font-family: $ff__dosis;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+}
+
+/* ------ MEDIA-QUERIES  ------ */
+@media all and (min-width: $breakpoint__sm) {
+  .orders__division { display: block; }
 }
 </style>
