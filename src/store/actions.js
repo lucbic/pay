@@ -15,7 +15,7 @@ export const setActiveClient = ({ commit }, id) => {
   commit(types.SET_ACTIVE_CLIENT, id)
 }
 
-export const deleteActiveClient = ({ commit }) => {
+export const deleteActiveClient = ({ commit, getters }) => {
   commit(types.DELETE_ACTIVE_CLIENT)
 }
 

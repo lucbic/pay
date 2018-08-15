@@ -1,20 +1,50 @@
 <template>
 <div class="app" ref="app">
-  <transition-group :name="transition" tag="div" class="app__content">
+
+  <transition-group v-if="$mq === 'sm'" :name="transition" tag="div" class="mobile">
     <tables v-show="tablesConditions" key="1" />
     <orders-summary v-show="summaryConditions" key="2" />
     <make-order v-if="makeOrderConditions" :client="clientMakeOrder" key="3"/>
     <client-orders v-show="clientOrdersConditions" key="4"/>
   </transition-group>
+
+  <div v-if="$mq !== 'sm' && $mq !== 'max'" class="tablet">
+    <div class="tablet__upper-row">
+      <tables />
+    </div>
+    <div class="tablet__lower-row">
+      <div class="column-flex-wrapper">
+        <orders-summary v-show="this.screenSm !== 'make-order'" />
+        <make-order v-show="this.screenSm === 'make-order'" :client="activeClient !== -1"/>
+      </div>
+    </div>
+  </div>
+
+  <div v-if="$mq === 'max'" class="desktop" key="5">
+    <div class="desktop__upper-row">
+      <div class="logo-flex-wrapper"><logo /></div>
+      <tables />
+    </div>
+    <div class="desktop__lower-row">
+      <div class="column-flex-wrapper">
+        <orders-summary />
+      </div>
+      <div class="column-flex-wrapper">
+        <make-order :client="activeClient !== -1"/>
+      </div>
+    </div>
+  </div>
+
 </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import Tables from '@/components/Tables.vue'
+import Tables from '@/components/Tables'
 import OrdersSummary from '@/components/Summary'
 import MakeOrder from '@/components/MakeOrder'
 import ClientOrders from '@/components/ClientOrders'
+import Logo from '@/components/Logo'
 
 export default {
   name: 'App',
@@ -22,13 +52,12 @@ export default {
     Tables,
     OrdersSummary,
     MakeOrder,
-    ClientOrders
+    ClientOrders,
+    Logo
   },
   computed: {
-    ...mapState(['screenSm']),
+    ...mapState(['screenSm', 'activeClient']),
     transition () {
-      if (this.$mq !== 'sm') { return }
-
       const scr = this.screenSmOrigin
       if (scr[0] === 'tables' && scr[1] === 'summary') {
         return 'shift-left'
@@ -51,41 +80,36 @@ export default {
       }
     },
     tablesConditions () {
-      return this.$mq === 'sm' ? this.screenSm === 'tables' : true
+      return this.screenSm === 'tables'
     },
     summaryConditions () {
-      return this.$mq === 'sm' ? this.screenSm === 'summary' : this.screenSm !== 'make-order'
+      return this.screenSm === 'summary'
     },
     makeOrderConditions () {
       return this.screenSm === 'make-order'
     },
     clientOrdersConditions () {
       return this.screenSm === 'client-orders'
+    },
+    clientMakeOrder () {
+      return this.screenSmOrigin[0] === 'client-orders' && this.screenSmOrigin[1] === 'make-order'
     }
   },
   watch: {
     screenSm (val) {
       if (this.screenSmOrigin.length === 2) { this.screenSmOrigin.shift() }
       this.screenSmOrigin.push(val)
-    },
-    screenSmOrigin (self) {
-      if (self[0] === 'client-orders' && self[1] === 'make-order') {
-        this.clientMakeOrder = true
-      } else {
-        this.clientMakeOrder = false
-      }
     }
   },
   mounted () {
-    this.screenSmOrigin.push(this.screenSm)
+    this.screenSmOrigin.push('')
     this.screenSmOrigin.push(this.screenSm)
   },
   created () { this.fetchData() },
   methods: { ...mapActions(['fetchData']) },
   data () {
     return {
-      screenSmOrigin: [],
-      clientMakeOrder: false
+      screenSmOrigin: []
     }
   }
 }
@@ -104,6 +128,44 @@ export default {
 .summary,
 .make-order {
   position: absolute;
+}
+
+.column-flex-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%
+}
+
+.tablet,
+.desktop {
+  min-height: 100vh;
+  max-height: 100vh;
+  max-width: 1620px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+  &__lower-row {
+    flex: 1;
+    display: flex;
+    max-height: 700px;
+  }
+
+  &__upper-row {
+    min-height: 310px;
+    max-height: 310px;
+    display: flex;
+  }
+}
+
+.logo-flex-wrapper {
+  min-height: 100%;
+  flex-basis: 33%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* ------ TRANSITIONS ------ */
@@ -139,38 +201,19 @@ export default {
 
   .tables,
   .summary,
-  .make-order {
-    position: static;
-  }
+  .make-order { position: static; }
 
-  .tables {
-    min-height: 310px !important;
-    max-height: 310px;
-  }
+  .tablet { max-width: $breakpoint__md }
 
-  .summary,
-  .make-order {
-    min-height: 450px !important;
-    max-height: 450px;
-  }
+  @media (max-height: 767px) {
+    .tablet,
+    .desktop {
+      min-height: 0;
+      max-height: 768px;
 
-  .app__content {
-    margin: 0 auto;
-    max-width: $breakpoint__lg;
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-  }
-
-  @media (min-height: 770px) {
-    .app { min-height: fit-content; }
-
-    .app__content { max-height: 100vh; }
-
-    .summary,
-    .make-order {
-      flex: 1;
-      max-height: 770px;
+      &__lower-row {
+        min-height: 455px;
+      }
     }
   }
 }

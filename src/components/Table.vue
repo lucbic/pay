@@ -38,6 +38,7 @@ export default {
   width: $size__table;
   height: $size__table;
   border-radius: ($size__table / 2);
+  color: $white;
 
   // display
   display: flex;
@@ -55,20 +56,18 @@ export default {
     border-radius: 15px;
   }
 
-  &--active {
-    border: 4px solid $turquoise;
-  }
-
   /* children */
   &__number {
-    // font
     font-size: 24px;
     font-family: $ff__dosis;
     font-size: 32px;
     font-weight: 700;
-    color: white;
   }
 
   cursor: pointer;
+}
+
+@media all and (min-width: $breakpoint__sm) {
+  .table--active { border: 4px solid $turquoise; }
 }
 </style>

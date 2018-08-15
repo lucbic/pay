@@ -35,9 +35,13 @@ export default {
   align-items: center;
   padding: 0 10px;
   cursor: pointer;
-  
+
   >span {
     margin-left: 8px;
   }
+}
+
+@media all and (min-width: $breakpoint__xl) {
+  .add-order { display: none; }
 }
 </style>

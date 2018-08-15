@@ -11,7 +11,7 @@
       </button>
       <small-logo class="make-order__logo" />
       <h1 class="header__table-number">
-        Novo Pedido - Mesa {{ tableNumber }}
+        Novo Pedido {{ tableNumber }}
       </h1>
       <div class="header__buttons">
         <button v-for="category in categories" class="btn-carousel" @click="view = category.name"
@@ -65,8 +65,8 @@
     </div>
 
     <div class="footer">
-      <button class="btn orange font-sm large" @click="confirmOrders"
-        v-show="true">
+      <button class="btn orange font-sm large"
+        @click="confirmOrders" v-show="newOrders.length > 0">
         Confirmar Pedido
       </button>
     </div>
@@ -95,10 +95,14 @@ export default {
   props: ['client'],
   computed: {
     ...mapState(['currentTableIndex']),
-    ...mapGetters(['productsList']),
+    ...mapGetters(['productsList', 'activeClientName']),
     tableNumber () {
-      if (this.currentTableIndex === null) { return }
-      return this.currentTableIndex + 1
+      if (this.currentTableIndex === null) { return '' }
+      if (this.client) {
+        return ` - ${this.activeClientName}`
+      } else {
+        return ` - Mesa ${this.currentTableIndex + 1}`
+      }
     }
   },
   mounted () {
@@ -117,7 +121,6 @@ export default {
         }
       })
     }
-
     this.view = 'drinks'
   },
   data () {
@@ -163,6 +166,7 @@ export default {
       } else {
         this.setScreenSm('summary')
       }
+      this.reset()
     },
     translateCategory (category) {
       switch (category) {
@@ -184,6 +188,12 @@ export default {
     confirmOrders () {
       this.addOrders(this.newOrders)
       this.back()
+    },
+    reset () {
+      this.$nextTick(() => {
+        if (this.$mq !== 'max') { this.view = 'drinks' }
+        this.newOrders = []
+      })
     }
   }
 }
@@ -195,10 +205,9 @@ export default {
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  position: relative;
 
   &__logo {
-    margin: 10px auto 0;
+    margin: 0 auto;
     position: absolute;
     top: 5px;
     left: 50%;
@@ -228,7 +237,7 @@ export default {
   border-radius: 15px;
   flex: 1;
   overflow-y: hidden;
-
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -352,6 +361,16 @@ export default {
   .make-order {
     height: 100%;
     width: 100%;
+
+    &__logo { display: none; }
+  }
+
+  .well { margin-top: 0; }
+
+  .header {
+    min-height: 120px;
+
+    &__table-number { margin-top: 0 }
   }
 
   .content {
@@ -368,6 +387,14 @@ export default {
 
   .orders-list {
     flex: 1;
+  }
+}
+
+@media all and (min-width: $breakpoint__xl) {
+  .well { margin-left: 5px; }
+  .header {
+    min-height: 100px;
+    &__back { display: none; }
   }
 }
 </style>

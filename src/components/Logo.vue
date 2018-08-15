@@ -14,11 +14,12 @@ export default {
 <style lang="scss" scoped>
 
 .logo {
+  width: 200px;
+  height: 106px;
   background: white;
   padding: 4px 10px;
   border-radius: 15px;
   border: 6px double $darkest-grey;
-  width: fit-content;
 
   &__image {
     display: block;
@@ -32,19 +33,6 @@ export default {
     font-size: 20px;
     color: $darkest-grey;
     margin: 0;
-  }
-}
-
-/* ------ MEDIA-QUERIES  ------ */
-@media all and (min-width: $breakpoint__sm) {
-  .logo {
-    &__image {
-      width: 50px;
-    }
-
-    &__title {
-      font-size: 16px;
-    }
   }
 }
 </style>

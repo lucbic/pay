@@ -18,8 +18,8 @@
     </div>
   </div>
 
-  <div v-show="client && $mq !== 'sm'" class="total" >
-    <span>Total cliente:</span>
+  <div v-if="$mq === 'sm' ? true : client" class="total" >
+    <span>Total{{ client ? ' cliente:' : ':' }}</span>
     <span>{{ localeTotal }}</span>
   </div>
 
@@ -41,6 +41,7 @@ export default {
   computed: {
     ...mapState(['activeOrder', 'currentTableIndex', 'activeClient']),
     ...mapGetters([
+      'getTotal',
       'activeClientTotal',
       'tableOrders',
       'clientOrders',
@@ -63,8 +64,9 @@ export default {
       return this.activeClientName ? `: ${this.activeClientName}` : ''
     },
     localeTotal () {
-      if (!this.activeClientTotal) { return 'R$ 0,00' }
-      let localeTotal = this.activeClientTotal
+      if (this.client && !this.activeClientTotal) { return 'R$ 0,00' }
+      let localeTotal = this.client ? this.activeClientTotal : this.getTotal
+
       return localeTotal.toLocaleString('pt-BR', {
         style: 'currency',
         currency: 'BRL'

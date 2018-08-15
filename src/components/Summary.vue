@@ -2,7 +2,7 @@
 <div class="summary" ref="summary">
   <full-screen />
   <modal ref="modal" />
-  <checkout ref="checkout" />
+  <checkout :client="isClientCheckout" ref="checkout" />
   <div class="well">
     <div class="header">
       <button class="header__back" @click="backToTables">
@@ -60,6 +60,11 @@
         <button class="btn orange btn-order-delivered" @click="orderDelivered"
           v-show="buttonOrder">
           Entregue
+        </button>
+
+        <button class="btn green btn-checkout-client" @click="clientCheckout"
+          v-show="buttonCheckoutClient">
+          Fechar Cliente
         </button>
       </div>
 
@@ -125,7 +130,8 @@ export default {
       'activeOrderStatus',
       'activeClientName',
       'activeOrderProduct',
-      'tableCheckoutReady'
+      'tableCheckoutReady',
+      'clientCheckoutReady'
     ]),
     tableNumber () {
       if (this.currentTableIndex === null) { return }
@@ -152,6 +158,10 @@ export default {
         return this.getTotal > 0
       }
     },
+    buttonCheckoutClient () {
+      return this.$mq !== 'sm' && this.activeOrder === -1 &&
+        this.activeClient !== -1 && this.activeClientTotal > 0
+    },
     buttonOrder () {
       if (this.$mq === 'sm') {
         return !this.activeOrderStatus && this.view === 'orders' && this.activeOrder !== -1
@@ -168,7 +178,8 @@ export default {
   },
   data () {
     return {
-      view: 'clients'
+      view: 'clients',
+      isClientCheckout: false
     }
   },
   methods: {
@@ -189,9 +200,19 @@ export default {
     },
     checkout () {
       if (this.tableCheckoutReady) {
+        this.isClientCheckout = false
         this.$refs.checkout.show()
       } else {
         const content = 'A conta só pode ser fechada quando todos os pedidos forem entregues.'
+        this.$refs.modal.show(content, 'info')
+      }
+    },
+    clientCheckout () {
+      if (this.clientCheckoutReady) {
+        this.isClientCheckout = true
+        this.$refs.checkout.show()
+      } else {
+        const content = 'A conta do cliente só pode ser fechada quando todos os pedidos forem entregues.'
         this.$refs.modal.show(content, 'info')
       }
     },
@@ -223,7 +244,6 @@ export default {
 
 .well {
   margin: $size__well-margin;
-  margin-top: 10px;
   background: $white;
   box-shadow: 6px 6px 10px 0px rgba(0,0,0,0.23);
   border-radius: 15px;
@@ -326,6 +346,8 @@ export default {
     width: 100%;
   }
 
+  .well { margin-top: 0; }
+
   .header__table-number {
     margin-top: 0;
   }
@@ -351,6 +373,11 @@ export default {
     &-remove-client { grid-column: 2 / 3; }
     &-cancel-order { grid-column: 3 / 4; }
     &-order-delivered { grid-column: 4 / 5; }
+    &-checkout-client { grid-column: 4 / 5; font-size: 16px; }
   }
+}
+
+@media all and (min-width: $breakpoint__xl) {
+  .well { margin-right: 5px; }
 }
 </style>

@@ -43,10 +43,10 @@
       </div>
 
       <div class="checkout__buttons">
-        <button class="btn orange" @click="reply(false)">
+        <button class="btn" @click="reply(false)">
           Cancelar
         </button>
-        <button class="btn green" @click="reply(true)">
+        <button class="btn orange" @click="reply(true)">
           Confimar
         </button>
       </div>
@@ -137,6 +137,8 @@ export default {
 <style lang="scss" scoped>
 .wrapper {
   position: fixed;
+  top: 0;
+  left: 0;
   height: 100vh;
   width: 100vw;
   z-index: 1;
@@ -255,7 +257,12 @@ export default {
   text-transform: uppercase;
 }
 
+/* ------ MEDIA-QUERIES  ------ */
 @media all and (max-width: 350px) {
   .item { font-size: 14px; }
+}
+
+@media all and (min-width: $breakpoint__sm) {
+  .checkout { max-width: 400px; }
 }
 </style>

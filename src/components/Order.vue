@@ -120,12 +120,14 @@ export default {
   &__underline {
     @extend %line;
     border: 1px solid $turquoise;
+    background: $turquoise;
   }
 
   &__line-through {
     @extend %line;
     bottom: 50%;
     border: 0.5px solid $light-red;
+    background: $light-red;
   }
 
   &--active {

@@ -91,6 +91,7 @@ export default {
 
   &__title {
     text-align: center;
+    text-transform: uppercase;
     font-family: $ff__dosis;
     font-size: 22px;
     margin: 0;

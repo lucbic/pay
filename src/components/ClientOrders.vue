@@ -1,4 +1,4 @@
-<template>
+\<template>
 <div class="client-orders">
   <modal ref="modal" />
   <checkout :client="true" ref="checkout" />
@@ -23,14 +23,9 @@
       <orders class="view__orders" :client="true" />
     </div>
 
-    <div class="total">
-      <span>Total:</span>
-      <span>{{ localeTotal }}</span>
-    </div>
-
     <div class="footer">
       <div class="footer__buttons">
-        <button class="btn orange" @click="checkout"
+        <button class="btn green" @click="checkout"
           v-show="buttonCheckout">
           Fechar Cliente
         </button>
@@ -81,14 +76,6 @@ export default {
     tableNumber () {
       if (this.currentTableIndex === null) { return }
       return this.currentTableIndex + 1
-    },
-    localeTotal () {
-      if (!this.activeClientTotal) { return 'R$ 0,00' }
-      let localeTotal = this.activeClientTotal
-      return localeTotal.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      }).replace('R$', 'R$ ')
     },
     buttonCheckout () {
       return (this.activeOrder === -1) && (this.activeClientTotal > 0)

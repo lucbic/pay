@@ -1,5 +1,5 @@
 <template>
-<div class="product" @click="$emit('add', product)">
+<div class="product" @click="add">
   <span class="product__name">
     {{ product.name }}
   </span>
@@ -10,10 +10,15 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
+
 export default {
   name: 'Product',
   props: [ 'product' ],
   computed: {
+    ...mapState(['currentTableIndex']),
+    ...mapGetters(['tableClients']),
+
     localePrice () {
       let localePrice = this.product.price
       localePrice = localePrice.toLocaleString('pt-BR', {
@@ -21,6 +26,13 @@ export default {
         currency: 'BRL'
       })
       return localePrice.replace('R$', 'R$ ')
+    }
+  },
+  methods: {
+    add () {
+      if (this.currentTableIndex !== null && this.tableClients.length > 0) {
+        this.$emit('add', this.product)
+      }
     }
   }
 }
