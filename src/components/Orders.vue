@@ -12,8 +12,10 @@
 
   <div class="orders__content" v-bar>
     <div class="orders__content-wrapper" >
-      <order v-for="(order, index) in orders" :client="client"
-              :order="order" :key="`order-${index}`"/>
+      <transition-group name="orders" tag="div">
+        <order v-for="(order, index) in orders" :client="client"
+                :order="order" :key="`order-${index}`"/>
+      </transition-group>
       <add-order v-if="showAddOrder" />
     </div>
   </div>
@@ -138,6 +140,26 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 0 30px;
+}
+
+/* ------ TRANSITIONS  ------ */
+.orders-enter-active {
+  max-height: 30px;
+  transition: all .2s, opacity .2s .2s;
+}
+
+.orders-leave-active {
+  max-height: 30px;
+  transition: all .2s .2s, opacity .2s;
+}
+
+.orders-enter, .orders-leave-to {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  opacity: 0;
 }
 
 /* ------ MEDIA-QUERIES  ------ */

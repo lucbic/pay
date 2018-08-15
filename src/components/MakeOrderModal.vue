@@ -1,45 +1,47 @@
 <template lang="html">
-  <div v-if="active" class="wrapper">
-    <div class="overlay" @click="reply(false)"/>
-    <div class="modal">
-      <button class="modal__exit" @click="reply(false)">
-        <simple-svg :filepath="'static/img/times-solid.svg'" :width="'14px'" />
-      </button>
-      <div class="header">
-        Item Selecionado
-      </div>
-      <h1 class="division">{{ product.name }}</h1>
-      <span class="client-name">Cliente</span>
-      <div class="clients">
-        <client v-for="client in tableClients"
-          v-if="!client.paid"
-          :key="`client-${tableClients.indexOf(client)}`"
-          @setModalActiveClient="setModalActiveClient"
-          :client="client" :modal="true"
-          :modal-active-client="modalActiveClient"/>
-      </div>
-      <div class="amount division">
-        <span class="amount__label">Quantidade</span>
-        <button class="amount__btn" @click="changeAmount('minus')">
-          <img src="static/img/minus-circle-solid.svg" style="width: 17px;">
+  <transition name="fade">
+    <div v-if="active" class="wrapper">
+      <div class="overlay" @click="reply(false)"/>
+      <div class="modal">
+        <button class="modal__exit" @click="reply(false)">
+          <simple-svg :filepath="'static/img/times-solid.svg'" :width="'14px'" />
         </button>
-        <span class="amount__number">{{ amount }}</span>
-        <button class="amount__btn" @click="changeAmount('plus')">
-          <img src="static/img/plus-circle-solid.svg" style="width: 17px;">
-        </button>
-      </div>
-      <div class="footer">
-        <div class="footer__buttons">
-          <button class="btn" @click="reply(false)">
-            Cancelar
+        <div class="header">
+          Item Selecionado
+        </div>
+        <h1 class="division">{{ product.name }}</h1>
+        <span class="client-name">Cliente</span>
+        <div class="clients">
+          <client v-for="client in tableClients"
+            v-if="!client.paid"
+            :key="`client-${tableClients.indexOf(client)}`"
+            @setModalActiveClient="setModalActiveClient"
+            :client="client" :modal="true"
+            :modal-active-client="modalActiveClient"/>
+        </div>
+        <div class="amount division">
+          <span class="amount__label">Quantidade</span>
+          <button class="amount__btn" @click="changeAmount('minus')">
+            <img src="static/img/minus-circle-solid.svg" style="width: 17px;">
           </button>
-          <button class="btn orange" @click="reply(true)">
-            Confirmar
+          <span class="amount__number">{{ amount }}</span>
+          <button class="amount__btn" @click="changeAmount('plus')">
+            <img src="static/img/plus-circle-solid.svg" style="width: 17px;">
           </button>
+        </div>
+        <div class="footer">
+          <div class="footer__buttons">
+            <button class="btn" @click="reply(false)">
+              Cancelar
+            </button>
+            <button class="btn orange" @click="reply(true)">
+              Confirmar
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>

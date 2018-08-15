@@ -4,12 +4,11 @@
 @import 'buttons';
 @import 'vuebar';
 @import 'gutter';
-
-* { box-sizing: border-box; }
-
-* { outline: none; }
+@import 'transitions';
 
 * {
-    min-height: 0;
-    min-width: 0;
+  box-sizing: border-box;
+  outline: none;
+  min-height: 0;
+  min-width: 0;
 }

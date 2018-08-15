@@ -53,10 +53,12 @@
         </div>
         <div class="orders-list__content" v-bar ref="list">
           <div class="orders-list__content-wrapper">
-            <order v-for="(order, index) in newOrders" :order="order"
-              :key="`order-${index}`"
-              :new-order="true"
-              @deleteNewOrder="deleteNewOrder"/>
+            <transition-group name="orders" tag="div">
+              <order v-for="(order, index) in newOrders" :order="order"
+                :key="`order-${index}`"
+                :new-order="true"
+                @deleteNewOrder="deleteNewOrder"/>
+            </transition-group>
           </div>
         </div>
       </div>
@@ -354,6 +356,15 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* ------ TRANSITIONS  ------ */
+.orders-enter-active, .orders-leave-active {
+  transition: opacity .2s;
+}
+
+.orders-enter, .orders-leave-to {
+  opacity: 0;
 }
 
 /* ------ MEDIA-QUERIES  ------ */

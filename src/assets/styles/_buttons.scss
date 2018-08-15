@@ -44,6 +44,7 @@
     font-size: 20px;
     text-transform: uppercase;
     color: $white;
+    transition: background .2s;
 
     &.active {
       background: $avocado;
@@ -66,6 +67,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background .2s;
 
     >div {
       margin-top: 2px;

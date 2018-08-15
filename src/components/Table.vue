@@ -46,9 +46,7 @@ export default {
   align-items: center;
 
   // transitions
-  transition:
-    border-radius ease-in-out $time__default-transition,
-    background ease-in-out $time__default-transition;
+  transition: all $time__default-transition;
 
   // modifier
   &--open {
@@ -68,6 +66,14 @@ export default {
 }
 
 @media all and (min-width: $breakpoint__sm) {
-  .table--active { border: 4px solid $turquoise; }
+  .table {
+    transform: scale(0.7);
+    opacity: 0.6;
+
+    &--active {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
 }
 </style>

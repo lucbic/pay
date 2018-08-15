@@ -14,8 +14,10 @@
     </div>
     <div class="tablet__lower-row">
       <div class="column-flex-wrapper">
-        <orders-summary v-show="this.screenSm !== 'make-order'" />
-        <make-order v-show="this.screenSm === 'make-order'" :client="activeClient !== -1"/>
+        <transition name="tablet" mode="out-in">
+          <orders-summary v-if="this.screenSm !== 'make-order'" key="1"/>
+          <make-order v-if="this.screenSm === 'make-order'" :client="activeClient !== -1" key="2"/>
+        </transition>
       </div>
     </div>
   </div>
@@ -193,6 +195,20 @@ export default {
 
 .shift-right-leave-to {
   transform: translateX(100vw);
+}
+
+.tablet-enter-active, .tablet-leave-active {
+  transform: translateX(0);
+  transition: all .2s;
+}
+.tablet-enter {
+  transform: translateX(100vh);
+  opacity: 0;
+}
+
+.tablet-leave-to {
+  transform: translateX(-100vh);
+  opacity: 0;
 }
 
 /* ------ MEDIA-QUERIES  ------ */

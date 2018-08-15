@@ -13,9 +13,13 @@
 
   <div class="clients__content" v-bar>
     <div class="clients__content-wrapper" >
-      <client v-for="client in tableClients"
-              :client="client" :key="`client-${tableClients.indexOf(client)}`"/>
-      <add-client v-if="currentTableIndex !== null" />
+      <transition-group name="clients" tag="div">
+        <client v-for="(client, index) in tableClients"
+                :client="client" :key="`client-${index}`"/>
+      </transition-group>
+      <transition name="fade">
+        <add-client v-if="currentTableIndex !== null" />
+      </transition>
     </div>
   </div>
 
@@ -123,6 +127,24 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 0 30px;
+}
+
+/* ------ TRANSITIONS  ------ */
+.clients-enter-active {
+  max-height: 35px;
+  transition: all .2s, opacity .2s .2s;
+}
+
+.clients-leave-active {
+  max-height: 35px;
+  transition: all .2s;
+}
+
+.clients-enter, .clients-leave-to {
+  max-height: 0;
+  padding: 0 10px;
+  margin: 0 16px;
+  opacity: 0;
 }
 
 /* ------ MEDIA-QUERIES  ------ */

@@ -1,57 +1,59 @@
 <template lang="html">
-  <div v-show="active" class="wrapper">
-    <div class="overlay" @click="reply(false)"/>
-    <div class="checkout">
-      <button class="checkout__exit" @click="reply(false)">
-        <simple-svg :filepath="'static/img/times-solid.svg'" :width="'14px'" />
-      </button>
+  <transition name="fade">
+    <div v-show="active" class="wrapper">
+      <div class="overlay" @click="reply(false)"/>
+      <div class="checkout">
+        <button class="checkout__exit" @click="reply(false)">
+          <simple-svg :filepath="'static/img/times-solid.svg'" :width="'14px'" />
+        </button>
 
-      <h1 v-if="client" class="checkout__header">
-        Fechar conta de<br />{{ activeClientName }}?
-      </h1>
-      <h1 v-else class="checkout__header">
-        Fechar mesa {{ currentTableIndex + 1 }}?
-      </h1>
+        <h1 v-if="client" class="checkout__header">
+          Fechar conta de<br />{{ activeClientName }}?
+        </h1>
+        <h1 v-else class="checkout__header">
+          Fechar mesa {{ currentTableIndex + 1 }}?
+        </h1>
 
-      <span v-if="client" class="label">Consumo individual</span>
-      <span v-else class="label">Consumo da mesa</span>
-      <div class="orders" v-bar :style="{ height: ordersHeight }">
-        <div class="orders__wrapper">
-          <div class="item " v-for="(order, index) in orders"
-            :key="`order${index}`">
-            <span>{{ order.amount }} x {{ getProduct(order.product_id).name }}</span>
-            <span class="price">{{ localeOrderTotal(order) }}</span>
+        <span v-if="client" class="label">Consumo individual</span>
+        <span v-else class="label">Consumo da mesa</span>
+        <div class="orders" v-bar :style="{ height: ordersHeight }">
+          <div class="orders__wrapper">
+            <div class="item " v-for="(order, index) in orders"
+              :key="`order${index}`">
+              <span>{{ order.amount }} x {{ getProduct(order.product_id).name }}</span>
+              <span class="price">{{ localeOrderTotal(order) }}</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <span class="label">Adicionais</span>
+        <span class="label">Adicionais</span>
 
-      <div class="tax item" @click="includeTax = !includeTax">
-        <div class="tax__box">
-          <simple-svg :width="'14px'" :filepath="'static/img/square-regular.svg'" />
-          <simple-svg class="tax__box--check" v-show="includeTax"
-            :width="'14px'" :filepath="'static/img/check-solid.svg'" />
+        <div class="tax item" @click="includeTax = !includeTax">
+          <div class="tax__box">
+            <simple-svg :width="'14px'" :filepath="'static/img/square-regular.svg'" />
+            <simple-svg class="tax__box--check" v-show="includeTax"
+              :width="'14px'" :filepath="'static/img/check-solid.svg'" />
+          </div>
+          <span class="tax__label">Taxa de serviço</span>
+          <span class="price">{{ localeTax }}</span>
         </div>
-        <span class="tax__label">Taxa de serviço</span>
-        <span class="price">{{ localeTax }}</span>
-      </div>
 
-      <div class="total item">
-        <span>Total</span>
-        <span class="price">{{ localeTotal }}</span>
-      </div>
+        <div class="total item">
+          <span>Total</span>
+          <span class="price">{{ localeTotal }}</span>
+        </div>
 
-      <div class="checkout__buttons">
-        <button class="btn" @click="reply(false)">
-          Cancelar
-        </button>
-        <button class="btn orange" @click="reply(true)">
-          Confimar
-        </button>
+        <div class="checkout__buttons">
+          <button class="btn" @click="reply(false)">
+            Cancelar
+          </button>
+          <button class="btn orange" @click="reply(true)">
+            Confimar
+          </button>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>

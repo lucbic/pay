@@ -1,8 +1,10 @@
 <template>
-<div class="add-order" @click="add" id="order-component">
-  <simple-svg :filepath="'static/img/plus-circle-solid.svg'" :width="'14px'" />
-  <span>Adicionar Pedido</span>
-</div>
+<transition name="fade">
+  <div class="add-order" @click="add" id="order-component">
+    <simple-svg :filepath="'static/img/plus-circle-solid.svg'" :width="'14px'" />
+    <span>Adicionar Pedido</span>
+  </div>
+</transition>
 </template>
 
 <script>

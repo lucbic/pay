@@ -1,25 +1,27 @@
 <template lang="html">
-  <div v-show="active" class="wrapper">
-    <div class="overlay" @click="reply(false)"/>
-    <div class="modal">
-      <button class="modal__exit" @click="reply(false)">
-        <simple-svg :filepath="'static/img/times-solid.svg'" :width="'14px'" />
-      </button>
-      <div class="modal__content">
-        <span>{{ content }}</span>
-      </div>
-      <div class="modal__buttons">
-        <button v-if="mode !== 'info'" class="btn" @click="reply(false)">
-          <span v-if="mode === 'yes-no' ">Não</span>
-          <span v-if="mode === 'ok-cancel' ">Cancelar</span>
+  <transition name="fade">
+    <div v-show="active" class="wrapper">
+      <div class="overlay" @click="reply(false)"/>
+      <div class="modal">
+        <button class="modal__exit" @click="reply(false)">
+          <simple-svg :filepath="'static/img/times-solid.svg'" :width="'14px'" />
         </button>
-        <button class="btn orange" @click="reply(true)">
-          <span v-if="mode === 'yes-no' ">Sim</span>
-          <span v-if="mode === 'ok-cancel' || mode === 'info'">Ok</span>
-        </button>
+        <div class="modal__content">
+          <span>{{ content }}</span>
+        </div>
+        <div class="modal__buttons">
+          <button v-if="mode !== 'info'" class="btn" @click="reply(false)">
+            <span v-if="mode === 'yes-no' ">Não</span>
+            <span v-if="mode === 'ok-cancel' ">Cancelar</span>
+          </button>
+          <button class="btn orange" @click="reply(true)">
+            <span v-if="mode === 'yes-no' ">Sim</span>
+            <span v-if="mode === 'ok-cancel' || mode === 'info'">Ok</span>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
