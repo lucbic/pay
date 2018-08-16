@@ -65,13 +65,14 @@ export default {
   justify-content: space-between;
   align-items: center;
   position: relative;
-  padding: 6px 10px;
+  padding: 0 10px;
   margin: 5px 16px;
   color: $white;
   font-family: $ff__dosis;
   font-size: 20px;
   border-radius: 10px;
   height: 35px;
+  overflow: hidden;
   cursor: pointer;
 
   &__icon,

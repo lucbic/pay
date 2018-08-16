@@ -33,7 +33,9 @@
         <template v-for="category in categories">
           <div v-show="view === category.name" class="products__slide" v-bar>
             <div class="products__slide-wrapper">
-              <product v-for="(product, pIndex) in productsList(category.name)" :product="product"
+              <product v-for="(product, pIndex) in productsList(category.name)"
+                v-show="currentTableIndex !== null && tableClients.length > 0"
+                :product="product"
                 :key="`product-${pIndex}`"
                 @add="addNewOrder" />
             </div>
@@ -97,7 +99,7 @@ export default {
   props: ['client'],
   computed: {
     ...mapState(['currentTableIndex']),
-    ...mapGetters(['productsList', 'activeClientName']),
+    ...mapGetters(['productsList', 'activeClientName', 'tableClients']),
     tableNumber () {
       if (this.currentTableIndex === null) { return '' }
       if (this.client) {

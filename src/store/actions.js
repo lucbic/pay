@@ -17,6 +17,9 @@ export const setActiveClient = ({ commit }, id) => {
 
 export const deleteActiveClient = ({ commit, getters }) => {
   commit(types.DELETE_ACTIVE_CLIENT)
+  if (getters.tableClients.every(client => client.paid)) {
+    commit(types.CLOSE_CURRENT_TABLE)
+  }
 }
 
 export const setActiveOrder = ({ commit }, id) => {

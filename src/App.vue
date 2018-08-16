@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <div v-if="$mq === 'max'" class="desktop" key="5">
+  <div v-if="$mq === 'max'" class="desktop">
     <div class="desktop__upper-row">
       <div class="logo-flex-wrapper"><logo /></div>
       <tables />
@@ -139,6 +139,10 @@ export default {
   max-height: 100%
 }
 
+.mobile {
+  display: flex;
+}
+
 .tablet,
 .desktop {
   min-height: 100vh;
@@ -198,16 +202,9 @@ export default {
 }
 
 .tablet-enter-active, .tablet-leave-active {
-  transform: translateX(0);
-  transition: all .2s;
+  transition: all .1s;
 }
-.tablet-enter {
-  transform: translateX(100vh);
-  opacity: 0;
-}
-
-.tablet-leave-to {
-  transform: translateX(-100vh);
+.tablet-enter,.tablet-leave-to {
   opacity: 0;
 }
 

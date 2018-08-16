@@ -142,8 +142,8 @@ export default {
 
 .clients-enter, .clients-leave-to {
   max-height: 0;
-  padding: 0 10px;
-  margin: 0 16px;
+  margin-top: 0;
+  margin-bottom: 0;
   opacity: 0;
 }
 

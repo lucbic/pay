@@ -216,6 +216,7 @@ export default {
 
   &__number {
     width: 30px;
+    padding-top: 3px;
   }
 
   &__btn {

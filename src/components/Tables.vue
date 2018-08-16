@@ -1,6 +1,7 @@
 <template>
 <div class="tables">
   <full-screen />
+  <small-logo class="tables__small-logo"/>
   <logo class="tables__logo"/>
   <div class="well" @click="deselect($event)">
     <h1 class="well__title">Selecione a mesa</h1>
@@ -19,6 +20,7 @@
 
 <script>
 import Logo from '@/components/Logo'
+import SmallLogo from '@/components/SmallLogo'
 import SingleTable from '@/components/Table'
 import { mapState, mapActions } from 'vuex'
 import FullScreen from '@/components/FullScreen'
@@ -27,6 +29,7 @@ export default {
   name: 'Tables',
   components: {
     Logo,
+    SmallLogo,
     SingleTable,
     FullScreen
   },
@@ -36,7 +39,7 @@ export default {
   methods: {
     ...mapActions(['setCurrentTableIndex']),
 
-    deselect () {
+    deselect (event) {
       if (event.target.closest('#table-component')) { return }
       if (this.currentTableIndex === null) { return }
       this.setCurrentTableIndex(null)
@@ -51,10 +54,18 @@ export default {
   flex-direction: column;
   height: 100vh;
   width: 100vw;
+  position: relative;
 
   &__logo {
     margin: 0 auto;
     margin-top: 10px;;
+  }
+
+  &__small-logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: none;
   }
 
   &__grid {
@@ -115,9 +126,17 @@ export default {
       display: none;
     }
 
+    &__small-logo {
+      display: block;
+    }
+
     &__grid {
       grid-template-columns: repeat(5, 1fr);
     }
   }
+}
+
+@media all and (min-width: $breakpoint__xl) {
+  .tables__small-logo { display: none; }
 }
 </style>
