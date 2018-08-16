@@ -1,0 +1,164 @@
+
+<!-- saved from url=(0063)chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/newtab.html -->
+<html lang="en" class="free-user"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+                                __      __                ___       ___
+  by michal simonfy            /\ \    /\ \  __          /\_ \    /'___'\
+  ____  _____      __     __   \_\ \   \_\ \/\_\     __  \//\ \  /\_\ /\ \
+ /',__\/\ '__'\  /'__'\ /'__'\ /'_' \  /'_' \/\ \  /'__'\  \ \ \ \/_/// /__
+/\__, '\ \ \L\ \/\  __//\  __//\ \L\ \/\ \L\ \ \ \/\ \L\.\_ \_\ \_  // /_\ \  __
+\/\____/\ \ ,__/\ \____\ \____\ \___,_\ \___,_\ \_\ \__/.\_\/\____\/\______/ /\_\
+ \/___/  \ \ \/  \/____/\/____/\/__,_ /\/__,_ /\/_/\/__/\/_/\/____/\/_____/  \/_/
+          \ \_\
+           \/_/               http://speeddial2.com by http://virae.org
+-->
+	
+	<meta name="author" content="Michal Šimonfy">
+	<meta http-equiv="cache-control" content="public">
+	<meta http-equiv="expires" content="Wed, 1 Jan 2014 00:00:00 GMT">
+	<title i18n="new_tab">New tab</title>
+	<script type="text/javascript" async="" src="./New tab_files/dc.js"></script><script src="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/beta/js/beta.js"></script>
+	<link rel="stylesheet" href="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/css/master.css">
+	<link rel="stylesheet" href="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/css/bootstrap.css">
+	<script src="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/js/jquery.min.js"></script>
+	<script src="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/js/moment.js"></script>
+	<script src="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/js/clone.js"></script>
+	<script src="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/js/vue.min.js"></script>
+	<script src="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/js/Uri.js"></script>
+	<script src="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/js_system/common.js"></script>
+	<script src="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/js_system/options.js"></script>
+	<script src="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/js_system/themes.js"></script><style type="text/css">html {background:none; background-image:url()!important; background-repeat-repeat;}body {background-position: center bottom}body {background-repeat:no-repeat;}body {background-size: contain!important}html {background-color:#bfbe9a;}.link {font-family:Helvetica,"Helvetica Nueue";arial,sans-serif;}.link .title {font-size:11px;font-weight:normal;font-style:normal;}#pages li a {background:#FFFFFF}.thumbnail_container {background:#FFFFFF}#pages li:hover a {background:#FFFFFF}#pages li a:hover .thumbnail_container {background:#FFFFFF}#pages li a {border-color: #ddd}#pages li:hover a {border-color: #ccc}.link .title {color: #8C7E7E}.link:hover .title {color: #333333}#pages li a {border-radius:4px; }#pages li .thumbnail_container {border-radius:2px 2px 0 0; }.link .title {text-align:center}</style>
+	<script src="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/js_system/websites.js"></script>
+	<script src="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/js/jquery.ui.min.js"></script>
+	<script src="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/js/tools.js"></script>
+	<script src="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/js_system/db.js"></script>
+	<script src="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/js_system/speeddial.js"></script><script type="text/javascript" charset="utf-8" src="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/js_system/apps.js"></script>
+</head>
+
+<body class="theme is-with-groups is-with-search" style="">
+
+	<div id="container" class="is-animated">
+
+		<div class="new-tab-header">
+			<div class="groups-container">
+				<ul id="groups" class="is-shown ui-sortable"><li class="home" loadgroup="0"><a class="group selected ui-droppable" href="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/newtab.html#0">Home</a></li><li loadgroup="1"><a class="group ui-droppable" href="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/newtab.html#1">Trampo</a></li></ul>
+			</div>
+			<div class="search-form search-form--expanding">
+				<input type="text" i18n-placeholder="search" class="form-control js-new-tab-search" placeholder="Search" autocomplete="off">
+				<span class="icon-search"></span>
+			</div>
+			<div id="quick-settings-icon" i18n-title="options_dialog_title" title="Settings"></div>
+		</div>
+		<ul id="pages" class="ui-sortable" style="width: 1728px; padding-top: 77px; margin-bottom: 100px;"><li class="link link--shadow link--shadow-drop" id="7" url="https://www.onenote.com/notebooks?auth=1&amp;nf=1&amp;fromAR=1" position="0" visits="2" style="height: 177px; overflow: hidden;"><a href="https://www.onenote.com/notebooks?auth=1&amp;nf=1&amp;fromAR=1" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-image: url(&quot;data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAsICAoIBwsKCQoNDAsNERwSEQ8PESIZGhQcKSQrKigkJyctMkA3LTA9MCcnOEw5PUNFSElIKzZPVU5GVEBHSEX/2wBDAQwNDREPESESEiFFLicuRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUX/wAARCAFzAtADASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AJEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/2Q==&quot;); background-size: 102% 100%; height: 147px;"></div></a></li><li class="link link--shadow link--shadow-drop" id="2" url="https://mail.google.com/mail/u/0/" position="1" visits="193" custom_thumbnail="true" style="height: 177px; overflow: hidden;"><a href="https://mail.google.com/mail/u/0/" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-size: contain; background-position: center center; background-image: url(&quot;http://farm9.staticflickr.com/8113/8660321326_d1ca08f601_o.png&quot;); height: 147px;"></div></a></li><li class="link link--shadow link--shadow-drop" id="8" url="https://web.whatsapp.com/" position="2" visits="32" custom_thumbnail="true" style="height: 177px; overflow: hidden;"><a href="https://web.whatsapp.com/" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-size: contain; background-position: center center; background-image: url(&quot;https://logo.clearbit.com/web.whatsapp.com?size=320&quot;); height: 147px;"></div></a></li><li class="link link--shadow link--shadow-drop" id="9" url="https://web.telegram.org" position="3" visits="467" custom_thumbnail="true" style="height: 177px; overflow: hidden;"><a href="https://web.telegram.org/" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-size: contain; background-position: center center; background-image: url(&quot;https://logo.clearbit.com/web.telegram.org?size=320&quot;); height: 147px;"></div></a></li><li class="link link--shadow link--shadow-drop" id="4" url="https://twitter.com" position="4" visits="1" custom_thumbnail="true" style="height: 177px; overflow: hidden;"><a href="https://twitter.com/" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-size: contain; background-position: center center; background-image: url(&quot;http://i.imgur.com/kT8yT0S.png&quot;); height: 147px;"></div></a></li><li class="link link--shadow link--shadow-drop" id="3" url="http://www.youtube.com" position="5" visits="144" custom_thumbnail="true" style="height: 177px; overflow: hidden;"><a href="http://www.youtube.com/" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-size: contain; background-position: center center; background-image: url(&quot;http://i.imgur.com/Mj0u4Ts.png&quot;); height: 147px;"></div></a></li><li class="link link--shadow link--shadow-drop" id="5" url="https://drive.google.com" position="6" visits="2" custom_thumbnail="true" style="height: 177px; overflow: hidden;"><a href="https://drive.google.com/" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-size: contain; background-position: center center; background-image: url(&quot;http://farm9.staticflickr.com/8124/8660297258_6291ac830d_o.png&quot;); height: 147px;"></div></a></li><li class="link link--shadow link--shadow-drop" id="10" url="http://mercadolivre.com.br" position="7" visits="0" custom_thumbnail="true" style="height: 177px; overflow: hidden;"><a href="http://mercadolivre.com.br/" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-size: contain; background-position: center center; background-image: url(&quot;https://logo.clearbit.com/mercadolivre.com.br?size=320&quot;); height: 147px;"></div></a></li><li class="link link--shadow link--shadow-drop" id="11" url="http://netflix.com" position="8" visits="1" custom_thumbnail="true" style="height: 177px; overflow: hidden;"><a href="http://netflix.com/" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-size: contain; background-position: center center; background-image: url(&quot;https://logo.clearbit.com/netflix.com?size=320&quot;); height: 147px;"></div></a></li><li class="link link--shadow link--shadow-drop" id="12" url="https://audionews.org/index.php" position="9" visits="2" custom_thumbnail="true" style="height: 177px; overflow: hidden;"><a href="https://audionews.org/index.php" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-size: contain; background-position: center center; background-image: url(&quot;https://logo.clearbit.com/audionews.org?size=320&quot;); height: 147px;"></div></a></li><li class="link link--shadow link--shadow-drop" id="13" url="http://actualized.org/" position="10" visits="125" custom_thumbnail="true" style="height: 177px; overflow: hidden;"><a href="http://actualized.org/" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-size: contain; background-position: center center; background-image: url(&quot;https://img.youtube.com/vi/qWuaPEpKgfk/0.jpg&quot;); height: 147px;"></div></a></li><li class="link link--shadow link--shadow-drop" id="14" url="http://hyperhumanism.com" position="11" visits="5" custom_thumbnail="true" style="height: 177px; overflow: hidden;"><a href="http://hyperhumanism.com/" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-size: contain; background-position: center center; background-image: url(&quot;http://hyperhumanism.com/wp-content/uploads/2018/02/pi-icon.png&quot;); height: 147px;"></div></a></li><li class="link link--shadow link--shadow-drop" id="15" url="https://www.dharmaoverground.org/" position="12" visits="5" custom_thumbnail="true" style="height: 177px; overflow: hidden;"><a href="https://www.dharmaoverground.org/" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-size: contain; background-position: center center; background-image: url(&quot;https://i.pinimg.com/originals/76/f4/14/76f414f732f5410aae07daff9f6487be.png&quot;); height: 147px;"></div></a></li><li class="link link--shadow link--shadow-drop" id="16" url="https://br.tradingview.com/chart/" position="13" visits="207" custom_thumbnail="true" style="height: 177px; overflow: hidden;"><a href="https://br.tradingview.com/chart/" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-size: contain; background-position: center center; background-image: url(&quot;https://logo.clearbit.com/br.tradingview.com?size=320&quot;); height: 147px;"></div></a></li><li class="link link--shadow link--shadow-drop" id="17" url="https://coinmarketcap.com/" position="14" visits="4" custom_thumbnail="true" style="height: 177px; overflow: hidden;"><a href="https://coinmarketcap.com/" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-size: contain; background-position: center center; background-image: url(&quot;https://logo.clearbit.com/coinmarketcap.com?size=320&quot;); height: 147px;"></div></a></li><li class="link link--shadow link--shadow-drop" id="28" url="https://github.com/iteliosbrasil/itelios-frontend-challenge" position="999" visits="22" custom_thumbnail="true" style="height: 177px; overflow: hidden;"><a href="https://github.com/iteliosbrasil/itelios-frontend-challenge" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-size: contain; background-position: center center; background-image: url(&quot;https://logo.clearbit.com/github.com?size=320&quot;); height: 147px;"></div></a></li><li class="link no-thumbnail-yet link--shadow link--shadow-drop" id="32" url="http://happiness-beyond-thought.com/downloads" position="999" visits="0" style="height: 177px; overflow: hidden;"><a href="http://happiness-beyond-thought.com/downloads" style="width: 268px; height: 157px; padding: 4px 4px 0px; margin: 10px;"><div class="thumbnail_container" style="background-size: 100%; background-position: center center; background-image: url(&quot;http://static.speeddial2.com/screenshot/?type=existing&amp;url=http://happiness-beyond-thought.com/downloads&quot;); height: 147px;"></div></a></li><li id="emptyrow" style="width: 288px; height: 171.4px;"><img src="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/images/newtab.first-dial-small.svg" width="64"></li></ul>
+		<div id="appspanel_wrapper" class="apps_dark"><ul id="appspanel" class="ui-sortable" style="padding: 0% 5%; width: 880px;"><li rel="mfiddfehmfdojjfdpfngagldgaaafcfo" data-options=""><a><img src="chrome://extension-icon/mfiddfehmfdojjfdpfngagldgaaafcfo/128/0"><span class="apptitle">BrowserStack Local</span></a></li><li rel="aohghmighlieiainnegkcijnfilokake" data-options=""><a><img src="chrome://extension-icon/aohghmighlieiainnegkcijnfilokake/128/0"><span class="apptitle">Docs</span></a></li><li rel="pjkljhegncpnkpknbcohdijeoejaedia" data-options="https://mail.google.com/mail/ca/#settings"><a><img src="chrome://extension-icon/pjkljhegncpnkpknbcohdijeoejaedia/128/0"><span class="apptitle">Gmail</span></a></li><li rel="apdfllckaahabafndbhieahigkjlhalf" data-options="https://drive.google.com/drive/settings"><a><img src="chrome://extension-icon/apdfllckaahabafndbhieahigkjlhalf/128/0"><span class="apptitle">Google Drive</span></a></li><li rel="felcaaldnbdncclmgdcncolpebgiejap" data-options=""><a><img src="chrome://extension-icon/felcaaldnbdncclmgdcncolpebgiejap/128/0"><span class="apptitle">Sheets</span></a></li><li rel="aapocclcgogkmnckokdopfmhonfmgoek" data-options=""><a><img src="chrome://extension-icon/aapocclcgogkmnckokdopfmhonfmgoek/128/0"><span class="apptitle">Slides</span></a></li><li rel="blpcfgokakmgnkcojhhkbfbldkacnbeo" data-options=""><a><img src="chrome://extension-icon/blpcfgokakmgnkcojhhkbfbldkacnbeo/128/0"><span class="apptitle">YouTube</span></a></li><li rel="ahfgeienlihckogmohjhadlkjgocpleb" data-options="" data-uninstall="false"><a><img src="chrome://extension-icon/ahfgeienlihckogmohjhadlkjgocpleb/128/1"><span class="apptitle">Chrome Web Store</span></a></li></ul></div>
+
+	</div><!--! end of #container -->
+
+	<div id="sidebar-toggle"></div>
+	<div class="sidebar-arrow"></div>
+
+<!--! messages -->
+	<div id="message"></div>
+
+<!--! context menu -->
+	<div class="contextMenu" id="editlinkmenu">
+	<ul>
+		<li id="opennewwindow" i18n="newtab_open_in_new_tab">Open in new tab</li>
+		<li class="separator"></li>
+		<li id="edit" i18n="edit">Edit</li>
+		<li id="delete" i18n="remove">Remove</li>
+		<li id="refresh" i18n="newtab_reload_thumbnail">Reload thumbnail</li>
+	</ul>
+	</div>
+	<div class="contextMenu" id="newitemmenu">
+	<ul>
+		<!--<li id="add">Add dial</li>-->
+		<li id="add" i18n="newtab_add_new_dial">Add new bookmark</li>
+		<li id="create_group" i18n="newtab_create_group">Create new group</li>
+		<li class="separator"></li>
+		<li id="options" i18n="options">Options</li>
+		<li id="statistics" i18n="statistics">Statistics</li>
+		<li id="help" i18n="help">Help</li>
+	</ul>
+	</div>
+	<div class="contextMenu" id="editgroupmenu">
+	<ul>
+		<li class="js-home-show grey" i18n="newtab_homegroup">This is your primary group</li>
+		<li id="openallgroup" i18n="newtab_open_all_links">Open all bookmarks</li>
+		<li class="separator"></li>
+		<li id="editgroup" i18n="newtab_edit_group">Edit group</li>
+		<li id="deletegroup" class="js-home-hide" i18n="newtab_remove_group">Remove group</li>
+	</ul>
+	</div>
+	<div class="contextMenu" id="editappmenu">
+	<ul>
+		<li id="app_launch" i18n="newtab_app_launch">Run application</li>
+		<li class="separator"></li>
+		<li id="app_options" i18n="options">Options</li>
+		<li id="app_uninstall" i18n="uninstall">Uninstall</li>
+	</ul>
+	</div>
+
+<!--! sidebars -->
+	<div id="sidebars">
+		<div id="apps">
+			<h1><a href="https://chrome.google.com/webstore/category/home" i18n="applications">Applications</a></h1>
+			<hr>
+			<ul id="apps_ul"></ul>
+		</div>
+		<div id="bookmarks">
+			<h1><a href="chrome://bookmarks/" i18n="bookmarks">Bookmarks</a></h1>
+			<div id="bookmark_search_li"><input class="sidebar_search" type="text" name="bookmarks_search" placeholder="Search your bookmarks" i18n-placeholder="newtab_search_your_bookmarks" id="bookmarks-search" autocomplete="off"></div>
+			<ul></ul>
+		</div>
+		<div id="history">
+			<h1><a href="chrome-extension://jpfpebmajhhopeonhlcgidhclcccjcik/newtab.html#" class="click-open" data-url="chrome://history/" i18n="recently_closed_tabs">Recently closed tabs</a></h1>
+			<div id="history_search_li"><input class="sidebar_search" type="text" name="history_search" placeholder="Search your history" i18n-placeholder="newtab_search_your_history" id="history-search" autocomplete="off"></div>
+			<ul id="history_items"></ul>
+		</div>
+	</div>
+
+	<footer></footer>
+
+	<div id="modals"><!----></div>
+
+	<div id="options-modal"><!----></div>
+
+	<div id="news-modal">
+		<modal v-if="state.open" @close="dismiss()" class="modal--news" v-cloak="">
+			<div slot="body" class="form options-modal">
+				<div v-html="content.news"></div>
+				<a @click="dismiss()" class="modal__close">×</a>
+			</div>
+			<div slot="footer">
+				<button @click="dismiss()" class="btn btn-small white" type="button" i18n="close_message">Close message</button>
+			</div>
+		</modal>
+	</div>
+
+	<!-- template for the modal component -->
+	<script type="text/x-template" id="modal-template">
+	 <transition name="modal">
+		 <div class="modal modal__mask" @click="$emit('overlay-clicked', $event)">
+			 <div class="modal__wrapper">
+				 <div class="modal__container">
+					 <div class="modal__header">
+						 <slot name="header"></slot>
+					 </div>
+					 <slot name="navigation"></slot>
+					 <div class="modal__body">
+						 <slot name="body"></slot>
+					 </div>
+					 <div class="modal__footer">
+						 <slot name="footer">
+							 <button class="modal-default-button" @click="$emit('close')">OK</button>
+						 </slot>
+					 </div>
+				 </div>
+			 </div>
+		 </div>
+	 </transition>
+	</script>
+
+
+<div id="jqContextMenu" style="display: none; position: absolute; z-index: 9999999;"></div><div style="background-color: rgb(0, 0, 0); position: absolute; opacity: 0.2; z-index: 499; display: none;"></div></body></html>
