@@ -2,10 +2,7 @@ export default {
   tables: [
     {
       open: true,
-      clients: [
-        0,
-        1
-      ],
+      clients: [0, 1],
       orders: [
         {
           id: 0,
@@ -26,9 +23,58 @@ export default {
       ]
     },
     {
-      open: false,
-      clients: [],
-      orders: []
+      open: true,
+      clients: [2, 4, 6],
+      orders: [
+        {
+          id: 3,
+          client_id: 2,
+          product_id: 4,
+          amount: 1,
+          status: true,
+          paid: false
+        },
+        {
+          id: 4,
+          client_id: 6,
+          product_id: 8,
+          amount: 1,
+          status: false,
+          paid: false
+        },
+        {
+          id: 5,
+          client_id: 2,
+          product_id: 15,
+          amount: 1,
+          status: false,
+          paid: false
+        },
+        {
+          id: 6,
+          client_id: 4,
+          product_id: 6,
+          amount: 2,
+          status: false,
+          paid: false
+        },
+        {
+          id: 7,
+          client_id: 6,
+          product_id: 13,
+          amount: 1,
+          status: true,
+          paid: false
+        },
+        {
+          id: 8,
+          client_id: 2,
+          product_id: 24,
+          amount: 1,
+          status: false,
+          paid: false
+        }
+      ]
     },
     {
       open: false,
@@ -41,9 +87,42 @@ export default {
       orders: []
     },
     {
-      open: false,
-      clients: [],
-      orders: []
+      open: true,
+      clients: [3, 5],
+      orders: [
+        {
+          id: 9,
+          client_id: 3,
+          product_id: 0,
+          amount: 2,
+          status: true,
+          paid: false
+        },
+        {
+          id: 10,
+          client_id: 3,
+          product_id: 10,
+          amount: 1,
+          status: false,
+          paid: false
+        },
+        {
+          id: 11,
+          client_id: 3,
+          product_id: 28,
+          amount: 1,
+          status: false,
+          paid: false
+        },
+        {
+          id: 12,
+          client_id: 5,
+          product_id: 34,
+          amount: 1,
+          status: false,
+          paid: false
+        }
+      ]
     },
     {
       open: false,
@@ -56,9 +135,18 @@ export default {
       orders: []
     },
     {
-      open: false,
-      clients: [],
-      orders: []
+      open: true,
+      clients: [7],
+      orders: [
+        {
+          id: 13,
+          client_id: 7,
+          product_id: 18,
+          amount: 1,
+          status: false,
+          paid: false
+        }
+      ]
     },
     {
       open: false,
@@ -66,9 +154,34 @@ export default {
       orders: []
     },
     {
-      open: false,
-      clients: [],
-      orders: []
+      open: true,
+      clients: [8, 9],
+      orders: [
+        {
+          id: 14,
+          client_id: 8,
+          product_id: 1,
+          amount: 1,
+          status: false,
+          paid: false
+        },
+        {
+          id: 15,
+          client_id: 9,
+          product_id: 2,
+          amount: 1,
+          status: false,
+          paid: false
+        },
+        {
+          id: 16,
+          client_id: 9,
+          product_id: 22,
+          amount: 1,
+          status: false,
+          paid: false
+        }
+      ]
     }
   ],
   clients: [
